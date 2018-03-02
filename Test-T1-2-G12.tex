@@ -1,0 +1,137 @@
+\documentclass{article}
+\usepackage{amssymb}
+\usepackage{circuitikz}
+\usepackage[T1]{fontenc}
+\usepackage[colorlinks=true,urlcolor=blue]{hyperref}
+
+
+\begin{document}
+\title{Computer Science G12}
+\author{Term 1, Review Test \\Date: Thu. 9 November 2017 \\  \\{\bf Name:}\\ }
+\date{}
+\maketitle
+
+%\section{Problems (100\%)
+%}
+%\subsection{Logic Gates}
+
+%Note: For the questions on Logic Circuits, remember to label each input and output lines and to use these labels correctly on the truth tables.
+
+\begin{enumerate}
+\item ($30\%$) Answer the following questions: 
+\begin{enumerate}
+\item  Complete the table by converting the values to the different base systems. 
+
+\begin{math}
+\begin{array}{|c|c|c|}
+Binary & Hex & Dec \\
+\hline
+1\,1011\,1110\,1110\,1101 & \; & \; \\
+\hline
+\; & FEAD & \; \\
+\hline
+\; & \; & 65537 \\
+\hline
+\; & \; & 25/8 \\
+\hline
+\; & \; & 71/3 \\
+\hline
+\end{array}
+\end{math}
+\item Convert the numbers -37 and -256 into binary using 2-complement. Make sure your answer has a bit-length that is multiple of a byte.
+\item Can the above fractional values be expressed exactly in those base systems? If not, find the smallest two bases where that's possible.
+\end{enumerate}
+\item ($10\%$) What follows are the transition rules of a Turing Machine. Write down the computations steps when this machines starts at state and input given by the first line below. Does this TM halt for this "program"?
+
+\begin{math}
+\begin{array}{rcl}
+(A,1) & \longrightarrow & (1,C,\rightarrow) \\
+(A,0) & \longrightarrow & (0,A,\leftarrow) \\
+(C,0) & \longrightarrow & (1,A,\rightarrow) \\
+(C,1) & \longrightarrow & (0,D,\leftarrow)  \\
+(D,1) & \longrightarrow & (0,A,\leftarrow) \\
+(D,0) & \longrightarrow & (0,C,\rightarrow) \\
+\end{array}
+\end{math}
+
+\begin{math}
+\begin{array}{l|r}
+\hline \\
+A & 1.\,0\;0\;0\;1\;1\;E \\
+\hline
+\phantom{A} & \phantom{0}
+\end{array}
+\end{math}
+
+\vspace{16cm}
+\item ($20\%$)  Answer the following questions:
+\begin{enumerate}
+\item From $p\rightarrow q$ and $q\rightarrow p$, conclude $\urcorner p\,\wedge\,\urcorner q\,\vee\,q\,\wedge\, p$ using a Truth Table.
+\item Idem, but prove it algebraically.
+\end{enumerate}
+\vspace{16cm}
+\item ($10\%$) Prove that the expression $(\urcorner ((p\vee q)\wedge r))$ is a {\sl wff} in propositional logic.
+\vspace{4cm}
+\item ($30\%$) We defined the symbol $\vDash$ to denote {\sl arguments} and we said that the argument $A\vDash B$ is valid {\bf iff} $\vDash A\rightarrow B$, 
+that is, we can rewrite the argument $A\vDash B$ as the statement "$A\rightarrow B$ is a tautology".
+Consider the expression $A\equiv p\rightarrow q,\,r\rightarrow s,\,p\vee r\vDash q\vee s$.
+\begin{enumerate}
+\item For any given expression $X$, if we state that $\vDash X$, what can we say about $\urcorner X$? How can we express this using the symbol $\vDash$?
+\item Rewrite expression $A$ as a tautology {\sl argument}.
+\item Determine wether the argument $A$ is or not valid using truth trees.
+\end{enumerate}
+
+\end{enumerate}
+
+
+\end{document}
+﻿# Computer Science G12 
+
+## Boolean Logic
+
+
+### Assignment 4. Due date: Fri. 27 Oct. 2017
+
+See examples below. Note p',!p or ~p, all mean NOT p.
+
+1. Write the truth table for the biconditional: p <-> q
+1. Prove p = p.q + p.(~q)
+1. From p->q and q->p, conclude p'.q'+qp using Truth Table
+1. Idem, but prove it algebraically
+1. Find equivalent expression w/o any conditional nor biconditional : (q<->p) + (p=>q)
+1. Prove using TT: (p->q) (~q) -> p
+1. Idem, algebraically
+1. Prove using TT: X.(X+Y) = X
+1. Idem, algebraically
+1. Write the dual expression of the following ones:
+   1. p.(!p+q)
+   1. (X+Y).(X+!Y).(!X+Y)
+   1. (A.1)+(A+0+~A)
+   1. (A+B).(~A+B)
+   1. ABC+ A(!B)C + (!A)B(!C)
+1. From p->q and q->p, conclude algebraically q'+qp 
+1. From p->q and q->p, conclude algebraically p'+qp 
+1. Find the complement of x.(y'.z'+y.z)
+1. Simplify using the laws of Boolean algebra: x.y+x'.z+y'.z
+
+
+**Example:** Let's prove algebraically that, given p->q and q->p, we can conclude ~p+qp.
+  Remember that "=>" means "from the expression on the left we can conclude the expression on the right", and viceversa for the arrow in the other sense.
+  
+  From the statement of the problem we assume we can claim
+
+     1. (p->q).(q->p)  (problem assumption)
+     2. (p->q)(from 1 and definition of conjunction)
+     3. ~p+q  (from 2. and definition of the conditional operator)
+     4. ~{p.(~q)} (from 3 and De Morgan laws)
+     5. ~{[p.(~q)] + F} (from 4 and definition of conjunction and definition of F)
+     6. ~{[p.(~q)] + (~p.p)} (from 5 and definition of conjunction )
+     7. ~{p.[(~q)+(~p)]} (from 5 and distributive laws; also from 5 in CNF )
+     8. ~p+qp ( from 6 and de Morgan Laws)
+     q.e.d
+
+  The sequence of steps above means that we claim to be true that "step i => step i+1", and we argue so for the reason in parenthesis given on the right of each step.
+
+  Another way to prove it is starting from the 7 and reaching up to 2. From there to 1 requires only the additional assumption of (q->p) which is given in the problem statement. This would finish this other proof.
+
+
