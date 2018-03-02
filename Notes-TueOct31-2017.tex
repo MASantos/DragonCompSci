@@ -1,0 +1,364 @@
+\section{Dragon Acadmemy 2017-2018}\label{dragon-acadmemy-2017-2018}
+
+\section{Computer Science G12}\label{computer-science-g12}
+
+Remember I'm following the text I posted on
+\href{http://msantos.sdf.org/G12/Term1/AnIntroductionToLogic-2016-MarkVLawson.pdf}{msantos.sdf.org/G12/}
+.
+
+These notes will be updated further in the coming days and can be found
+on that same site, both in Markdown as well as PDF formats.
+
+\section{Notes Tue 17 Oct 2017}\label{notes-tue-17-oct-2017}
+
+\subsection{Boolean Algebra}\label{boolean-algebra}
+
+\subsubsection{Connectives and their truth
+tables}\label{connectives-and-their-truth-tables}
+
+And, or, not, conditional, biconditional, xor:
+\(\wedge,\,\vee,\,\urcorner,\,\rightarrow,\,\leftrightarrow,\,\oplus\)
+
+Truth values: True/False, 0/1, T/\(\perp\)
+
+\paragraph{Alternative notations}\label{alternative-notations}
+
+While symbols listed above are the ones that are common in logic, some
+computer science texts, or rather computer languages, may use other
+symbols for them.
+
+\begin{itemize}
+\tightlist
+\item
+  Negation: NOT p, !p, \(\bar{p},\, p'\)
+\item
+  Conjunction: p AND q, \(p\cdot q,\quad p\,q\)
+\item
+  Disjunction: p OR q, \(p + q\)
+\end{itemize}
+
+\subsubsection{Boolean Laws}\label{boolean-laws}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Commutativity
+\item
+  Associativity
+\item
+  Distributivity
+\item
+  Idempotence
+\item
+  De Morgan Laws
+\end{enumerate}
+
+\section{Notes of Tue Oct 31 2017.}\label{notes-of-tue-oct-31-2017.}
+
+\subsection{Logic riddles:}\label{logic-riddles}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  A, B, C either Knights (allways tell truth) or Knaves (allways lie).
+  You ask A, but she whispers and you don't understand it. B then says:
+  ``She said she is a knave'', to which C immediately replies ``That's a
+  lie''. What can you say about A,B, and C being either a knight or a
+  knave?
+\item
+  A: ``Exactly one of us is a knave'', B: ``Exactly two of us is a
+  knave'', C: ``all of us are knaves''. Same question.
+\end{enumerate}
+
+More on logic riddles can be found in e.g.
+
+\begin{itemize}
+\item
+  The notes I'm basing this unit on. See link above.
+\item
+  The site
+  \href{https://sites.google.com/site/newheiser/knightsandknaves}{Knight
+  and Knaves}
+\item
+  Logicians have a peculiar sense of humor as reflected in the title of
+  research papers like ``\emph{The Hardest Logic Puzzle Ever}'' by
+  George Boolos or ``\emph{How to solve the hardest logic puzzle ever in
+  two questions}'' by Gabriel Uzquiano. (And you thought they would only
+  be dealing with \emph{serious stuff}, eh?)
+
+  You can dig further into this topic in the corresponding
+  \href{https://en.wikipedia.org/wiki/The_Hardest_Logic_Puzzle_Ever}{wikipedia
+  page}. Be aware though, these are tricky problems, so don't desperate
+  if you feel at lost -that said, if you find them trivial, let me know
+  and I tell the authors!!
+\end{itemize}
+
+\subsection{SAT (Boolean SATisfiability)
+problem:}\label{sat-boolean-satisfiability-problem}
+
+\begin{itemize}
+\tightlist
+\item
+  Example of a SAT problem: Which combination of truth values of p, q
+  and r makes the following sentence true? \textasciitilde{}p \^{} (r
+  \^{} (q v p) )
+\item
+  Easy understand complexity: Exponential complexity. Unsolved general
+  case. P !=? NP
+\end{itemize}
+
+\subsection{Propositional Logic as a formal
+system/language}\label{propositional-logic-as-a-formal-systemlanguage}
+
+We will describe again here what we have seen on propositional logic,
+but his time we will consider the topic as a \emph{(formal) language}.
+
+In more general terms, a language is an example of what's called a
+\emph{formal system}. Other examples of formal systems are for instance,
+any \emph{axiomatic system}, e.g., Euclid's geometry could arguably be
+considered the first axiomatic/formal system we know of.
+
+One distinguishes two parts when formally stating what propositional
+logic, and by extension, any (formal) language, is: Its \textbf{syntax}
+and its \textbf{semantics}.
+
+Note: What does the word semantic mean? where does it come from?
+Semantics comes from greek
+\(\sigma \eta \mu \alpha \nu \tau \iota \kappa \'o \varsigma\) (like
+semanticos) and more or less translates into the word ``meaning''. Thus,
+semantic as adjective relates to the meaning in language and logic.
+
+\subsubsection{Syntax of Propositional
+Logic}\label{syntax-of-propositional-logic}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Alphabet of symbols:
+  \(\Sigma=\{p_1,\,p_2,\dots ,\, (,),\urcorner ,\vee ,\wedge ,\rightarrow ,\leftrightarrow ,\oplus , \perp, T\}\)
+\item
+  Definition: \textbf{Atom} := Any of the symbols \(p_1,\,p_2,\dots\)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Note: Atoms are usually denoted by lowercase symbols from a natural
+    language (e.g.~english) alphabet like \(p, q, r,\dots\) or variants
+    as shown above (\(p_1,p_2\dots\)).
+  \end{itemize}
+\item
+  Definition of a sentence using that alphabet \(\Sigma\): Sentences are
+  strings containing only characters of the alphabet \(\Sigma\).
+\item
+  Rules defining a \emph{well-formed formula}:
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    (WFF1) All atoms are wff
+  \item
+    (WFF2) if A and B are wff, the so are
+    \((A), \urcorner A, A\vee B, A\wedge B, A\oplus B, A\rightarrow B, A\leftrightarrow B\).
+  \item
+    (WFF3) All wffs are constructed by repeated application of rules
+    (WFF1) and (WFF2) a \emph{finite number of times}.
+  \end{enumerate}
+\end{enumerate}
+
+Definition: All wff which are not an atom are called \emph{compound
+statements}.
+
+Definition: \textbf{Literal} := Any atom \(p\) or the symbol
+\(\urcorner\) immediately followed by an atom \(p\). That is, either
+\(p\) or \(\urcorner p\).
+
+Definition: \textbf{Connective} := Any of the symbols of the alphabet
+that either links together two or more wff or modifies one. Examples:
+\(\urcorner ,\vee ,\wedge\dots\)
+
+Definition: \textbf{Language based on alphabet \(\Sigma\)} := Is the
+collection of all wff based on that alphabet.
+
+Definition: A \textbf{grammar} is the set of rules that tells us what
+the wff are.
+
+\begin{itemize}
+\tightlist
+\item
+  The grammar for propositional logic is given by the rules (WFF1),
+  (WFF2) and (WFF3) above. This set of rules is an exampl of
+  \emph{Backus-Knaur Form} (BNF).
+\end{itemize}
+
+The idea of a language as a formal system, i.e., defined by a grammar as
+a set of transformation rules as stated above, is due to
+\href{https://en.wikipedia.org/wiki/Noam_Chomsky}{Noam Chomsky}.
+
+In more technical terms, the example of grammar above is called a
+\href{https://en.wikipedia.org/wiki/Context-free_grammar}{\emph{context-free
+grammar}} and plays an essential role in defining programming languages
+and compilers, which translate a code into an executable.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Solved exercise:} Prove that the sentence
+  \((\urcorner ((p\vee q)\wedge r))\) is a wff.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Proof:}
+
+    \begin{enumerate}
+    \def\labelenumi{\arabic{enumi}.}
+    \tightlist
+    \item
+      p, q and r are wff {[}by WFF1{]}
+    \item
+      \((p\vee q)\) is a wff {[}by 1 and WFF2{]}
+    \item
+      \(((p\vee q)\wedge r)\) is a wff {[}by 2 and WFF2{]}
+    \item
+      \((\urcorner ((p\vee q)\wedge r))\) is a wff {[}by 3 and WFF2{]} .
+      q.e.d.
+    \end{enumerate}
+  \end{itemize}
+\end{itemize}
+
+\subsubsection{Semantics of Propositional
+Logic}\label{semantics-of-propositional-logic}
+
+The semantics of propositional logic is already well known by us: it
+consists in specifying the truth tables of all connectives.
+
+\section{Notes of Wed Nov. 7/8 2017.}\label{notes-of-wed-nov.-78-2017.}
+
+\subsection{Parse trees and Truth
+trees}\label{parse-trees-and-truth-trees}
+
+For details, check out the book reference provided at the very beginning
+of these notes.
+
+\subsubsection{Parse Trees}\label{parse-trees}
+
+Eg: Parse tree for \(\urcorner p\rightarrow (q \vee r)\)
+
+\begin{equation}
+\begin{array}{ccc}
+\phantom{p} & \rightarrow & \phantom{p}
+\\
+\phantom{p} & \swarrow\,\searrow  & \phantom{p}
+\\
+\urcorner  & \phantom{\rightarrow} & \vee 
+\\
+\downarrow  & \phantom{\rightarrow} & \swarrow \searrow
+\\
+p & \phantom{\rightarrow} &  q \quad r 
+\end{array}
+\end{equation}
+
+\subsubsection{Truth Trees}\label{truth-trees}
+
+Advantages:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Simplifying} expressions/statements
+\item
+  Determining \textbf{SAT} (satisfiability) questions
+\item
+  Determining \emph{contradictions}/\textbf{tautologies}
+\end{enumerate}
+
+Eg: (Book notes: pp 51, example 1.10.1)
+
+\begin{equation}
+\begin{array}{ccc}
+\phantom{p} & \urcorner p \rightarrow (q\wedge r) & \phantom{p}
+\\
+\phantom{p} & \swarrow\,\searrow  & \phantom{p}
+\\
+\urcorner (\urcorner p)  & \phantom{\rightarrow} & q\wedge r 
+\\
+\downarrow  & \phantom{\rightarrow} & \swarrow \searrow
+\\
+p & \phantom{\rightarrow} &  q \quad r 
+\end{array}
+\end{equation}
+
+See book examples 1.10-2 to 1.10.10.
+
+Homework: Exercices 5 (see book pp.~61)
+
+\paragraph{Example workout: Exercise 1(a) book
+pp.~61}\label{example-workout-exercise-1a-book-pp.61}
+
+\begin{itemize}
+\item
+  \textbf{Problem}: Determine wether the following argument is valid or
+  not using a truth tree:
+  \(A\equiv p\rightarrow q,\,r\rightarrow s,\,p\vee r\vDash q\vee s\)
+
+  \textbf{Solution}:
+
+  The key is to see that proving such argument is valid is equivalent to
+  proving that the following statement is a tautology
+
+  \(\vDash\,\urcorner\left( (p\rightarrow q) \wedge (r\rightarrow s) \wedge (p\vee r)\right) \vee (q\vee s)\)
+
+  The above line states that the expression to the right of the symbol
+  \(\vDash\) is a tautology.
+
+  In order to prove that an expression is a tautology the trick is to
+  prove that its negation is a \textbf{contradiction} (\emph{proof by
+  contradiction}), i.e., we need to prove that
+
+  \(\left( (p\rightarrow q) \wedge (r\rightarrow s) \wedge (p\vee r)\right) \,\wedge \, \urcorner (q\vee s) \vDash .\)
+
+  Let's do that.
+
+  \begin{equation}
+  \begin{array}{rcl}
+  \phantom{p} & \left( (p\rightarrow q) \wedge (r\rightarrow s) \wedge (p\vee r)\right) \,\vee\, \urcorner (q\vee s) & \phantom{p} 
+  \\
+  \phantom{p} & \swarrow \qquad\qquad \qquad\qquad\qquad\searrow &  \phantom{p}
+  \\
+    \phantom{p} & (p\rightarrow q) \wedge (r\rightarrow s) \wedge (p\vee r) \quad\quad   \urcorner (q\vee s) & \phantom{a}
+  \\
+    \phantom{p} & \downarrow \qquad\qquad\qquad\qquad\qquad\qquad   \downarrow & \phantom{a}
+  \\  
+    \phantom{p} & p\rightarrow q \qquad\qquad\qquad\qquad\qquad   \urcorner q  & \phantom{a}
+  \\
+    \phantom{p} & r\rightarrow s \qquad\qquad\qquad\qquad\qquad   \urcorner s & \phantom{a}
+  \\
+    \phantom{p} & p\vee r        \qquad\qquad\qquad\qquad\qquad   \phantom{q\vee s} & \phantom{a}
+  \\
+    \phantom{p} & \swarrow\quad\searrow \quad\qquad\qquad\qquad\qquad\qquad   \phantom{q\vee s} & \phantom{a}
+  \\
+    \phantom{p} & \urcorner p\qquad\qquad q        \qquad \qquad\qquad\qquad\qquad\qquad  \phantom{q\vee s} & \phantom{a}
+  \\
+    \swarrow  & \downarrow \qquad \swarrow\quad\searrow        \qquad\qquad \qquad\qquad\qquad   \phantom{q\vee s} & \phantom{a}
+  \\
+    \urcorner r \quad  & s    \qquad  \urcorner r\qquad s \qquad\qquad\qquad\qquad\qquad \phantom{q\vee s} & \phantom{a}
+  \\
+    \swarrow\searrow  & \quad\swarrow\searrow   \quad  \downarrow\searrow \qquad \downarrow\searrow \qquad\qquad\qquad\qquad\qquad \phantom{q\vee s} & \phantom{a}
+  \\
+   \perp p\; \perp r  & \quad \perp p\quad r   \quad  p\; \perp r \quad p\quad r \qquad\qquad\qquad\qquad\qquad \phantom{q\vee s} & \phantom{a}
+  \end{array}
+  \end{equation}
+
+  Clearly, not all branches end up in a contradiction, e.g., the
+  right-most branch containing \(\urcorner q \wedge \urcorner s\).
+
+  Whence, the original statement is what is called a \textbf{contingent
+  statement}, i.e., \emph{a statement whose truth value can be either
+  false or true, depending on the truth values of the atoms involved}.
+  \(\square\)
+\end{itemize}
