@@ -513,7 +513,20 @@ That relation doesn't change during the loop, even though $t,\,k$ and $m$ keep c
 
 We say that this relation is an **invariant of the loop**.
 
-Let's proceed:
+|K  |t  | b[k-1] |   m   | $\mathbf{t_k\cdot 2^k+m_k}$ |
+|:-:|:-:|:------:|:--------------------------:|:----------------:|
+|0|13| 0/`nil` | 0 | $13\cdot 2^0+0\,=\,13$ |
+|1|6|1| $1\cdot 2^{1-1}$ | $6\cdot 2^1+1\,=\,13$ |
+|2|3|0| $0\cdot 2^{2-1}+1\cdot 2^{1-1}$ | $3\cdot 2^2+1\,=\,13$ |
+|3|1|1| $1\cdot 2^{3-1}+0\cdot 2^{2-1}+1\cdot 2^{1-1}$ | $1\cdot 2^3+5\,=\,13$ |
+|4|0|1| $1\cdot 2^{4-1}+1\cdot 2^{3-1}+0\cdot 2^{2-1}+1\cdot 2^{1-1}$ | $0\cdot 2^4+13\,=\,13$ |
+
+   : The **loop invariant** $\mathbf{t_k\cdot 2^k+m_k}$ stays constant in value during loop, even though all the local loop variables may
+   be changing during the loop iterations. Example for input value $n=13$. At the end of the loop $k=0$ and m contains
+   $m=1\cdot 2^{4-1}+1\cdot 2^{3-1}+0\cdot 2^{2-1}+1\cdot 2^{1-1}=\mathbf{\mbox{b}}1101$ the binary representation
+   of $13$.
+
+Let's proceed with the proof:
 
 1. *It holds at the beginning of the loop*: Before the first statement of the loop is
    executed the values are $k=0$, by definition, and $m=0$, because the array $b$ is empty.
