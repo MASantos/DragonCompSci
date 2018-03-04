@@ -20,7 +20,7 @@ a heading that starts with a $+$ sign.
 \newpage
  
 ## Overview
-![Algorithms: Summary II](Term3/ClassNotes/IMG_20180215_143706-AlgorithmsSummary2.jpg)
+![Algorithms: Summary II](G12/Term3/ClassNotes/IMG_20180215_143706-AlgorithmsSummary2.jpg)
 
 An **algorithm** is a computational solution to a particular problem. This is what we
 call a **program**.
@@ -233,7 +233,7 @@ $$R_0\,=\,1$$
 Can we prove this *guess*? Also, and how many slices do we have in total after $n$ cuts then?
 Is there a *closed form* expression for $R_n$?
 
-**Homework**: Download the file [SlicePizza.ggb](http://msantos.sdf.org/G12/Term3/SlicePizza.ggb) 
+**Homework**: Download the file [SlicePizza.ggb](http://msantos.sdf.org/G12/G12/Term3/SlicePizza.ggb) 
 and upload it into the [Geogebra webapp](https://www.geogebra.org/graphing?lang=en). 
 (Open the top-left `Main Menu` and select `Open File`, then select the folder icon on the
 right of the window). Select and drag the lines and points around. In which cases does that
@@ -360,7 +360,7 @@ This is the **Formulation of the Principle of Mathematical Induction (PMI)**:
 ***THEN** it holds for all values of $n$*. 
 
 
-![The Principle of Mathematical Induction (PMI) I: Example 1](Term3/ClassNotes/IMG_20180215_143641-PMI-1.jpg)
+![The Principle of Mathematical Induction (PMI) I: Example 1](G12/Term3/ClassNotes/IMG_20180215_143641-PMI-1.jpg)
 
 #### Example 1
 If $n$ is a positive integer and $x$ is a real number such that $1+x>0$, then for all values of
@@ -395,7 +395,7 @@ for all integer values of $n>0$ and for all $x>-1$.
 
 #### Example 2
 
-![Example 2 of the use of the PMI](Term3/ClassNotes/IMG_20180215_143650-PMI-Ex2.jpg)
+![Example 2 of the use of the PMI](G12/Term3/ClassNotes/IMG_20180215_143650-PMI-Ex2.jpg)
 
 The sum of the first $n$ natural numbers $S_n\,=\,\sum^n_{k=1}\,k\,=\,1+2+3+\dots$ 
 is equal to $n\frac{(n+1)}{2}$.
@@ -422,7 +422,7 @@ We will use the principle of mathematical induction. It goes as follows:
        d. Rules of arithmetic
 
 ### Exercise 1
-![The PMI: Exercise 1](Term3/ClassNotes/IMG_20180215_143713-PMI-Ex3-crop.jpg)
+![The PMI: Exercise 1](G12/Term3/ClassNotes/IMG_20180215_143713-PMI-Ex3-crop.jpg)
 
 We are given the finite sum of $n$ terms 
 $$T_n\,=\,\sum^n_{k=1}\,(3\,+\,5\,n)\,=\,8\,+\,13\,+\,18\,+\,23\,+\dots\,+\,(3\,+\,5\,n)$$
@@ -449,7 +449,7 @@ B) Take the definition of $T_n$ and group common terms:
    where $S_n=\sum^n_{k=1}\,k\,=\,n\,\frac{(n+1)}{2}$ is the sum of the first $n$ integers 
    calculated in example 2 above.
 
-   ![The PMI: Exercise 1, b). Here $S(n)$ is the summation defined in example 2 above.](Term3/ClassNotes/IMG_20180215_143641-PMI-Exercise-1b.jpg)
+   ![The PMI: Exercise 1, b). Here $S(n)$ is the summation defined in example 2 above.](G12/Term3/ClassNotes/IMG_20180215_143641-PMI-Exercise-1b.jpg)
 
 C) We are given the closed form for $T_n\,=\,n\frac{5\,n\,+\,11}{2}$ and we want to prove it is correct.
    We will proceed by mathematical induction on the value of $n$.
@@ -678,9 +678,9 @@ case and, thus, feels more descriptive.
 
 ### Useful results
 
-1. ${n \choose k}\,=\,\frac{n!}{k!\,(n-k)!}$. Example: ${5\choose 2}=\frac{5!}{2!\,3!}=\frac{5\cdot 4}{2!}=5\cdot 2=10$
-2. $(a\pm b)^2\,=\,a^2\,\pm\,2\cdot a\cdot b\,+\,b^2$
-3. $(a\pm b)^3\,=\,a^3\,\pm\,3\cdot a^2\cdot b\,+\,3\cdot a\cdot b^2\,\pm\,b^3\,$
+1. $(a\pm b)^2\,=\,a^2\,\pm\,2\cdot a\cdot b\,+\,b^2$
+2. $(a\pm b)^3\,=\,a^3\,\pm\,3\cdot a^2\cdot b\,+\,3\cdot a\cdot b^2\,\pm\,b^3\,$
+3. **Binomial Coefficient**: ${n \choose k}\,=\,\frac{n!}{k!\,(n-k)!}$. Example: ${5\choose 2}=\frac{5!}{2!\,3!}=\frac{5\cdot 4}{2!}=5\cdot 2=10$
 4. **Newton's binomial**: $(a\pm b)^n\,=\,\sum^n_{k=0}{n\choose k}(\pm 1)^k\,a^{n-k}\,b^k$
 
 \newpage
@@ -806,7 +806,7 @@ which means that $f(n)\,=\,c\,g(n)$ for some $c>1$ and large enough values of $n
 1. Go to [https://www.geogebra.org/graphing?lang=en](https://www.geogebra.org/graphing?lang=en). There plot the following functions: $y=2^x,\,y=x^3,\,y=x^2,\,y=x\,\log_2(x),\,y=x,\,y=1$
 Which function grows faster?
 
-2. Check out [this video](http://msantos.sdf.org/G12/Term3/BigO.mov) 
+2. Check out [this video](http://msantos.sdf.org/G12/G12/Term3/BigO.mov) 
 and revisit your answers from exercise 1.
 
 3. Sort the previous functions from fastest growing to slowest growing. 
