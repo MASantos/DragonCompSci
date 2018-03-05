@@ -1,14 +1,14 @@
 # Raspberry Pi Part II
-A tentative Syllabus for our hand-on classes with the Raspberry Pi
+A tentative Syllabus for our hands-on classes with the Raspberry Pi
 
-Date: \today
+Updated: \today
 
-1. Getting to Know th GPIO
+1. Getting to Know the GPIO
      1. Connecting an LED
           1. Ohm's Law
           2. Single LED, Resistors in Series
           3. Two LEDs in parallel
-             A) Independ Load
+             A) Independent Load
              B) Load Sharing
      2. Leaving the GPIOs Pins in a Safe State
      3. Controlling the Brightness of an LED
@@ -26,7 +26,7 @@ Date: \today
            A) Counting Coins
            B) Face Detection
            C) Motion Detection
-           D) Optical Character Recogniztion
+           D) Optical Character Recognition
       2. Motors
       3. The Internet of Things (IoT)
            1. Controlling GPIOs using a Web page
@@ -36,4 +36,4 @@ Date: \today
   
 # Bibliography
 
-1. *The Raspberry Pi Cookbook*, by Simon Monk, O'Reilley Media, 2016. 
+1. *The Raspberry Pi Cookbook*, by Simon Monk, Reilly Media, 2016. 
