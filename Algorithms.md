@@ -354,7 +354,7 @@ This is the **Formulation of the Principle of Mathematical Induction (PMI)**:
 
 ***IF***
 
-* *the expresion works for $n=1$ **AND***
+* *the expression works for $n=1$ **AND***
 * ***assuming** it works for an arbitrary $n$ we can then prove that it also works for $n+1$*
 
 ***THEN** it holds for all values of $n$*. 
@@ -513,8 +513,8 @@ That relation doesn't change during the loop, even though $t,\,k$ and $m$ keep c
 
 We say that this relation is an **invariant of the loop**.
 
-|K  |t  | b[k-1] |   m   | $\mathbf{t_k\cdot 2^k+m_k}$ |
-|:-:|:-:|:------:|:--------------------------:|:----------------:|
+|$k$  | $t_k$  | $b[k-1]$ |   $m_k$   | $\mathbf{t_k\cdot 2^k+m_k}$ |
+|:-:|:-:|:------:|:----------------------------------:|:----------------:|
 |0|13| 0/`nil` | 0 | $13\cdot 2^0+0\,=\,13$ |
 |1|6|1| $1\cdot 2^{1-1}$ | $6\cdot 2^1+1\,=\,13$ |
 |2|3|0| $0\cdot 2^{2-1}+1\cdot 2^{1-1}$ | $3\cdot 2^2+1\,=\,13$ |
@@ -522,7 +522,7 @@ We say that this relation is an **invariant of the loop**.
 |4|0|1| $1\cdot 2^{4-1}+1\cdot 2^{3-1}+0\cdot 2^{2-1}+1\cdot 2^{1-1}$ | $0\cdot 2^4+13\,=\,13$ |
 
    : The **loop invariant** $\mathbf{t_k\cdot 2^k+m_k}$ stays constant in value during loop, even though all the local loop variables may
-   be changing during the loop iterations. Example for input value $n=13$. At the end of the loop $k=0$ and m contains
+   be changing during the loop iterations. Example for input value $n=13$. At the end of the loop $t_k=0$ and m contains
    $m=1\cdot 2^{4-1}+1\cdot 2^{3-1}+0\cdot 2^{2-1}+1\cdot 2^{1-1}=\mathbf{\mbox{b}}1101$ the binary representation
    of $13$.
 
@@ -537,14 +537,11 @@ Let's proceed with the proof:
        It is $t_{k+1}\,=\,\lfloor t_k/2\rfloor$ (e.g., $\lfloor 7/2\rfloor = 3$) 
        and thus $t_{k+1}\,2^{k+1}\,=\,\lfloor t_k/2\rfloor\,2\,2^k$.
 
-       Furthermore, $m_{k+1}\,=\,m_k\,+\,\left(t_k\,-\,\lfloor t_k/2\rfloor\,2\right)\,2^{k+1}$, by definition.   
+       Furthermore, $m_{k+1}\,=\,m_k\,+\,\left(t_k\,-\,\lfloor t_k/2\rfloor\,2\right)\,2^{k}$, by definition.   
 
-       At this point, we distinguish two cases: 
-         a) The previous $t_k$ is **even**. Then $t_{k+1}=\lfloor t_k/2\rfloor=t_k/2$ and $t_{k+1}\,2^{k+1}\,=\,t_k\,2^k$. 
-            Furhtermore, in this case, $m_{k+1}=0$. Whence the sought after relation holds.
-         b) The previous $t_k$ is **odd**. In this case $m_{k+1}=1$.
-TODO...
-
+       If we plug this last two relations into the loop invariant above we have
+       $$t_{k+1}\,2^{k+1}\,+\,m_{k+1}\,=\,\lfloor t_k/2\rfloor\,2\,2^k,+\,m_k\,+\,\left(t_k\,-\,\lfloor t_k/2\rfloor\,2\right)\,2^{k}\,=\,t_k\,2^k\,+\,m_k\,\Box$$
+       
 
 ### +Reverse Induction (Advanced)
 Consider the set of all natural numbers $\mathbb{N}=\{1,2,3,\dots\}$. The set of all 
@@ -676,7 +673,7 @@ case and, thus, feels more descriptive.
    What is **wrong** with this proof?
 6. $+$Consider the following recurrence relation
    $$E_n\,=\,E_{n-1}\,+\,n\,-\,\frac{1}{3}\quad;\quad E_1\,=\,\frac{2}{3}$$
-       a) Find an expression for $E_n$ as a *sum* by repeatedly applying the reccurence relation on the right-hand side (Hint: $E_n=E_{n-2}+n-1+n-2/3$)
+       a) Find an expression for $E_n$ as a *sum* by repeatedly applying the recurrence relation on the right-hand side (Hint: $E_n=E_{n-2}+n-1+n-2/3$)
        b) Find a closed form for $E_n$
        c) Prove that closed form by mathematical induction
 7. $++$**Perturbation method for sums**: This works as follows. We have a sum, called it $S_n\,=\,\sum^n_{k=0}a_k$, where $a_k$ is an expression 
