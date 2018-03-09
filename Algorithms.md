@@ -480,7 +480,79 @@ IF the statement holds for $n=1$, *AND, assuming it holds for all values of the 
 equal to $n$, we can demonstrate that it then also holds for $n+1$, THEN the statement is true
 for all values of $n$*.
 
-### +Application: Proof of algorithms (advanced)
+### Application: Proof of algorithms I
+Mathematical induction has a direct application on proving the correctness of
+recursive functions.
+
+Indeed, the way we implement a recursive function mimics the steps of a proof by PMI.
+
+Let's consider some examples
+
+#### The factorial function
+This function implemented in Python is
+
+```python
+def fac(n):
+   if n == 1 or n == 0 : 
+      return 1
+   return n * f(n-1)
+
+f(0) # -> 1
+f(4) # -> 24
+```
+
+In JavaScript the same function is:
+
+```javascript 
+function fac(n){
+   if ( n == 1 || n == 0 ) return 1
+   return n * f(n-1)
+}
+```
+
+In pseudo-code:
+
+```
+Algorithm: fac(n):
+
+Input: n (non-negative integer)
+Output: m, a positive integer equal to n!
+
+Begin
+  m <-- 1
+  if n > 1 then
+     m <-- n * fac( n-1 )
+End 
+```
+
+Let's proof these implementations are correct. That is, for any integer $n$, any of these implementations yields 
+the value of $n!\, =\, n\cdot (n-1)\cdot\dots\cdot 2\cdot 1$
+
+**Proof**:
+
+1. *Base case*: We have $\mbox{fac}(1)=1$ and $1!=1$. Whence it works for the base case. Notice that without the first line
+   in the defintion of either version of `fac`, the base case would not be satisfied. Instead, the code would lead to an
+   infinite recursion loop.
+2. Let's assume it works for an *arbitrary, yet concrete value* $n$ (but different than the base case). That is, we assume that `fac(n)` gives us indeed the correct
+   value of $n!$ for such an $n$. We now aim to show that it then also works for the *next value* $n+1$, i.e., that $fac(n+1) = (n+1)!$.
+
+     Indeed, the second line of both implementations allow us to write
+     $$fac(n+1) \, =_a\, (n\,+\,1)\cdot fac(n)\, =_b\, (n\,+\,1)\cdot n!\, =_c\, (n\,+\,1)!$$
+     where step a) follows from the implementation, step b) from the inducction assumption, and step c) from the rules of arithmetics $\Box$.
+
+#### The Merge-Sort sorting algorithm
+The following is an implementation of an algorithm for sorting a list of items, in this case, numbers,
+that is called *Merge-Sort*.
+
+```javascript
+function mergeSort(ar){
+  
+}
+``` 
+
+TODO! (\today)
+
+### +Application: Proof of algorithms II (advanced)
 Mathematical induction can be used to prove the correctness of a loop.
 
 Let's consider the case of a program the converts a decimal number into binary:
