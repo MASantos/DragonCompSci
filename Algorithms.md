@@ -1,7 +1,7 @@
 
 # Algorithms
 ## Preface
-This notes combine concepts and discussions seeing in our G12 Comp.Sci. class 
+This notes combine concepts and discussions seen in our G12 Comp.Sci. class 
 with additional material
 for exploring further details.
 
