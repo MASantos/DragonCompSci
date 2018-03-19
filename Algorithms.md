@@ -531,28 +531,16 @@ the value of $n!\, =\, n\cdot (n-1)\cdot\dots\cdot 2\cdot 1$
 **Proof**:
 
 1. *Base case*: We have $\mbox{fac}(1)=1$ and $1!=1$. Whence it works for the base case. Notice that without the first line
-   in the defintion of either version of `fac`, the base case would not be satisfied. Instead, the code would lead to an
+   in the definition of either version of `fac`, the base case would not be satisfied. Instead, the code would lead to an
    infinite recursion loop.
 2. Let's assume it works for an *arbitrary, yet concrete value* $n$ (but different than the base case). That is, we assume that `fac(n)` gives us indeed the correct
    value of $n!$ for such an $n$. We now aim to show that it then also works for the *next value* $n+1$, i.e., that $fac(n+1) = (n+1)!$.
 
      Indeed, the second line of both implementations allow us to write
      $$fac(n+1) \, =_a\, (n\,+\,1)\cdot fac(n)\, =_b\, (n\,+\,1)\cdot n!\, =_c\, (n\,+\,1)!$$
-     where step a) follows from the implementation, step b) from the inducction assumption, and step c) from the rules of arithmetics $\Box$.
+     where step a) follows from the implementation, step b) from the induction assumption, and step c) from the rules of arithmetics $\Box$.
 
-#### The Merge-Sort sorting algorithm
-The following is an implementation of an algorithm for sorting a list of items, in this case, numbers,
-that is called *Merge-Sort*.
-
-```javascript
-function mergeSort(ar){
-  
-}
-``` 
-
-TODO! (\today)
-
-### +Application: Proof of algorithms II (advanced)
+#### +(advanced) Proving the correctness of a loop
 Mathematical induction can be used to prove the correctness of a loop.
 
 Let's consider the case of a program the converts a decimal number into binary:
@@ -613,7 +601,107 @@ Let's proceed with the proof:
 
        If we plug this last two relations into the loop invariant above we have
        $$t_{k+1}\,2^{k+1}\,+\,m_{k+1}\,=\,\lfloor t_k/2\rfloor\,2\,2^k,+\,m_k\,+\,\left(t_k\,-\,\lfloor t_k/2\rfloor\,2\right)\,2^{k}\,=\,t_k\,2^k\,+\,m_k\,\Box$$
-       
+
+### Application: Design of Algorithms
+Consider a list of numbers $x_1,\,x_2\,\dots\,x_n$. Find as many as possible different algorithms for sorting
+such a list in increasing order. If you already have seen one such algorithm before, you are asked to come up
+with one completely different.
+
+To fix ideas you could think on only $n=5$ elements and draft by hand some pseudo-code. 
+
+Give yourself at least five minutes to think about it before you go on reading. If by then you do get an
+idea of an algorithm, you are asked to come up with an additional one... 
+
+...
+
+...
+
+Maybe you were inspired and quickly came up with a first alternative sorting algorithm. However, likely 
+you got then stuck when trying to come up with an additional one. 
+
+
+How can we create an algorithm out of the blue? Is there a guiding principle that could help us in writing
+a program that sorts those numbers say in increasing order?
+
+The answer is that the Principle of Mathematical induction is one such general guiding idea in designing
+algorithms. Let's see how it is so.
+
+As we mentioned before, the gist of the PMI is to *spread* a feature over the rest of the elements of a set,
+given that one (or a special few) are known to have such feature. This is the **Induction (or reduction) step**
+of the PMI.
+
+Here is how we apply it to design an algorithm. Consider the problem of sorting a list of $n$ numbers:
+
+#### The Insertion-Sort sorting algorithm
+1. **Induction Hypothesis**: Following the standard variant of the PMI, we make the assumption that 
+   **we can already sort a list of *smaller size***!  That is, **We assume that we can sort a list of $n-1$**.
+
+2. We then task ourselves to see **how we can *extend* the sorting process to a list of one more element, i.e., 
+   from $n-1$ to $n$ elements**.
+
+     Let's assume we already sorted four elements $x_1=-17\,\leq x_2=-3\,\leq x_3=1\,\leq x_4=1$ and we are given a 
+     fith number $x_5$ to sort among the previous ones. We are not told its value, but we need to come up with a 
+     recipe that guaranties that the five elements will be sorted in the end. How can we achieve it? 
+
+     1. Compare $x_5$ to $x_4$. If $x_5\,>\,x_4$ then we leave $x_5$ at the end of the list and the sorting is finished.
+
+         If $x_5\,<\,x_4$, then we know that $x_4$ will be the last element: $x_1\,\leq x_2\,\leq x_3\,\leq x_5\,\leq x_4$.
+         Now we compare $x_5$ to $x_3$. If $x_5\,>\,x_3$ then we leave $x_5$ as the 4th element of the list and the sorting is finished. 
+
+     2. Otherwise, if $x_5\,<\,x_3$, then we know that $x_3$ will be the 4th element: $x_1\,\leq x_2\,\leq x_5\,\leq x_3\,\leq x_4$.
+        Now we compare $x_5$ to $x_2$. If $x_5\,>\,x_2$ then we leave $x_5$ as the 3rd element of the list and the sorting is finished. 
+
+     3. Otherwise, if $x_5\,<\,x_2$, then we know that $x_2$ will be the 3rd element: $x_1\,\leq x_5\,\leq x_2\,\leq x_3\,\leq x_4$
+        Now we compare $x_5$ to $x_1$. If $x_5\,>\,x_1$ then we leave $x_5$ as the 2nd element of the list and the sorting is finished. 
+
+     4. Otherwise, if $x_5\,<\,x_1$, then we know that $x_1$ will be the 2nd element: $x_5\,\leq x_1\,\leq x_2\,\leq x_3\,\leq x_4$.
+        As there is no other element, the sorting is finished.
+3. Finally, we prove that the previous procedure works for a base case: For a list of $n=2$ elements, the previous steps
+   will trivially give the correct sorting. 
+
+     Whence, we just proved that the present algorithm gives an ascending sorting of a list of numbers of arbitrary size $n$.
+
+
+The following is an implementation of the *Insertion-Sort* algorithm.
+
+```
+Algorithm: InsertionSort( ar )
+
+Input: ar (array of numbers)
+Output: new array with numbers in ar sorted from small to big
+
+Begin
+  n <-- size( ar ) 
+  if n < 2 then return ar
+  
+  ar <- InsertionSort( ar[0:n-1] ) + ar[n-1:]
+
+  i <-- n-1
+  do 
+    flip <-- false
+    if ar[i] < ar[i-1] then
+       tmp <- ar[i-1]
+       ar[i-1] <-- ar[i]
+       ar[i] <-- tmp
+       flip = true
+       i <-- i-1
+  while i > 0 and flip 
+  return ar
+End
+```
+
+#### The Merge-Sort sorting algorithm
+The following is an implementation of an algorithm for sorting a list of items, in this case, numbers,
+that is called *Merge-Sort*.
+
+```javascript
+function mergeSort(ar){
+  
+}
+``` 
+
+TODO! (\today)
+
 
 ### +Reverse Induction (Advanced)
 Consider the set of all natural numbers $\mathbb{N}=\{1,2,3,\dots\}$. The set of all 
@@ -764,6 +852,34 @@ case and, thus, feels more descriptive.
 2. $(a\pm b)^3\,=\,a^3\,\pm\,3\cdot a^2\cdot b\,+\,3\cdot a\cdot b^2\,\pm\,b^3\,$
 3. **Binomial Coefficient**: ${n \choose k}\,=\,\frac{n!}{k!\,(n-k)!}$. Example: ${5\choose 2}=\frac{5!}{2!\,3!}=\frac{5\cdot 4}{2!}=5\cdot 2=10$
 4. **Newton's binomial**: $(a\pm b)^n\,=\,\sum^n_{k=0}{n\choose k}(\pm 1)^k\,a^{n-k}\,b^k$
+
+## The art of programming
+Before this course, whenever you had to write a program, most likely you were always already coding while
+at the same time trying to figure out how to solve the problem and thus, also trying to figure out what to code.
+
+This is a **bad** strategy called *spaghetti* coding because it leads to a twisted and tangled program flow or
+because of its convoluted, if not simply, wrong program-logic. It is very prone to **program logic errors, that
+is, the program will not always do what we expected it to do**. It is also **difficult to debug**!
+ 
+We have seen, however, that very often we can use the Principle of Mathematical Induction to describe the solution of a problem
+in terms of a computer algorithm.
+
+**Only once we have we the correct pseudo-code should we proceed with the actual coding in any given language**.
+
+This way, coding is reduced to a task of translation from pseudo-code into a programming language. 
+
+The advantages of this way are that 
+
+1. we have the correct understanding of our problem.
+2. we sketched the correct logic of our algorithm in pseudo-code.
+3. our coding will not have logic errors
+4. the errors in coding the algorithm will mainly be in syntax
+5. coding can be done much faster.
+
+Thus we should always try write down our algorithm on paper first, for instance in the
+form of pseudo-code. Then we should try to make sure the logic described by the pseudo-code
+is the one we want. Finally, we translate the pseudo-code to any programming language we
+want to.
 
 \newpage
 
