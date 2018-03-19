@@ -5,7 +5,7 @@ This notes combine concepts and discussions seen in our G12 Comp.Sci. class
 with additional material
 for exploring further details.
 
-Not all in here is meant to be seeing in the course. Much less to be a material for a test.
+Not all in here is meant to be seen in the course. Much less to be a material for a test.
 The added content corresponds rather to an introductory undergrad level.
 
 The combination of both the concepts from class plus these extensions will hopefully 
