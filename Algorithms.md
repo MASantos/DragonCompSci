@@ -643,7 +643,8 @@ Here is how we apply it to design an algorithm. Consider the problem of sorting 
      fith number $x_5$ to sort among the previous ones. We are not told its value, but we need to come up with a 
      recipe that guaranties that the five elements will be sorted in the end. How can we achieve it? 
 
-     1. Compare $x_5$ to $x_4$. If $x_5\,>\,x_4$ then we leave $x_5$ at the end of the list and the sorting is finished.
+     1. Compare $x_5$ to $x_4$. If $x_5\,>\,x_4$ then we leave $x_5$ at the end of the list $x_1\,\leq x_2\,\leq x_3\,\leq x_4\,\leq x_5$ 
+        and the sorting is finished.
 
      2. Otherwise, if $x_5\,<\,x_4$, then we know that $x_4$ will be the last element: $x_1\,\leq x_2\,\leq x_3\,\leq x_5\,\leq x_4$.
         Now we compare $x_5$ to $x_3$. If $x_5\,>\,x_3$ then we leave $x_5$ as the 4th element of the list and the sorting is finished. 
@@ -785,7 +786,7 @@ virus is like the PMI's second step (*reduction step*[^%]).
 
 Incidentally, this may be a funny way to see *Modus Ponens*: *If the initial host gets infected
 ($p$) and the hosts interacts with someone else ($p\rightarrow q$), the victim gets as 
-well infected ($q$)*.
+well infected ($q$)*. This is how the *virus of mathematical truth* spreads out!
 
 [^%]: Some call the base case, the *induction hypothesis* and the second step the *reduction step*
 or *induction step*. Reduction is meant as reducing the truth of the $n+1$ case to that of the $n$
