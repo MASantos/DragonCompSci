@@ -790,7 +790,10 @@ well infected ($q$)*. This is how the *virus of mathematical truth* spreads out!
 
 [^%]: Some call the base case, the *induction hypothesis* and the second step the *reduction step*
 or *induction step*. Reduction is meant as reducing the truth of the $n+1$ case to that of the $n$
-case and, thus, feels more descriptive.
+case and, thus, feels more descriptive. We will call the base case, **base case**, and **use induction
+hypothesis** as an *alternative name* **for** the **antecedent of the reduction/induction step**! 
+That is, the induction hypothesis is when we say "*let's assume this works for $n$*", before we go on
+and try to prove it then also works for $n+1$.
 
 ## Review Exercises
 1. Prove that $x^n-y^n$ is divisible by x-y for all natural numbers $x,y\,(x\neq y)\,,n$.
