@@ -989,13 +989,17 @@ following pair of values for $c$ and $n$
    :For each row, it holds that $f(n)\leq c\,g(n)$ for $n\geq n^*$ and $f(n)=n^3$, $g(n)=2^n$.
      That is, for each row it is $f(n)=O(g(n))$ and $g(n)=\Omega (f(n))$.
 
+**Homework**: For each row of the above table, find the value of the constant $c'$ such that
+$g(n)\,\geq\,c'\,f(n)\quad\,\mbox{for}\quad n\leq n^*$, that is, such that 
+$g(n)=\Omega(f(n))\quad\,\mbox{for}\quad n\leq n^*$.
+
 #### Big-Theta Notation
 What happens for function like, say, $f(n)=2\,n+30$ and $g(n)=10\,(n-1)$? 
 Can we use the Big-O notation here? What about the Big-Omega notation?
 
 Clearly, *both* of the previous relations hold for large enough values of $n$.
 
-Indeed, it is $f(n)\,\leq\,c\,g(n)$ for $c=4$ and $n\geq 2$, whence $f(n)=O(g(n)). 
+Indeed, it is $f(n)\,\leq\,c\,g(n)$ for $c=4$ and $n\geq 2$, whence $f(n)=O(g(n))$. 
 But it is *also* true that $f(n)\,\geq\,c^*\,g(n)$ for $c'=5$ and $n\geq 2$.
 
 Whence, both functions have the same growth rate. We can express this by using
