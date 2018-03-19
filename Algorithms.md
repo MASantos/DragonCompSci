@@ -645,16 +645,16 @@ Here is how we apply it to design an algorithm. Consider the problem of sorting 
 
      1. Compare $x_5$ to $x_4$. If $x_5\,>\,x_4$ then we leave $x_5$ at the end of the list and the sorting is finished.
 
-         If $x_5\,<\,x_4$, then we know that $x_4$ will be the last element: $x_1\,\leq x_2\,\leq x_3\,\leq x_5\,\leq x_4$.
-         Now we compare $x_5$ to $x_3$. If $x_5\,>\,x_3$ then we leave $x_5$ as the 4th element of the list and the sorting is finished. 
+     2. Otherwise, if $x_5\,<\,x_4$, then we know that $x_4$ will be the last element: $x_1\,\leq x_2\,\leq x_3\,\leq x_5\,\leq x_4$.
+        Now we compare $x_5$ to $x_3$. If $x_5\,>\,x_3$ then we leave $x_5$ as the 4th element of the list and the sorting is finished. 
 
-     2. Otherwise, if $x_5\,<\,x_3$, then we know that $x_3$ will be the 4th element: $x_1\,\leq x_2\,\leq x_5\,\leq x_3\,\leq x_4$.
+     3. Otherwise, if $x_5\,<\,x_3$, then we know that $x_3$ will be the 4th element: $x_1\,\leq x_2\,\leq x_5\,\leq x_3\,\leq x_4$.
         Now we compare $x_5$ to $x_2$. If $x_5\,>\,x_2$ then we leave $x_5$ as the 3rd element of the list and the sorting is finished. 
 
-     3. Otherwise, if $x_5\,<\,x_2$, then we know that $x_2$ will be the 3rd element: $x_1\,\leq x_5\,\leq x_2\,\leq x_3\,\leq x_4$
+     4. Otherwise, if $x_5\,<\,x_2$, then we know that $x_2$ will be the 3rd element: $x_1\,\leq x_5\,\leq x_2\,\leq x_3\,\leq x_4$
         Now we compare $x_5$ to $x_1$. If $x_5\,>\,x_1$ then we leave $x_5$ as the 2nd element of the list and the sorting is finished. 
 
-     4. Otherwise, if $x_5\,<\,x_1$, then we know that $x_1$ will be the 2nd element: $x_5\,\leq x_1\,\leq x_2\,\leq x_3\,\leq x_4$.
+     5. Otherwise, if $x_5\,<\,x_1$, then we know that $x_1$ will be the 2nd element: $x_5\,\leq x_1\,\leq x_2\,\leq x_3\,\leq x_4$.
         As there is no other element, the sorting is finished.
 3. Finally, we prove that the previous procedure works for a base case: For a list of $n=2$ elements, the previous steps
    will trivially give the correct sorting. 
