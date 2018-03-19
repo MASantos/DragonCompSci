@@ -858,7 +858,7 @@ Before this course, whenever you had to write a program, most likely you were al
 at the same time trying to figure out how to solve the problem and thus, also trying to figure out what to code.
 
 This is a **bad** strategy called *spaghetti* coding because it leads to a twisted and tangled program flow or
-because of its convoluted, if not simply, wrong program-logic. It is very prone to **program logic errors, that
+because of its convoluted, if not simply, wrong program logic. It is very prone to **program-logic errors, that
 is, the program will not always do what we expected it to do**. It is also **difficult to debug**!
  
 We have seen, however, that very often we can use the Principle of Mathematical Induction to describe the solution of a problem
