@@ -7,7 +7,7 @@ Date: \today
 ## Name:
 
 
-Each question emphasizes on different skills: (K) Knowledge, (T) Thinking, (C) Communication and (A) Application.
+Each question emphasizes different skills: (K) Knowledge, (T) Thinking, (C) Communication and (A) Application.
 
 The value of each problem is as follows: P1 20% , P2 40%, P3 30% and P4 10%.
 
@@ -16,7 +16,7 @@ The value of each problem is as follows: P1 20% , P2 40%, P3 30% and P4 10%.
 
      **Answer**: $Q_n\,=\,2\,Q_n\,-\,Q_n\,=\,1\,-\,\frac{1}{2^n}$. Whence, as it is always that $(1/2)^n\,>\,0$, and therefore $1-1/2^n<1$, 
      we conclude that it will always be $Q_n\,<\,1\quad\Box$
-2. (40% KTC) The gist of the **insertion sort**  algorithm consists in building a sorted list of number by inserting each of them one by one in the right position. 
+2. (40% KTC) The gist of the **insertion sort**  algorithm consists in building a sorted list of numbers by inserting each of them one by one in the right position. 
    Say, the list of numbers $R_1,\,R_2,\,R_3,\,\dots \,R_n\,R_{n+1}$ is such that the first $n$ of them are already sorted. How can we sort the full list?
    
        1. Sketch a reasoning of how to sort the full list using PMI and proving it is correct. 

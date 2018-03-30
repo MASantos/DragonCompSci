@@ -7,7 +7,7 @@ Date: \today
 ## Name:
 
 
-Each question emphasizes on different skills: (K) Knowledge, (T) Thinking, (C) Communication and (A) Application.
+Each question emphasizes different skills: (K) Knowledge, (T) Thinking, (C) Communication and (A) Application.
 
 The value of each problem is as follows: P1 20% , P2 40%, P3 30% and P4 10%.
 
@@ -16,8 +16,8 @@ The value of each problem is as follows: P1 20% , P2 40%, P3 30% and P4 10%.
 2. (40% KTC) The gist of the **insertion sort**  algorithm consists in building a sorted list of number by inserting each of them one by one in the right position. 
    Say, the list of numbers $R_1,\,R_2,\,R_3,\,\dots \,R_n\,R_{n+1}$ is such that the first $n$ of them are already sorted. How can we sort the full list?
    
-       1. Sketch a reasoning of how to sort the full list using PMI and proving it is correct. 
-       2. Write a pseudo-code for this algorithm 
+       1. Write a pseudo-code for this algorithm 
+       2. Explain the code's logic in your own words. Make sure to clearly show how PMI is used to guarantee the logic is correct.
 3. (30% KCA) Calculate the closed form of the following sums and prove your result by mathematical induction. Hint: Use the method of shifting and 
    the well-known result $S_n=\sum^n_{k=1}k=n\dot (n+1)/2$
 
