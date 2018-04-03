@@ -857,6 +857,8 @@ and try to prove it then also works for $n+1$.
 3. **Binomial Coefficient**: ${n \choose k}\,=\,\frac{n!}{k!\,(n-k)!}$. Example: ${5\choose 2}=\frac{5!}{2!\,3!}=\frac{5\cdot 4}{2!}=5\cdot 2=10$
 4. **Newton's binomial**: $(a\pm b)^n\,=\,\sum^n_{k=0}{n\choose k}(\pm 1)^k\,a^{n-k}\,b^k$
 
+\newpage
+
 ## The art of programming
 Before this course, whenever you had to write a program, most likely you were always already coding while
 at the same time trying to figure out how to solve the problem and thus, also trying to figure out what to code.
@@ -884,6 +886,187 @@ Thus we should always try write down our algorithm on paper first, for instance 
 form of pseudo-code. Then we should try to make sure the logic described by the pseudo-code
 is the one we want. Finally, we translate the pseudo-code to any programming language we
 want to.
+
+### Learning by example: Basic Sorting Algorithms
+Let's exemplify the previous ideas with some examples. We will study some basic algorithms
+for sorting a list or array of numbers. 
+
+The algorithms we will see are Bubble-sort, Insertion-sort, Selection-sort, Quick-sort and Merge-sort.
+
+We will learn how
+
+1. the Principle of Mathematical Induction allows us to specify an algorithm whose logic is correct.
+2. to summarize in a few words what an algorithm does. 
+   This is key to (1) remember it and (2) to communicate with others about it.
+3. once we have the previous steps completed, to write down a pseudo-code for that algorithm
+4. unfold an recursive algorithm that was obtained using the PMI. We will see that, while PMI allows
+   use to design an algorithm on solid grounds, it leads to recursive algorithms that can easily 
+   exhaust the memory resources of our computer. More specifically, we will often run out of memory
+   available for the stack, with message like *Maximum call stack size exceeded*. In these cases,
+   we need to transform the recursive code into one using loops.
+  
+
+After that, we will translate our algorithms to 3 different programming languages: JavaScript, Python and C.
+
+**Statement of the problem**: We are given a list of $n>0$ numbers $R_1,\,R_2,\,\dots ,\,R_n$ and we want to
+sort them in increasing order. 
+
+To fix ideas, we may think on a finite, small case like $n=5$: $R_1=-17,\,R_2=-3,\,R_3=1,\,R_4=1,\,R_5=3$.
+
+
+### Bubble-sort
+Bubble-sort is not a very useful sorting algorithm. The reason is because it is very slow.
+
+However, the idea of the bubble-sort is very easy to summarize:
+
+**Idea** (without using PMI):
+Sweep array comparing each element againts its neighbor on the right.
+Swap them if the latter is smaller. Repeat until a sweep is done w/o any swap.
+
+**Pseudo-code**:
+```bash
+Algorithm: BubbleSort(A)
+Input: A ( array of numbers)
+Output: A (w/ numbers sorted in increasing order)
+
+Begin
+ n <-- len(A)
+ swapped <-- True
+ while swapped
+        swapped <-- False
+        for i <-- 0 TO n-2
+          if A[i] > A[i+1] then
+                Swap A[i], A[i+1]
+                swapped <-- True
+End
+```
+
+**Python implementation**:
+
+```python
+n = len(A)
+swapped = True
+while swapped :
+        swapped = False
+        for i in range(0,n-1):
+                if A[i] > A[i+1]:
+                        tmp = A[i+1]
+                        A[i+1] = A[i]
+                        A[i] = tmp
+                        swapped = True
+```
+
+### Recursive Bubble-sort
+We have seen how Bubble-sort works. However, that was an algorithm designed without using PMI.
+
+In our key point 4 above, we mentioned that PMI always leads to a recursive algorithm and that
+such an algorithm can always be rewritten using loops (this we called it *unfolding recursion*).
+
+**How can we design bubble-sort using PMI?** 
+What we need is to find the right *induction hypothesis*.  Reviewing the previous 
+algorithm will help pinpoint the key idea.
+
+We know it's about swapping contiguous pairs. And only when no swapping can be made 
+do we know we are done. This gives us a key insight of what is happening. 
+
+As we started from the beginning, *the largest element of the array will always end up
+as the last element after this first sweep*. 
+
+Once this is done, we can then concentrate on the remaining $n-1$
+elements. This gives us the key to formulate our induction hypothesis
+
+**Buble-sort Induction hypothesis**: Let's assume we know how to sort a list of $n$
+elements. 
+
+The induction step is as follows: 
+Consider now the case of $n+1$ elements. Split the array into two parts: the first element and the
+remaining $n$. By the induction hypothesis, we know how to sort the latter. We are left with making
+sure the first elements gets swapped into its right position. 
+
+But this can be easily done: we just sweep the list from left to right and keep swapping that element
+everytime it is larger than the next element.
+
+**Base case**: Trivially it works for an array of size $n=1\quad\Box$.
+
+Thus, using the PMI, we have found the gist of the bubble-sort algorithm: 
+
+**Idea**: *Swap an element all the way down the array until it is no longer larger than next one*.
+*Assume from the second element on this had been done before*.
+
+**Pseudo-code**:
+```bash
+Algorithm: BubbleSort-Rec(A)
+Input: A (array of numbers)
+Output: A (array w/ numbers sorted in increasing order)
+
+Begin
+ n <-- len(A)
+ if n <= 1 return A
+ A <-- A[0] ++ BubbleSort-Rec( A[1:] )
+ for i from 0 to n-2
+   if A[i] > A[i+1] then swap A[i] & A[i+1]
+ return A
+End
+```
+
+**JavaScript Implementation**:
+```javascript
+function BubbleSortRec(A){
+        var n = A.length
+        if ( n == 1 ) return A
+
+        A = [ A[0] ].concat( BubbleSortRec(A.slice(1)) )
+
+        var tmp = 0.0
+        for(var i = 0 ; i < n-1 ; i++ ){
+                if ( A[i] > A[i+1] ){
+                        tmp = A[i+1]
+                        A[i+1] = A[i]
+                        A[i] = tmp
+                }
+        }
+        return A
+}
+```
+
+### Exercises
+
+1. Implement Bubble-sort in JavaScript and C. Make sure to add comments that include
+   the idea in plain english and the corresponding pseudo-code in each case.
+2. Implement the recursive version of Bubble-sort in Python and C. 
+   Make sure to add comments that include
+   the idea in plain english and the corresponding pseudo-code in each case.
+3. Estimate the number of swaps required in the worst case of the Bubble-sort algorithm for an array of size $n$.
+4. Answer the same question for the case of the recursive version of the Bubble-sort algorithm.
+5. Implement a non-recursive version of the Insertion-sort algorithm seen in the previous chapter.
+   Make sure to add comments that include
+   the idea in plain english and the corresponding pseudo-code in each case.
+
+### Insertion Sort
+
+### Recursive Insertion Sort
+
+### Exercises
+
+### Selection Sort
+
+### Rercursive Selection Sort
+
+### Exercises
+
+### Quick Sort
+
+### Recursive Quick Sort
+
+### Exercises
+
+### Merge Sort
+
+### Recursive Merge Sort
+
+### Exercises
+
+### Review Exercises
 
 \newpage
 
