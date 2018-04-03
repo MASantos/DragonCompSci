@@ -4,7 +4,7 @@
   return type could be void
   We will make it return the number of swaps done
 */
-unsigned long int selectionSort(float* ar, size_t n){
+unsigned long int SelectionSort(float* ar, size_t n){
 	/*
 	  Selection Sort
 	  iteratively swap mininum of remaining slice
@@ -33,24 +33,5 @@ unsigned long int selectionSort(float* ar, size_t n){
 		if (i == n)  break ;
 	}
 	return swaps ;
-}
-
-int main(){
-/*
-	float r[9] = {87, -3, 1, 6, -17, 3, 2, 1,7} ;
-	printf("Sorting ") ;
-	printArray( r , 9) ;
-	printf( "Swaps: %lu\n", selectionSort(r,9) ) ;
-	printf("Original array now: ");
-	printArray( r , 9) ;
-*/
-	long MX = ipow(2,31)-1 ; 
-	size_t N = 128000 ; 
-	float* r = (float*) calloc(N, sizeof(float) ) ;
-	size_t i ;
-	for( i = 0 ; i < N ; i++ ) *(r+i) = random()*100.0/MX ;
-	selectionSort(r,N);
-	//printArray(r,30);
-	return 0;
 }
 

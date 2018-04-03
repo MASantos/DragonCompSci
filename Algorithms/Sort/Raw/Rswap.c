@@ -1,14 +1,14 @@
 #include"helper.h"
 
 /* INSERTION SORT
-Here we called it R(ecursive) Swap, or Rswap, as that's how we implement it.
+Here we called it R(ecursive) Swap, or Rswap
 
 */
 
-float* rSwap(float* ar, size_t n){
+float* InsertionSortRec(float* ar, size_t n){
 	if ( n<2) return ar; //Base case n=1 :=> nothing to do
 
-	printf("DEbug: i: ar[%zu]  : ",n); printFarray(ar, n);
+	printf("DEbug: i: ar[%zu]  : ",n); printArray(ar, n);
 
 	//Constructing and sorting slice ar[0,n-1]
 	float* ar1 = (float*) calloc(n-1,sizeof(float));
@@ -16,13 +16,13 @@ float* rSwap(float* ar, size_t n){
 	for( i =0 ; i< n-1 ; i++){
 		ar1[i] = ar[i] ;	
 	}
-	rSwap( ar1 , n-1) ;
+	InsertionSortRec( ar1 , n-1) ;
 	//In C we can't just return pointer to local variable to be used after scope ends
 	// whence lets store sorted list back into original array and return this
 	for( i =0 ; i< n-1 ; i++){
 		ar[i] = ar1[i] ;	
 	}
-	// At this point we have : ar = rSwap( ar[:n-1] ) ++ [ ar[n-1] ]
+	// At this point we have : ar = InsertionSortRec( ar[:n-1] ) ++ [ ar[n-1] ]
 	unsigned int  flip ;
 	do{
 		flip = 0 ; 
@@ -35,17 +35,7 @@ float* rSwap(float* ar, size_t n){
 		}	
 	} while ( i > 0 && flip) ;
 
-	printf("DEbug: a: ar[%zu]  : ",n); printFarray(ar, n);
+	printf("DEbug: a: ar[%zu]  : ",n); printArray(ar, n);
 	return ar ;
 }
 
-int main(){
-
-	float r[9] = {87, -3, 1, 6, -17, 3, 2, 1,7} ;
-	size_t n = 9 ;
-	printf("Sorting ") ;
-	printFarray(r, n );
-	rSwap(r, n)  ;
-	printFarray(r, n );
-	return 0;
-}
