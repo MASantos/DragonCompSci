@@ -268,7 +268,7 @@ The label **`socialSecurityNumber`** points to a memory location that stores the
          }
 ```
 
-2. Write a program that prompts the user to guess a hidden number. If the user's answer is wrong, show a dialog window saying "Wrong!".
+2. **Game: Guess it! I**. Write a program that prompts the user to guess a hidden number. If the user's answer is wrong, show a dialog window saying "Wrong!".
    If it is correct, show a dialog windows saying "Correct!".
 
      **Solution**:
@@ -285,7 +285,7 @@ The label **`socialSecurityNumber`** points to a memory location that stores the
            alert("Wrong!")
          }
 ```
-2. Write a program that prompts the user to guess a hidden number. This time, the user has 3 chances to guess the number correctly.
+2. **Game: Guess it! II**. Write a program that prompts the user to guess a hidden number. This time, the user has 3 chances to guess the number correctly.
    Say the hidden number is 12. If the user's guess is  20, show a dialog window saying "It's smaller!"; if the user's guess is 8,
    show a dialog window saying "It's larger!".
 
@@ -341,23 +341,23 @@ The label **`socialSecurityNumber`** points to a memory location that stores the
 
 1. Write a while-loop that counts from 0 to 9 and each time prints "Count =" and then the value of the current count. Example:
 
-```
+    ```
      Count = 0
      Count = 1
      Count = 2
        ...
-```
+    ```
 
-           **Solution**:
+    **Solution**:
 
-```javascript
+    ```javascript
          var count = 0
          
          while ( count < 10 ) {
            print("Count =" + count )
            count = count + 1         //This is the loop, update rule!
          }
-```
+    ```
 2. Write a while-loop that prints the happy-birthday song so that we repeat statements the least number of times possible.
 
      **Solution**:
@@ -372,7 +372,44 @@ The label **`socialSecurityNumber`** points to a memory location that stores the
          print( "Happy birthday dear Julia" )
          print( "Happy birthday to you")
 ```
-3. Write a while-loop to calculate the sum $1+2+3+4+5+\dots +100$. Make your program print the final result.
+3. **Game: Guess it! III**. We want to rewrite our game *Guess it!* using while-loop. It makes sense. After all
+   the game consists in repeating at most 3 times the same question (prompting the user to guess a number) and 
+   possible actions that need to be taken are always the same. Would it be possible to tell the computer to 
+   *do all that 3 times at most*?  Well, there is, namely using while-loops. 
+
+     Problem: Rewrite the game *Guess it!* so that the code contains only 1 single line prompting the user for a number,
+     and yet it gives the user 3 chances at most to guess the hidden number.
+
+     **Solution**:
+
+```javascript
+var secretNumber = 3
+
+var counter = 1
+
+while ( counter <= 3 ) {
+  var userAnswwer = Number( prompt( "Guess a number: ") )
+
+  if ( counter == 3 && userAnswer != secretNumber ) {
+    alert( "Game over!" )
+    break                          // 'break' will force stop the while-loop altogether
+  }
+
+  if ( userAnswer == secretNumber ) {
+    alert( "Correct!" )
+    break                         // User guessed won. Let's stop the while-loop here.
+  }
+  else if ( userAnswer > secretNumber ) {
+    alert("It's smaller. Try again")
+  }
+  else {
+    alert("It's larger. Try again")
+  }
+  
+  counter = counter + 1  // Never forget this! Update the loop counter!! 
+}
+```
+4. Write a while-loop to calculate the sum $1+2+3+4+5+\dots +100$. Make your program print the final result.
 
      **Solution**:
 
@@ -386,7 +423,7 @@ The label **`socialSecurityNumber`** points to a memory location that stores the
          }
          print( sum )
 ```
-4. Write a while-loop to calculate the sum $2+4+6+8+10+\dots +200$. Make your program print the final result.
+5. Write a while-loop to calculate the sum $2+4+6+8+10+\dots +200$. Make your program print the final result.
 
      **Solution**: 
 
@@ -435,7 +472,7 @@ The label **`socialSecurityNumber`** points to a memory location that stores the
          }
          print( sum )
 ``` 
-5. Write a while-loop to calculate the sum $1+3+5+7+9+\dots +199$. Make your program print the final result.
+6. Write a while-loop to calculate the sum $1+3+5+7+9+\dots +199$. Make your program print the final result.
 
      **Solution**: 
 
@@ -477,7 +514,7 @@ The label **`socialSecurityNumber`** points to a memory location that stores the
          }
          print( sum )
 ``` 
-6. Write a program that calculates the sum $2+6+12+20+30+42+56+\dots +110$ and prints the final result.
+7. Write a program that calculates the sum $2+6+12+20+30+42+56+\dots +110$ and prints the final result.
 
      **Solution**
 
@@ -506,7 +543,7 @@ The label **`socialSecurityNumber`** points to a memory location that stores the
          }
          print( sum )
 ```
-7. Write a program that calculates the sum $1+\frac{1}{2}+\frac{1}{4}+\frac{1}{8}+\frac{1}{16}+\dots +\frac{1}{1024}$ and prints the final result.
+8. Write a program that calculates the sum $1+\frac{1}{2}+\frac{1}{4}+\frac{1}{8}+\frac{1}{16}+\dots +\frac{1}{1024}$ and prints the final result.
 
      **Solution**: In order to find the pattern, *sometimes it is easier to make the counter start by 0*!
 
