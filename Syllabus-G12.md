@@ -1,8 +1,13 @@
 # Course Content 
 
 ## Term 1
-See the course notes on [Number systems]() and [Propositional Logic](https://github.com/MASantos/DragonCompSci/blob/master/PropositionalLogic-Notes.pdf) 
-and [Lambda Calculus](https://github.com/MASantos/DragonCompSci/blob/master/lambdaCalculus.pdf).
+See the course notes on 
+
+* [Number systems]() 
+* Computer Architecture
+* Turing Machine
+* [Propositional Logic](https://github.com/MASantos/DragonCompSci/blob/master/PropositionalLogic-Notes.pdf) 
+* [Lambda Calculus](https://github.com/MASantos/DragonCompSci/blob/master/lambdaCalculus.pdf).
 
 ## Term 2
 See the course notes on [Object Oriented Programming](https://github.com/MASantos/DragonCompSci/blob/master/ObjectsInJS.pdf).
