@@ -1,7 +1,10 @@
-Project
-=======
+G12 Computer Science
+====================
 
-Most of the topics listed are from our main reference on JavaScript
+Final Course Project
+====================
+
+Most of the topics listed below are from our main reference on JavaScript
 during this course, namely *Eloquent JavaScript: A Modern Introduction
 to Programming* from Marijn Haverbeke.
 
@@ -23,12 +26,11 @@ Along the way we will learn about things like regular expressions,
 parsin or finite automata, besides some elementary topics in
 linguistics. From the point of view of Haskell, we will about its
 powerful implementation of abstract data types, its lazy evaluation or
-its use of pattern-matching definitions.\
-\
+its use of pattern-matching definitions.
 Some pointers on Haskell are [the Haskell
 wiki](https://wiki.haskell.org/Haskell).\
 \
-Alternatively, this topic may be address through Python with the NLTK
+Alternatively, this topic may be addressed through Python with the NLTK
 module. This has a more applied emphasis. The reference is *Natural
 Language Processing with Python* by Steven Bird et al. You can find an
 online version [here](http://www.nltk.org/book/)
