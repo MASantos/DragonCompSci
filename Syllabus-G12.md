@@ -1,7 +1,13 @@
-# Course Content (Terms 3 & 4 )
-For a list of topics. See the document
+# Course Content 
 
-https://github.com/MASantos/DragonCompSci/blob/master/Algorithms.pdf
+## Term 1
+See the course notes on [Number systems]() and [Propositional Logic](https://github.com/MASantos/DragonCompSci/blob/master/PropositionalLogic-Notes.pdf) 
+and [Lambda Calculus](https://github.com/MASantos/DragonCompSci/blob/master/lambdaCalculus.pdf).
+
+## Term 2
+See the course notes on [Object Oriented Programming](https://github.com/MASantos/DragonCompSci/blob/master/ObjectsInJS.pdf).
+## Terms 3 & 4 
+For a list of topics. See the course notes on [Algorithms](https://github.com/MASantos/DragonCompSci/blob/master/Algorithms.pdf).
 
 # Class Dynamic
 Wednesdays will be our day for in depth discussion of questions, doubts and problems you may have with the concepts seen so far or any pending problem set.
