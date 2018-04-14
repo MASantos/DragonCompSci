@@ -9,6 +9,10 @@ See the course notes on [Object Oriented Programming](https://github.com/MASanto
 ## Terms 3 & 4 
 For a list of topics. See the course notes on [Algorithms](https://github.com/MASantos/DragonCompSci/blob/master/Algorithms.pdf).
 
+## Additional Notes
+* [Programming in C](https://github.com/MASantos/DragonCompSci/blob/master/programmingC.pdf)
+* [Programming in Python](https://github.com/MASantos/DragonCompSci/blob/master/programmingPython.pdf)
+
 # Class Dynamic
 Wednesdays will be our day for in depth discussion of questions, doubts and problems you may have with the concepts seen so far or any pending problem set.
 
