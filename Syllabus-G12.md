@@ -6,6 +6,7 @@ and [Lambda Calculus](https://github.com/MASantos/DragonCompSci/blob/master/lamb
 
 ## Term 2
 See the course notes on [Object Oriented Programming](https://github.com/MASantos/DragonCompSci/blob/master/ObjectsInJS.pdf).
+
 ## Terms 3 & 4 
 For a list of topics. See the course notes on [Algorithms](https://github.com/MASantos/DragonCompSci/blob/master/Algorithms.pdf).
 
