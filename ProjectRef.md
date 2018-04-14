@@ -46,7 +46,8 @@ References
 Besides the notes and explanation I will provide you, googling for a
 topic might give you some pointer.
 
-I also urge you to check out the Library Genesis. There you will find
+Now that we are at it, here a question on the interaction of CS and 
+Society: the Library Genesis. There you will find
 **all textbooks for free in electronic form**. It's use though is not
 excempt of criticisms and potential problems. While their server is
 likely illegal in most countries, its ethical status is far from being
@@ -55,3 +56,22 @@ be reprovable, specially in the digital age? Can accessing such
 information be reprovable? Should it be left only to the few wealthy or
 lucky enough? For more details, search for it in Google or visit the
 [Wikipedia article on it](https://en.wikipedia.org/wiki/Library_Genesis)
+
+
+List of Project topics
+======================
+
+Tentative List of Course Project Ideas:
+
+1. Implement own programming language. Ref: Eloquent JS, Chap 11. See exercises and compiler suggestion
+2. A platform Game. Ref: Ibidem., Chap 15. See Exer.
+3. Drawing on Canvas: Bouncing Ball. Ref: Ibidem., Chap. 16. See Exer
+4. Conway's Game of Life. Ref: Ibidem. Chap 18, exer. 2
+5. A painting program. Ref: Ibidem. Chap 19
+6. Web site. Ref. Ibidem. Chaps 20/21.
+7. JS & Performance (Graph layout, Dijkstra, Profiling,...). Ref: Ibidem, Chap 22
+8. Dynamic Web Site with Ember
+9. GUI Design and Programming (Non web-based)
+10. Concurrent and Parallel programming
+11. Deep Learning w/ Google Tensor Flow
+12. Linguistics with Haskell
