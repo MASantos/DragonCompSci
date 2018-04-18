@@ -77,3 +77,6 @@ Tentative List of Course Project Ideas:
 10. Concurrent and Parallel programming
 11. Deep Learning w/ Google Tensor Flow
 12. Linguistics with Haskell
+13. Bioinformatics I: Analyzing Protein structure with Python and PyMol
+14. Bioinformatics II: Determining Protein Structure via Homology Modeling in Python
+
