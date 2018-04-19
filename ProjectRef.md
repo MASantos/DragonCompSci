@@ -65,6 +65,7 @@ List of Project topics
 
 Tentative List of Course Project Ideas:
 
+#### Closed Problems
 1. Implement own programming language. Ref: Eloquent JS, Chap 11. See exercises and compiler suggestion
 2. A platform Game. Ref: Ibidem., Chap 15. See Exer.
 3. Drawing on Canvas: Bouncing Ball. Ref: Ibidem., Chap. 16. See Exer
@@ -73,6 +74,8 @@ Tentative List of Course Project Ideas:
 6. Web site. Ref. Ibidem. Chaps 20/21.
 7. JS & Performance (Graph layout, Dijkstra, Profiling,...). Ref: Ibidem, Chap 22
 8. Bioinformatics I: Intro to Dynamic Programming. Multiple Sequence Alignment
+
+#### Open Problems
 9. Dynamic Web Site with Ember
 10. GUI Design and Programming (Non web-based)
 11. Concurrent and Parallel programming
