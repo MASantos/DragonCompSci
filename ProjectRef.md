@@ -72,11 +72,12 @@ Tentative List of Course Project Ideas:
 5. A painting program. Ref: Ibidem. Chap 19
 6. Web site. Ref. Ibidem. Chaps 20/21.
 7. JS & Performance (Graph layout, Dijkstra, Profiling,...). Ref: Ibidem, Chap 22
-8. Dynamic Web Site with Ember
-9. GUI Design and Programming (Non web-based)
-10. Concurrent and Parallel programming
-11. Deep Learning w/ Google Tensor Flow
-12. Linguistics with Haskell
-13. Bioinformatics I: Analyzing Protein structure with Python and PyMol
-14. Bioinformatics II: Determining Protein Structure via Homology Modeling in Python
+8. Bioinformatics I: Intro to Dynamic Programming. Multiple Sequence Alignment
+9. Dynamic Web Site with Ember
+10. GUI Design and Programming (Non web-based)
+11. Concurrent and Parallel programming
+12. Deep Learning w/ Google Tensor Flow
+13. Linguistics with Haskell
+14. Bioinformatics II: Analyzing Protein structure with Python and PyMol
+15. Bioinformatics III: Determining Protein Structure via Homology Modeling in Python
 
