@@ -23,7 +23,7 @@ Linguistics and Logic and have a glance on how all that may lead to
 quite advanced mathematical methods.\
 \
 Along the way we will learn about things like regular expressions,
-parsing or finite automata, besides some elementary topics in
+parsin or finite automata, besides some elementary topics in
 linguistics. From the point of view of Haskell, we will about its
 powerful implementation of abstract data types, its lazy evaluation or
 its use of pattern-matching definitions.
@@ -51,19 +51,14 @@ topic might give you some pointer.
 Now that we are at it, here a question on the interaction of CS and 
 Society: the Library Genesis. There you will find
 **all textbooks for free in electronic form**. It's use though is not
-exempt of criticisms and potential problems. While their server is
+excempt of criticisms and potential problems. While their server is
 likely illegal in most countries, its ethical status is far from being
 clear cut: Can learning on your own the fundamentals of human knowledge
 be reprovable, specially in the digital age? Can accessing such
 information be reprovable? Should it be left only to the few wealthy or
-lucky enough? Or rather 
-shouldn't the creator of something new and original 
-be able to claim any right on her/his creation? 
-or should the author get stripped off a chance for such profit instead? 
-Is this an ethical question
-(e.g., like not killing for a smartphone, or stealing the food of those starving)
-or just an adminitrative, legal question (e.g, like a speed limit or the 
-convention to drive on the right)?
+lucky enough? Or rather should the author get stripped off a chance
+for some profit? Shoudn't the creator of something new and original not
+be able to claim any right on the her/his creation? 
 For more details, search for it in Google or visit the
 [Wikipedia article on it](https://en.wikipedia.org/wiki/Library_Genesis)
 
@@ -86,7 +81,8 @@ Tentative List of Course Project Ideas:
 #### Open Problems
 9. Dynamic Web Site with Ember
 10. GUI Design and Programming (Non web-based)
-11. Concurrent and Parallel programming 12. Deep Learning w/ Google Tensor Flow
+11. Concurrent and Parallel programming
+12. Deep Learning w/ Google Tensor Flow
 13. Linguistics with Haskell
 14. Bioinformatics II: Analyzing Protein structure with Python and PyMol
 15. Bioinformatics III: Determining Protein Structure via Homology Modeling in Python
