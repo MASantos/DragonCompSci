@@ -810,7 +810,6 @@ and try to prove it then also works for $n+1$.
 
 1. Find the closed expression for a general *geometric progression* $S_n\,=\,\sum_{k=0}^n\,a\,x^k$, where $a$ and $x$ are constants.
 1. Find an expression for the sum of numbers of the $i$-th row of the following triangle and prove its correctness.
-
    \begin{equation*}
    \begin{array}{ccr}
        1 &  = & 1 \\
@@ -988,10 +987,10 @@ everytime it is larger than the next element.
 
 **Base case**: Trivially it works for an array of size $n=1\quad\Box$.
 
-Thus, using the PMI, we have found the gist of the bubble-sort algorithm: 
+Thus, we have found the gist of the bubble-sort algorithm, from the point of view of the PMI: 
 
 **Idea**: *Swap an element all the way down the array until it is no longer larger than next one*.
-*Assume from the second element on this had been done before*.
+*Assume this had been done before from the second element on*.
 
 **Pseudo-code**:
 ```bash
@@ -1054,9 +1053,48 @@ function BubbleSortRec(A){
 
 ### Exercises
 
-### Quick Sort
+### Quicksort
+This version of Quicksort is partly recursive.
 
-### Recursive Quick Sort
+**Idea**:  Recursively *partition array by pivot* into left and right blocks.
+
+**Partition by pivot**:
+
+* **Idea**:
+
+     Partition array A between l-th and r-th elements (both included) using a given value 
+     as the "pivot". That is, once done, all elements < pivot, will be on left of pivot; 
+     all > pivot, on its right.
+* **Detail (elaboration)**:
+
+     Initially, choose as pivot A[p] with p=0, i.e., the first element of array.
+
+     Given a pivot A[p], consider a value at p<i<r. If A[i]>A[p], check next i.
+
+     Otherwise, swap A[i] w/ A[p+1], then swap A[p] w/ A[p+1]. Effectively, this will put
+     the original A[i] on the left of the pivot A[p], which has moved one to the right to
+     accommodate A[i]. The original value on the right of A[p] is moved to where A[i] was.
+
+                                         If  A[i] <= A[p] then
+
+         Initiallly:        A[0] ... A[p-1] A[p] A[p+1] ... A[i]   ... A[N-1]
+                                              ^              ^^
+         After 1st swap:    A[0] ... A[p-1] A[p] A[i]  ...  A[p+1] ... A[N-1]
+                                              ^   ^^
+         After 2nd swap:    A[0] ... A[p-1] A[i] A[p]  ...  A[p+1] ... A[N-1]
+                                             ^^    ^
+
+     Increment p by 1.
+     Repeat for all i from p+1 to r.
+
+     Return index of pivot: p
+
+     Base case, 2 elements. Ok (although one superfluous swap)
+
+Quicksort is a popular algorithm because it is easy to implement and is [very fast](https://docs.google.com/spreadsheets/d/11SZkDrXPpg1EZIsLVizsqUAcomQHYVl25QaWCXcwIK4/edit?usp=sharing). 
+We will see more about this in the next chapter.
+
+### Recursive Quicksort
 
 ### Exercises
 
@@ -1070,7 +1108,43 @@ function BubbleSortRec(A){
 
 \newpage
 
-## Growth and Big-O notation
+## Complexity of Algorithms: Growth and Big-O notation
+
+### What is Complexity of an algorithm? Why do we care?
+![Complexity of Algorithms: The Big-O notation](./G12/Term4/ClassNotes/ComplexityBigO-1.jpg)
+
+We know that for any given problem, we can find many different algorithms that solve it. Which one should we choose then?
+Anyone, arbitrarily? 
+
+Clearly, in most of the cases we would prefer a faster algorithm instead of a slower one. The less time it takes to compute things
+the faster we can come up with an answer to our problem, and the faster we can move on to the next one. And it is only by solving many 
+problems in as little a time as possible that we may achieve a deeper understanding of the world and ourselves. Time is money, says the adage.
+
+Whence we would like to go for the fastest possible algorithm. Can we do that always? The answer is no. Sometimes, the fastest algorithm 
+will require more memory than we can possibly afford. In these cases we need to settle for the algorithm that requires the least amount of
+memory. A good case in point is the software that runs in embedded systems and microcontrollers. Up to some extend, smartphones also require
+a sensible management of memory, as currently they still come with a rather small amount of RAM.
+
+In this course, **we will focus on Time Complexity** only. How can we *measure* time complexity? It seems only natural to think of it as
+the number of "steps" that the computer must do in order to run the algorithm. However, this definition still leaves room for calculating
+such number in different ways.
+
+Say Alice is constantly requested at work to sort a random array of ID's, e.g., $[1,-2,-45,55,3,19,\dots]$ but her friend Bob 
+is regularly tasked with sorting arrays of ID's that are the same size as those of Alice, but where 70% of them come already sorted.
+E.g, Bob gets things like $[1,1,1,1,19,3,\dots]$ or $[-45,-2,1,3,55,19,\dots]$. Bob will optimize his algorithm for the type 
+input he usually gets, and so will Alice do as well. Every now and then, a mistake is made in the processing center and Bob gets
+a random array of ID's, much like those of Alice. His algorithm is be very slow in those cases (takes 10 times more), but the chances that 
+this happens, he already found out, are small, 1 out of every 10 cases. Whence, he keeps that optimized algorithm, 
+**because on average it works fast**.
+
+Now the company find itself in a bear market, where they get much less demands for their services. This forces them to improve much more
+their results in order to stay ahead of the competition: **even the worst case of a sorting must finish in a given amount of time**!
+This means, Alice and Bob, both need to use an algorithm that guarantees a *worst-case running time* less than that limit.
+
+In this course, we will in addition focus only on **time complexity in the worst-case scenario**.
+
+### Growth of functions
+![Different function grow at a different rate when the argument increases.](./G12/Term4/ClassNotes/ComplexityBigO-2-Growth.jpg)
 
 Consider the following different functions: 
 $$s(n)=2^n,\,f(n)=n^3,\,g(n)=n^2,\,h(n)=n,\,j(n)=\log(n),\,k(n)=1$$. 
