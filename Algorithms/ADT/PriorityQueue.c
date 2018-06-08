@@ -1,11 +1,11 @@
 /*
 ADT: Priority Queue
 A priority queue is a heap with efficient  insertion and deletion of elements
-A Deletion is always that of the highest key element element.
+A Deletion is always that of the highest key element.
 
 Note, a Heap is a tree satisfying:
  1. degree of all nodes is 2 (i.e., it's a Binary tree)
- 2. Each nodes satisfies the heap property, namely, its key is >= children's keys
+ 2. Each node satisfies the heap property, namely, its key is >= children's keys
 
 In this example we will use an implicit representation for trees, i.e., that of
 an array, such that the left and right children of a node j (starting by 1) are located at positions 2*j 
@@ -23,7 +23,7 @@ Notice that wee must insert a "reserved" key value for signaling an absence of a
 Here we do it using -1 (assuming all keys are positive values. If the elements contain pointers
 to struct, the this could be a NULL pointer).
 
-Gaps in the array of an implicit representation of a tree will, in general, show some gaps like those -1.
+Gaps in the array of an implicit representation of a tree (like those -1s) will denote an unbalanced tree.
 However, the way insertion is implemented for a priority queue will NEVER lead to such an unbalanced tree.
 
 Example: The same keys in a balanced heap. T=[19,12,9,8,8,1,1]
@@ -49,16 +49,17 @@ as this doesn't even hold true for the root. We would get 0, 0, 1 instead of 0, 
 For j=[1,2,3...], we say
 	parent		node	left 	right
 	floor( j/2 )    j	2j       2j+1.
-But that doesn't actually work for j=1 !!
+But that doesn't actually work for j=1 : floor( 1/2 ) == 0 != 1!!
 
 Consider the rest (j>1) and index i starting by 0, i.e, j=i+1
 floor( j/2 )		j       2j      2j+1   (sequences start by 1)
 floor( (i+1)/2 )	i+1     2i+2    2i+3
 --------------------------------
 floor( (i-1)/2 )	i       2i+1    2i+2   (sequence starts by 0)
-But this doesn't actually work for i=0 !!
+But this doesn't actually work for i=0 either if i is unsigned; it works if i is int!!
+(See C-basics material intdiv.c )
 
-We will treat case i=0 thus separately.
+We will treat case i=0 thus separately, as we will be using size_t (aka, unsigned long) for i.
 
 
 Algorithm: Remove element of a priority queue
@@ -114,7 +115,6 @@ We will thus call our 'remove' 'delete' in order to avoid a clash.
 */
 #include<stdio.h>
 #include<stdlib.h>
-#include<math.h>
 
 typedef struct node entry;
 typedef entry* PQueue ;
