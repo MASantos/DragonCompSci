@@ -1,0 +1,329 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{color}
+\usepackage{listings}
+
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+
+\lstdefinelanguage{JavaScript}{
+  keywords={break, case, catch, continue, debugger, default, delete, do, else, finally, for, function, if, in, instanceof, new, return, switch, this, throw, try, typeof, var, void, while, with},
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]',
+  morestring=[b]",
+  sensitive=true
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  keywordstyle=\color{green}\bfseries,
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+}
+
+\lstset{language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   %basicstyle=\footnotesize\ttfamily,
+   basicstyle=\scriptsize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   %numberstyle=\footnotesize,
+   numberstyle=\scriptsize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
+
+\title{Exploring Computer Technology TEJ0 G9 \\
+The Dragon Academy \\
+Course Review }
+
+\begin{document}
+\maketitle
+
+
+\section{Index of topics}
+\begin{enumerate}
+\item[ 1.] Turing Machines:
+
+	\begin{enumerate}
+	\item[ 1.1.] Given the rules of a TM, an input string of 0s and 1s and an initial state,
+	        determine if the TM will halt or not and what will be on the tape in the end.
+	\end{enumerate}
+\item[ 2.] Logic Gates and Logic Circuits
+	\begin{enumerate}
+	\item[ 2.1.] Truth values
+	\item[ 2.2.] Logic gates as words: AND, OR, NOT.
+	\item[ 2.3.] Identify and sketch the diagram of each of the three basic logic gates. Label all inputs and outputs.
+	\item[ 2.4.] Write the truth table of each basic logic gate
+	\item[ 2.5.] Analyze and write the truth table of logic circuits
+	\end{enumerate}
+\item[ 3.] Binary Numbers
+	\begin{enumerate}
+	\item[ 3.1.] Given a binary number of 8 bits, determine its decimal representation
+	\item[ 3.2.] Given an integer in the decimal number system between 0 and 1024,
+	     write its binary representation.
+	\end{enumerate}
+\item[4.] Web pages: HTML and CSS
+	\begin{enumerate}
+	\item[4.1] HTML
+		\begin{enumerate}
+		\item[4.1.1] The template of a web page: the {\sl doctype, html, head, title} and {\sl meta} body tags
+		\item[4.1.2] Headings: h1, h2, and h3 
+		\item[4.1.3] Paragraphs: p
+		\item[4.1.4] Boldface and emphasize: strong and em.
+		\item[4.1.5] Inserting an image: img
+		\item[4.1.6] Inserting a link: a
+		\item[4.1.7] The box tag: div
+		\end{enumerate}
+	\item[4.2] CSS: the style tag
+		\begin{enumerate}
+		\item[4.2.1] Changing the font color of an HTML element: \mbox{color}
+		\item[4.2.2] Changing the background color of an HTML element: \mbox{background}
+		\item[4.2.3] Changing the font type (family) of an HTML element: \mbox{font-family}
+		\item[4.2.4] Changing the font size of an HTML element: \mbox{font-size}
+		\item[4.2.5] Changing the border of an HTML element: \mbox{border}
+		\item[4.2.6] Animations (not an exam topic)
+		\end{enumerate}
+	\end{enumerate}
+\item[ 5.] Javascript programing
+	\begin{enumerate}
+	\item[ 5.1.] Assignments
+		\begin{enumerate}
+             	\item[ 5.1.1.] Assigning numbers to a variable
+		\item[ 5.1.2.] Assigning strings to a variable
+		\end{enumerate}
+	\item[ 5.2.] Inputs
+		\begin{enumerate}
+            	\item[ 5.2.1.] Inputting numbers from the user
+            	\item[ 5.2.2.] Inputting strings from the user
+		\end{enumerate}
+	\item[ 5.3.] Loops
+		\begin{enumerate}
+            	\item[ 5.3.1.] Calculate the sum of the first 100 integers
+            	\item[ 5.3.2.] Calculate the product of the first 20 integers
+            	\item[ 5.3.3.] General problem: Identify the pattern and implement the while-loop
+		\end{enumerate}
+	\end{enumerate}
+\item[ 6.] Algorithms
+	\begin{enumerate}
+	\item[6.1.] Compression
+	\item[6.1] Searching: unsorted, sorted and hashed lists
+	\item[6.2] Information Theory
+		\begin{enumerate}
+     		\item[ 6.2.1.] Decision Tree: Number of yes/no questions needed
+     		\item[ 6.2.2.] Information as \# yes/no questions needed
+		\item[6.2.3.] Information, bits and integer logarithms
+		\end{enumerate}
+	\end{enumerate}
+\end{enumerate}
+     
+\section{Examples}
+\subsection{1. Turing Machine}
+\begin{figure}[H]
+\includegraphics[width=0.8\linewidth]{IMG_20180608_153248.jpg}
+\end{figure}
+\begin{figure}[H]
+\includegraphics[width=0.8\linewidth]{IMG_20180531_111229.jpg}
+\end{figure}
+\begin{figure}[H]
+\includegraphics[width=0.8\linewidth]{IMG_20180531_111238.jpg}
+\end{figure}
+
+\subsection{2. Logic Gates and Circuits}
+\begin{figure}[H]
+\includegraphics[width=0.8\linewidth]{IMG_20180607_112038.jpg}
+\end{figure}
+\begin{figure}[H]
+\includegraphics[width=0.8\linewidth]{IMG_20180607_112028.jpg}
+\end{figure}
+\begin{figure}[H]
+\includegraphics[width=0.8\linewidth]{IMG_20180607_111900.jpg}
+\end{figure}
+\begin{figure}[H]
+\includegraphics[width=0.8\linewidth]{IMG_20180607_111758.jpg}
+\end{figure}
+\begin{figure}[H]
+\includegraphics[width=0.8\linewidth]{IMG_20180607_111758.jpg}
+\end{figure}
+\begin{figure}[H]
+\includegraphics[width=0.8\linewidth]{IMG_20180607_111747.jpg}
+\end{figure}
+\begin{figure}[H]
+\includegraphics[width=0.8\linewidth]{IMG_20180607_111735.jpg}
+\end{figure}
+\begin{figure}[H]
+\includegraphics[width=0.8\linewidth]{IMG_20180607_111725.jpg}
+\end{figure}
+
+\subsection{3. Binary Numbers}
+In a group of 8 bits, the position of each of them represents a
+different value. For instance, if we set all to $0$ (switched off)
+except the right-most bit, which we set to $1$ (switched on), the
+value represented is 1.
+
+If instead the only bit we switch on is the second right-most one, then
+the value we have is 2. And so on and so forth.
+\begin{eqnarray*}
+0000\,0001 &=& 1 \\
+0000\,0010 &=& 2 \\
+0000\,0100 &=& 4 \\
+0000\,1000 &=& 8 \\
+0001\,0000 &=& 16 \\
+0010\,0000 &=& 32\\
+0100\,0000 &=& 64\\
+1000\,0000 &=& 128 
+\end{eqnarray*}
+
+When we have several bits switched on, we just "collect" the values represented by each
+of them and add them up
+\begin{eqnarray*}
+0101\,0101\,=\,64\,+\,16\,+\,4\,+\,1\,=\,85 \\
+1000\,1010\,=\,128\,+\,8\,+\,2\,=\,138
+\end{eqnarray*}
+
+\begin{figure}[H]
+\includegraphics[width=0.8\linewidth]{IMG_20180611_103420.jpg}
+\end{figure}
+
+We can also do the other way around: given a decimal number like $35$ write its binary representation.
+
+Solution: First try to write $35$ in terms of the previous powers of 2. $35\,=\,32+3\,=\,32+2+1$.
+Hence, $35$ in binary is $0010\,0011$.
+
+What is $127$ in binary? 
+
+Solution: $127\,=\,64\,+\,32\,+\,16\,+\,8\,+\,4\,+\,2\,+\,1$, hence in binary $0111\,1111$.
+
+What is $255$ in binary? Check that the solution is all 8 bits set: $1111\,1111$
+
+What numbers are the following?
+\begin{eqnarray*}
+0000\,0011 &=& \\
+0000\,0111 &=& \\
+0000\,1111 &=& \\
+0001\,1111 &=& \\
+0011\,1111 &=& \\
+0111\,1111 &=& \\
+\end{eqnarray*}
+
+Solution: $3,7,15,31,63,127$
+
+\subsubsection{More than 8 bits}
+\begin{figure}[H]
+\includegraphics[width=0.8\linewidth]{IMG_20180611_103430.jpg}
+\end{figure}
+\begin{eqnarray*}
+0001\,0000\,0000 &=& 256 \\
+0010\,0000\,0000 &=& 512 \\
+0100\,0000\,0000 &=& 1024 \\
+1000\,0000\,0000 &=& 2048 \\
+\end{eqnarray*}
+
+What is the binary expression of $725$? 
+
+Solution: We proceed as before, expressing this number as a sum of powers of 2,
+namely, $725\,=\,512\,+\,128\,+\,64\,+\,16\,+\,4\,+\,1$, hence in binary it is
+$0010\,1101\,0101$.
+
+\subsection{4. Web pages}
+\begin{figure}[H]
+\includegraphics[width=0.8\linewidth]{IMG_20180608_153314.jpg}
+\end{figure}
+\begin{figure}[H]
+\includegraphics[width=0.8\linewidth]{IMG_20180608_153324.jpg}
+\end{figure}
+\begin{figure}[H]
+\includegraphics[width=0.8\linewidth]{IMG_20180608_153335.jpg}
+\end{figure}
+\begin{figure}[H]
+\includegraphics[width=0.8\linewidth]{IMG_20180608_153346.jpg}
+\end{figure}
+
+\subsection{5. Programing in Javascript}
+\begin{figure}[H]
+\includegraphics[width=0.8\linewidth]{IMG_20180611_103440.jpg}
+\end{figure}
+\begin{lstlisting}
+var x = 3.5
+var y = 7
+var z = x*y
+var s = Math.pow(x,2)
+alert( z )
+\end{lstlisting}
+The variable x gets assigned the value $3.5$, y $7$ and z the product of those two,
+namely $24.5$.
+
+We can calculate the square of the value contained in x by writing "Math.pow(x,2)". 
+There is a second method though, namely simply writing the product of x by itself: "x*x".
+
+"alert" is a way to output information to the user. It creates a new small pop-up window showing
+the content of whatever we put between the parentheses after alert. In this case it will show the
+value of z.
+
+We can 
+\begin{figure}[H]
+\includegraphics[width=0.8\linewidth]{IMG_20180611_103448.jpg}
+\end{figure}
+In a similar way we can deal with "strings":
+\begin{lstlisting}
+var name = "George"
+var familyName = "Lucas"
+var fullName = name + " " + familyName
+alert("This person's name is "+ fullName)
+\end{lstlisting}
+We can compose strings out of smaller strings by using the plus $+$ sign. 
+
+
+\begin{figure}[H]
+\includegraphics[width=0.8\linewidth]{IMG_20180611_103504.jpg}
+\end{figure}
+\begin{figure}[H]
+\includegraphics[width=0.8\linewidth]{IMG_20180611_103514.jpg}
+\end{figure}
+\begin{figure}[H]
+\includegraphics[width=0.8\linewidth]{IMG_20180611_103523.jpg}
+\end{figure}
+We can ask the user for input through the command "prompt". If we expect a number, we
+need to wrap the prompt with the function "Number" 
+\begin{lstlisting}
+var user_name = prompt("Enter your name:")
+
+var user_number = Number( prompt("Enter a number:")  )
+
+alert( "The user "+ user_name + " entered the value "+ user_number )
+\end{lstlisting}
+
+
+\begin{figure}[H]
+\includegraphics[width=0.8\linewidth]{IMG_20180611_103534.jpg}
+\end{figure}
+Loops allow repetition of statements without actually having to write them several times.
+Loops allow use to  calculate tedius mathematical expressions.
+
+Write the sum of the first 100 numbers. Store the result into a variable called "sum" 
+and show it to the user.
+\begin{lstlisting}
+var sum = 0
+var i = 1 
+while( i <= 100 ){
+    sum = sum + i
+    i = i + 1
+}
+alert( "The sum of the first 100 integers is "+ sum )
+\end{lstlisting}
+
+\subsection{6. Algorithms}
+\begin{figure}[H]
+\includegraphics[width=0.8\linewidth]{IMG_20180529_111617.jpg}
+\end{figure}
+\begin{figure}[H]
+\includegraphics[width=0.8\linewidth]{IMG_20180529_111640.jpg}
+\end{figure}
+
+\end{document}
