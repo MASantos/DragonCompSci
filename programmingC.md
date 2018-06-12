@@ -255,6 +255,104 @@ not only to be able to address the relevant feature we want to describe but also
 
 # Programming in C
 
+## Quick summary
+
+### (One of) The most basic programm
+```c
+#include<stdio.h>
+
+int main(){
+	float a = 1.5, b=3.0, x;
+	x = a*b ;
+	printf("a=%f, b=%f : a*b=%f\n",a,b,x); // a=1.500000, b=3.000000 : a*b=4.500000
+	return 0;
+}
+```
+In order to print out information on screen we need to use of one of the basic **C libraries**[^#], the `stdio.h`. Without it
+we can't use the `printf` *instruction*.
+
+[^#]: More precisely, we use a header file of the [**C standard library**](https://en.wikipedia.org/wiki/C_standard_library).
+The latter is a collection of header files each providing a set of algorithms for dealing with different problems, e.g.,
+printing, or comparing arrays or copying strings, etc.
+
+In order to "load" the library we use the *statement* `#include <stdio.h>`. Other common and useful libraries are, e.g.,
+the `stdlib.h` or the `math.h`.
+
+Any statement that starts with the *number (pound) sign* `#` is not an actual instruction in `C`, but an instruction for
+the compiler. In this case, we are telling the compiler "*before you start processing the code we wrote, **copy***&***paste (include)** 
+the code that's in the `stdio.h` file (library) right before our code, as if we had written it there ourselves*".
+
+Every `C` program needs to have a `main` section (technically, a *function*). When we run a program, the computer starts 
+executing the main section first. Actually, that's the only stuff that the computer will execute at all!
+
+All `C` statements **must** end with a semi-colon `;`.
+
+Anything after `//` and till the end of the line is considered a **comment** intended for the programmer and is thus ignored
+by the compiler.  We can write multiple-line comments by enclosing them between a starting `/*` and an ending `*/`.
+
+
+### Types
+We must tell the compiler how we intend to use each and every variable we use. That's done by specifying the **type** of each
+variable.
+```c
+int a = 3 ;     // a can only store integer values
+float x = 11.1; // x is meant to store fractionary numbers
+char c = 'A' ;  // c can only store a (single) character value
+```
+
+A `float` refers to *floating point number*[^1]. Floating point numbers are represented in three parts: a sign, 
+a mantissa (or significand), and an exponent.  Given such a representation with sign s, mantissa m, and exponent e, 
+the corresponding numerical value is $s\dot m\dot 2^e$.
+
+We can use the constants `FLT_MIN` and `FLT_MAX` to find the smallest and largest positive (finite) float numbers
+that we can represent with such a type.
+
+[^1]: In Mac OS X, open a terminal and type `main float` for more information. Use info in Linux to find more details.
+
+### User defined type: `struct`
+```c
+#include<stdio.h>
+#include<string.h>
+
+struct dwelling {
+    char street[20];
+    int number;
+    char postalcode[7];
+    char city[20];
+};
+
+struct student {
+    int id;
+    char name[20];
+    char surname[20];
+    struct dwelling address;
+};
+
+int main(){
+    struct student randa = {
+            123,
+            "randa",
+            "adnar",
+            {
+            "Prince Arthur",
+            35,
+            "M5R2M8",
+            "Toronto"
+            }
+    };
+    printf("%s's postal code is %s\n", randa.name, randa.address.postalcode );
+    struct student nic, sam;
+    strcpy(nic.name, "nic"); // normal assignment of an array variable (name = "nic") doesn't work in C
+    strcpy(sam.name, "sam");
+    struct student class_csg12[3] = { randa, nic, sam};
+
+    int i;
+    for(i=0; i<3; i++) printf("%s\n", class_csg12[i].name );
+    return 0;
+}
+```
+
+
 ## The Caesar Cipher
 
 ### The one-character cipher
