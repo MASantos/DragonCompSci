@@ -1,0 +1,226 @@
+\documentclass{report}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{color}
+\usepackage{listings}
+\usepackage{enumitem}
+\setlist[enumerate]{label*=\arabic*.}
+\usepackage{datetime}
+\newdate{date}{22}{06}{2017}
+\date{\displaydate{date}}
+
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries}{}{0pt}{\Huge}
+
+
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+
+\lstdefinelanguage{JavaScript}{
+  keywords={break, case, catch, continue, debugger, default, delete, do, else, finally, for, function, if, in, instanceof, new, return, switch, this, throw, try, typeof, var, void, while, with},
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]',
+  morestring=[b]",
+  sensitive=true
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  keywordstyle=\color{green}\bfseries,
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+}
+
+\lstset{language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   %basicstyle=\footnotesize\ttfamily,
+   basicstyle=\scriptsize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   %numberstyle=\footnotesize,
+   numberstyle=\scriptsize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
+
+\title{Computer Science ICS4U G12 \\
+The Dragon Academy \\
+Course Outline
+}
+
+%\renewcommand{\contentsname}{Units}
+%\renewcommand\thesection{{section}\arabic}
+\setcounter{secnumdepth}{0}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\chapter{Introduction}
+\section{Overview}
+This course outline follows the requirements set by the Ontario Ministry of Education as published 
+in \href{http://www.edu.gov.on.ca/eng/curriculum/secondary/computer10to12_2008.pdf}{http://www.edu.gov.on.ca/eng/curriculum}
+
+Computer Science ICS4U is a course that enables students to further develop knowledge and skills in computer
+science. 
+
+Students will use {\sl modular design principles} to create complex and {\sl fully documented programs}, 
+according to industry standards. Student teams will manage a large
+software development project, from planning through to project review. Students will
+also {\sl analyse algorithms for effectiveness}. They will investigate ethical issues in comput-
+ing and further explore environmental issues, emerging technologies, areas of research
+in computer science, and careers in the field.
+
+Prerequisite: Introduction to Computer Science, Grade 11, University Preparation (ICS3U)
+
+\section{Expectations}
+\newcommand{\expectation}[1]{(#1)}
+\newcommand{\xpecA}[1]{ \expectation{\textcolor{red}{#1}} }
+\newcommand{\xpecB}[1]{ \expectation{\textcolor{blue}{#1}} }
+\newcommand{\xpecC}[1]{ \expectation{\textcolor{magenta}{#1}} }
+\newcommand{\xpecD}[1]{ \expectation{\textcolor{green}{#1}} }
+\begin{enumerate}
+\item[\xpecA{A.}] {\bf Programming Concepts and Skills }
+	\begin{enumerate}
+	\item[A.1] {\bf Demonstrate ability to use different data types }
+		\begin{enumerate}
+		\item[A.1.1] Use integer division \& remainder 
+		\item[A.1.2] Limitations of finite data ( integer bounds, float precision, rounding errors,...)
+		\item[A.1.3] Use objects, structures/records
+		\item[A.1.4] Use non-numeric comparison (strings, objects,...)
+		\end{enumerate}
+	\item[A.2] {\bf Describe and use modular programming concepts and principles }
+		\begin{enumerate}
+		\item[A.1.1] Divide program among multiple files
+		\item[A.1.2] Reusable code techniques: encapsulation, inheritance, overloading, polymorphism,...
+		\item[A.1.3] Modify existing code to enhance functionality
+		\end{enumerate}
+	\item[A.3] {\bf Design and write Algorithms to solve a variety of problems }
+		\begin{enumerate}
+		\item[A.3.1] I/O $<>$ file
+		\item[A.3.2] Linear \& binary search
+		\item[A.3.3] Insert/Delete array elements
+		\item[A.3.4] Sort data in array
+		\item[A.3.5] Algo for 2D arrays (vec, complex, matrix, images...)
+		\item[A.3.6] Design simple \& efficient recursive algo ($n!$, merge-sort, parse XML,...)
+		\end{enumerate}
+	\item[A.4] {\bf Use proper code maintenance }
+		\begin{enumerate}
+		\item[A.4.1] Work independently
+		\item[A.4.2] Implement testing
+		\item[A.4.3] Document code
+		\item[A.4.4] Document code and add external docs/guides
+		\end{enumerate}
+	\end{enumerate}
+\item[\xpecB{B.}] {\bf Software Development }
+	\begin{enumerate}
+	\item[B.1] {\bf Project Management }
+	\item[B.2] {\bf Project Contribution }
+	\end{enumerate}
+\item[\xpecC{C.}] {\bf Designing Modular Programs }
+	\begin{enumerate}
+	\item[C.1] {\bf Apply modular design concepts based on functionality and reusability ( modules, classes -w/ methods \& inheritance-, records/structures and ADT: stack, queue, dictionary,...) }
+	\item[C.2] {\bf Analyse Algorithms for effectiveness in solving a problem ( Complexity -search, sort-, pitfalls of recursive algorithms -stack, exp growth) }
+	\end{enumerate}
+\item[\xpecD{D.}] {\bf Topics in Computer Science }
+	\begin{enumerate}
+	\item[C.1] {\bf Environmental Stewardship \& Sustainability }
+	\item[C.2] {\bf Ethical practices }
+	\item[C.3] {\bf Emerging technologies }
+	\item[C.4] {\bf Exploring Computer Science }
+		\begin{enumerate}
+		\item[C.4.1] Interdisciplinarity CS $\leftrightarrow$ other-science (bioinformatics, linguistics, math,...)
+		\item[C.4.2] Topics in Theoretical CS (crypto, graphs, logic, computability, data mining, AI, ...)
+		\end{enumerate}
+	\end{enumerate}
+\end{enumerate}
+\chapter{Units}
+\section{Unit 1: Computers, the Internet and Society \xpecD{D1, D2, D3, D4}}
+\begin{enumerate}
+\item The computational revolution
+	\begin{enumerate}
+	\item Earliest calculating devices
+	\item From Electricity to Electronics: The revolution of the Transistor
+	\item The future revolutions: Quantum Computers, Biological Computers, AI...what next?
+	\end{enumerate}
+\item The networking revolution, aka. Internet
+	\begin{enumerate}
+	\item The Information flow and Society.
+	\item The Internet OF Things (IoT)
+	\end{enumerate}
+\item Life Cycle Analysis: The resources demand of it all
+	\begin{enumerate}
+	\item What is a Life Cycle Analysis of a product
+	\item Are computers (environmentally) clean? Is the {\sl cloud} clean?
+	\item Assignment: LCA of a computer
+	\begin{enumerate}
+	\item How much does rough materials extraction pollute? How much energy does it consume?
+	\item How much does manufacturing pollute?  How much energy does it consume?
+	\item How much does computer pollute?  How much energy does it consume?
+	\item How much does disposing of a computer pollute? How much energy does it consume?
+	\item Assignment Resources:
+		\begin{enumerate}
+		\item \url{http://homes.soic.indiana.edu/nensmeng/posts/2013/05/20/computers-environment/}
+		\item \href{http://homes.soic.indiana.edu/nensmeng/enviro-compute/}{Dirty Bits: An environmental History of Computing}
+		\item \url{http://www.isc.uoguelph.ca/documents/050602environcs.pdf}
+		\item Google: Power consumption of data centers
+		\item Google: Environmental impact of manufacturing computer
+		\end{enumerate}
+	\end{enumerate}
+	\end{enumerate}
+\item Carriers in Computing
+\end{enumerate}
+\section{Unit 2: How Computers work: Hardware and Software \xpecA{A1, A2, A3, }}
+\begin{enumerate}
+\item Number Systems
+	\begin{enumerate}
+	\item Integrated Circuits and Transistors: The 0's and 1's
+	\item Finite representation of integers and fractionary numbers: The decimal, binary, hexadecimal and sexagesimal number systems
+	\item Floating point representation of real numbers
+	\end{enumerate}
+\end{enumerate}
+\section{Unit 3: The Logic of it all \xpecA{A1, A3}}
+\begin{enumerate}
+\item Logic Gates and Logic Circuits
+	\begin{enumerate}
+	\item Reasoning with Logic: The Truth Values
+	\item Logic gates as words: AND, OR, NOT.
+	\item Identify and sketch the diagram of each of the three basic logic gates. Label all inputs and outputs.
+	\item Write the truth table of each basic logic gate
+	\item Analyze and write the truth table of logic circuits
+	\end{enumerate}
+\item What a computer is in a nutshell
+	\begin{enumerate}
+	\item Von Neumann Architecture: The essential diagram of a computer.
+	\item Turing Machine: The essential mechanics of a computer 
+	\item The Busy Beaver: Given the rules of a TM, an input string of 0s and 1s and an initial state,
+	        determine if the TM will halt or not and what will be on the tape in the end.
+	\end{enumerate}
+\item Formal demonstrations
+	\begin{enumerate}
+	\item Propositional Logic
+	\item The language of First-Order Logic
+	\end{enumerate}
+\end{enumerate}
+\section{Unit 4: Object-Oriented Programming \xpecA{A1,A2,A3,A4},\xpecC{C1}, \xpecD{D3, D4}}
+\begin{enumerate}
+\item JavaScript: The prototypal approach to OOP
+\end{enumerate}
+\section{Unit 5: Algorithms and Information \xpecA{A3, A4}, \xpecB{B1, B2}, \xpecC{C1,C2}, \xpecD{D3, D4}}
+\begin{enumerate}
+\item Compression
+\item Searching: unsorted, sorted and hashed lists
+\item Information Theory
+	\begin{enumerate}
+	\item Decision Tree: Number of yes/no questions needed
+	\item Information as \# yes/no questions needed
+	\item Information, bits and integer logarithms
+	\end{enumerate}
+\end{enumerate}
+\end{document}

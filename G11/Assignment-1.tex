@@ -1,0 +1,68 @@
+\documentclass{article}
+\usepackage{amssymb}
+
+\title{
+Computer Science G11 at The Dragon \\
+Assignment 1 \\
+Propositional Logic\\
+\bf{Due date: Tue Sep. 18 2018}
+}
+
+\begin{document}
+\maketitle
+\date{Fri Sep. 2018}
+
+
+\begin{enumerate}
+\item (KtiCa) Express the following statements in propositional logic
+\begin{enumerate}
+\item I'm tired and hungry
+\item If I'm hungry, I whinge
+\item I only get tired if I did not have a nap
+\item Either I eat dinner or I get hungry
+\end{enumerate}
+\item (Ktica) What does it mean that two logical expressions A and B are equivalent? Given an example.
+\item \label{eqByTT} (KtiCa) Use the truth tables to decide which of the following pairs of propositions are equivalent. Hint: Just make one big truth table in
+which you can discuss all cases.
+\begin{enumerate}
+\item $(p\,\vee\,q)\,\vee\,r $ and $p\,\vee\,(q\,\vee\,r)$
+\item $(p\rightarrow q)\rightarrow r$ and $p\rightarrow (q\rightarrow r)$
+\item $\urcorner (p\,\wedge\,q)$ and $\urcorner p\,\vee\,\urcorner q$
+\item $p\rightarrow q$ and $\urcorner q \rightarrow \urcorner p$
+\end{enumerate}
+\item (KtiCa) Repeat question \ref{eqByTT} this time using an algebraic method instead of truth tables.
+\item (kTIca) A box has 3 buttons and a light. The light goes on when, and only when, exactly 2 buttons are pressed. Produce a truth table for 
+such an setting. Using the truth table, find a formula (a proposition) for each case. Can you find a unique formula for the whole box?
+\item (KticA) Simplify the boolean expression $(p\,\vee\,q\,\vee,r)\,\wedge\,\urcorner (s\,\vee\,t)\,\vee\,(p\,\vee\,q\,\vee,r)\,\wedge\,(s\,\vee\,t)$ 
+and choose the best answer:
+\begin{enumerate}
+\item $p\,\vee\,q\,\vee\,r$
+\item $s\,\vee\,t$
+\item $\urcorner q\,\wedge\,\urcorner q\,\wedge\,\urcorner r$
+\item $\urcorner s\,\wedge\, \urcorner t$
+\item None of the above. Write your answer then.
+\end{enumerate}
+\item (KticA) Simplify the boolean expression $\urcorner (p\,\vee\,q)\,\wedge\,\urcorner (r\,\vee\,s\,\vee\,t)\,\vee\,\urcorner (q\,\vee\,q)$
+and choose the best answer:
+\begin{enumerate}
+\item $p\,\vee\,q$
+\item $\urcorner p\,\wedge\,\urcorner q$
+\item $r\,\vee\,s\,\vee\,t$
+\item $\urcorner r\,\wedge\,\urcorner s\,\wedge\, \urcorner t$
+\item None of the above. Write your answer then.
+\end{enumerate}
+\item (KticA) Given the function $F(p,q,r)\,=\,p\,\wedge\,r\,\vee\,r\,\wedge\,(\urcorner p\,\vee\,(p\,\wedge\,q))$ find the equivalent simplified 
+expression for $F$
+\begin{enumerate}
+\item $r\,\vee\,(q\,\wedge\,r)$
+\item $r\,\vee\,(p\,\wedge\,q\,\wedge\,r)$
+\item $p\,\wedge\,r$
+\item $p\,\vee\,(q\,\wedge\,r)$
+\item $r$
+\item None of the above. Write your answer then.
+\end{enumerate}
+\item (kTIca) Demonstrate algebraically that $(\urcorner p\rightarrow q)\,\wedge\,(\urcorner p \rightarrow \urcorner q)$ is equivalent to 
+$(\urcorner p\,\wedge\, r\,\wedge\, q)\,\vee\,(\urcorner r\,\wedge\, q\,\wedge\,\urcorner p)\,\vee\,(r\,\wedge\, p\,\wedge\, \urcorner q)\,\vee\,(\urcorner r\,\wedge\, p\,\wedge\,\urcorner q)$.
+\item (kTIca) Argue algebraically wether $\urcorner p \rightarrow (q\,\vee\,r)$ is equivalent to $\urcorner ((p\rightarrow q)\,\vee\,r)$
+\end{enumerate}
+\end{document}
