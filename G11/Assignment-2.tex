@@ -1,0 +1,58 @@
+\documentclass{article}
+\usepackage{amssymb}
+
+\title{
+Computer Science at The Dragon Academy\\
+Assignment II\\
+Propositional Logic\\
+{\bf Due date: Tue. Oct. 2 2018}
+}
+
+\begin{document}
+\maketitle
+$40\%$ Exercises and $60\%$ Problems. 
+\section{Exercises}
+\begin{enumerate}
+\item (Ktica) State which of the following are propositions:
+\begin{enumerate}
+\item {\sl Try to build a routine}
+\item {\sl Do not lie}
+\item {\sl It's cold out there}
+\item {\sl What do you mean?}
+\end{enumerate}
+\item (KtiCa) Simplify the following expression and choose the right answer: $\left[\urcorner \left(p\,\vee\,q\right)\,\wedge\,\urcorner\left(r\,\vee\,s\,\vee\,t\right)\right]\,\vee\,\urcorner\left(p\,\vee\,q\right)$
+\begin{enumerate}
+\item $p\vee q$
+\item $\urcorner p \wedge \urcorner q$
+\item $r \vee s \vee t$
+\item $\urcorner r \wedge \urcorner s \wedge \urcorner t$
+\item $\urcorner p \wedge \urcorner q \wedge \urcorner r \wedge \urcorner s \wedge \urcorner t$
+\end{enumerate}
+\item (KtiCa) Given $F=\left( \urcorner p \wedge \urcorner q \right)\vee \left( \urcorner r \wedge \urcorner s \wedge \urcorner t\right)$, which of the following represents 
+the only correct expression for $\urcorner F$ (write down the derivation that justifies your answer):
+\begin{enumerate}
+\item $\urcorner F=\urcorner p \vee \urcorner q \vee \urcorner r \vee \urcorner s \vee \urcorner t$
+\item $\urcorner F=\urcorner p \wedge \urcorner q \wedge \urcorner r \wedge \urcorner s \wedge \urcorner t$
+\item $\urcorner F=\left(\urcorner p \wedge \urcorner q \right) \wedge \left(\urcorner r \wedge \urcorner s \wedge \urcorner t\right)$
+\item $\urcorner F=\left(  p \wedge  q \right)\vee \left( \urcorner r \wedge \urcorner s \wedge \urcorner t\right)$
+\item $\urcorner F = \left(p\vee q\right)\wedge r\wedge s\wedge t$
+\end{enumerate}
+\item (KtiCa) Express the following function $f(p,q,r,s)=(q\vee r\vee s)\wedge (p\vee r \vee s)\wedge (p\vee q\vee s)$ as a {\sl disjunction} of terms,
+each of which consisting on a {\sl conjunction} of atomic literals or negation of atomic literals.
+\item (KtiCa) Express the following function $f(p,q,r)=\left[ (p\vee q)\wedge r\right]\vee (p\wedge q \wedge r)$ as a {\sl conjunction} of terms,
+each of which consisting on a {\sl disjunction} of atomic literals or negation of atomic literals.
+\end{enumerate}
+\section{Problems}
+\begin{enumerate}
+\item (kTICa) Prove algebraically and by truth table that $p\wedge (p\vee q)\,\leftrightarrow p$.
+\item (kTICa) Given $p\rightarrow q$ and $p$, conclude, both via truth table and algebraically, $p\rightarrow (p\wedge q)$ (Hint: Modus Ponens).
+\item (kTICa) From the premises $p\rightarrow q$ and $q\rightarrow p$, conclude, algebraically and via truth table, $\urcorner q\vee (p\wedge q)$ (Hint: Modus Ponens).
+\item (KTICa) Found an equivalent expression for $(p\leftrightarrow q)\vee (p\rightarrow q)$ that has not conditionals nor bi-conditionals.
+\item (KTICa) The following is a list of conditionals, i.e., logical statements with the pattern $p\rightarrow q$ . For each of them, write the sentences corresponding to
+(I) $\urcorner q \rightarrow \urcorner p$, (II) $p\wedge \urcorner q$ and  (III) $\urcorner p \rightarrow \urcorner q$:
+\begin{enumerate}
+\item {\sl If it is January, then it is cold}
+\item $\mbox{If}\;y\,+\,5\,\neq\,7\,\mbox{then}\,y\,<\,0$
+\end{enumerate}
+\end{enumerate}
+\end{document}
