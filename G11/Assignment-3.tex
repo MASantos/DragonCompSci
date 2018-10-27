@@ -1,0 +1,70 @@
+\documentclass{article}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[margin=2cm]{geometry}
+
+\title{
+Computer Science at The Dragon Academy\\
+Assignment III\\
+Review of Propositional Logic, Logic Gates \& Circuits \\
+{\bf Due date: Wed. Oct. 31st 2018}
+}
+
+\begin{document}
+\maketitle
+$50\%$ questions and $50\%$ problems. 
+\section{Exercises}
+\begin{enumerate}
+\item (KtiCa) Given $p:\,x+y=5$ and $q:x\cdot y\geq 6$, translate to English/math the following expressions (use math for expressing identities or inequalities):
+	\begin{enumerate}
+		\item $\urcorner q \rightarrow \urcorner p$
+		\item $p\oplus q$
+		\item $p \vee q$
+		\item $\urcorner q \rightarrow (p \vee \urcorner p)$
+	\end{enumerate}
+\item (KtiCa) Identify $p$ and $q$ from $p\wedge q\equiv\mbox{\textit{"It's raining and cold"}}$ and find a natural translation to English of the following sentences:
+	\begin{enumerate}
+		\item $\urcorner (p\wedge q)$
+		\item $\urcorner q \rightarrow (p \,\vee\, \urcorner p)$
+	\end{enumerate}
+\item (KtiCa) Prove that $\left((p\rightarrow q)\wedge(q\rightarrow r)\right)\rightarrow (p\rightarrow r)$
+\item (KtiCa) Prove that $\left[\left(a\rightarrow (b\rightarrow c)\right)\wedge(a\wedge b)\right]\rightarrow c$
+\item (KtiCa) Simplify and determine whether each of the following sentences is (a) contingent, (b) contradictory or (c) tautological:
+	\begin{enumerate}
+		\item $(p\rightarrow q)\rightarrow \urcorner q$
+		\item $p\rightarrow \urcorner p$
+		\item $\left[\left(p\rightarrow r\right)\rightarrow (p\wedge q)\right]\wedge r\wedge \urcorner q$
+	\end{enumerate}
+\item (KTIca) Consider a gate consisting in two CNOT gates coupled in series, i.e., the output of the first is fed into the input of the second.
+	\begin{enumerate}
+	\item Write the truth table of such a gate
+	\item If we call the top and bottom inputs $x,\,y$. respectively, and the top and bottom outputs $x',\,y'$, respectively, determine an algebraic expressions for $x'$ and $y'$ 
+		in terms of $x$ and $y$
+	\item A CNOT gate is reversible. This means we can build a gate, the \textit{inverse gate} of the CNOT, that \textit{undoes} what the CNOT does. What is that gate?
+	\end{enumerate}
+\section{Problems}
+\item (ktiCA) Determine the expressions for $F_1$ and $F_2$ as given by the circuit of figure \ref{circuit} and simplify as much as possible.
+	\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=0.6\linewidth]{A3circuit}
+		\caption{Logic circuit \ref{circuit}}
+		\label{circuit}
+	\end{center}
+	\end{figure}
+\item\label{qtof} (kTICa) Consider the circuit of figure \ref{toffoli} and determine the expressions for $a,\,b,\,c$ in the following cases. What function to we obtain in each case?
+	\begin{enumerate}
+		\item $y=1$
+		\item $z=0$
+		\item $x=\urcorner a$ and $y=\urcorner b$ and $z=0$
+	\end{enumerate}
+	\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=0.5\linewidth]{Toffoli}
+		\caption{Toffoli gate}
+		\label{toffoli}
+	\end{center}
+	\end{figure}
+\item (kTIca) From your answers to exercise \ref{qtof}), figure out how to write the OR gate using only NOT's and a CNOT.
+\end{enumerate}
+
+\end{document}
