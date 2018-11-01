@@ -1,0 +1,84 @@
+\documentclass{article}
+\usepackage{amssymb}
+\usepackage[T1]{fontenc}
+\usepackage{sidecap} %for side captions
+\usepackage{graphicx}
+\usepackage[margin=2cm]{geometry}
+
+\title{
+Computer Science G11 at The Dragon Academy\\
+Test II Term 1
+%\\ \bf{Due date: Tue Sep. 18 2018}
+}
+\author{}
+
+\begin{document}
+\maketitle
+Note:
+\begin{itemize}
+\item \textbf{All questions have the same value towards your mark}. 
+\item Make sure to strategize your time: Pick the easiest questions first; move on to the next one if you get stuck.
+\item \textbf{Duration: 1h}
+\end{itemize}
+\begin{enumerate}
+\item (KtiCa) Express the following statements in propositional logic
+\begin{enumerate}
+\item If I'm sleepy, then I'm slow and inefficient
+\item If I'm slow and inefficient it is because I'm sleepy.
+\item I'm sleepy if I did not go to bed at a reasonable time
+\end{enumerate}
+\item (kTICA) Express the following reasoning in propositions logic. How is this type of reasoning called? \textit{If I didn't go to be at a reasonable time, I'm sleepy. If I'm sleepy, I'm slow and inefficient. Hence, If I didn't go to be early enough, I'm slow and inefficient}.
+\item (Ktica) What does it mean that two logical expressions A and B are equivalent? Give an example.
+\item (Ktica) State which of the following are propositions:
+\begin{enumerate}
+\item {\sl Try to build a routine}
+\item {\sl Do not lie}
+\item {\sl It's cold out there}
+\item {\sl What do you mean?}
+\end{enumerate}
+\item (KtiCa) Simplify the following expression and choose the right answer: $\left[\urcorner \left(p\,\vee\,q\right)\,\wedge\,\urcorner\left(r\,\vee\,s\,\vee\,t\right)\right]\,\vee\,\urcorner\left(p\,\vee\,q\right)$
+\begin{enumerate}
+\item $p\vee q$
+\item $\urcorner p \wedge \urcorner q$
+\item $r \vee s \vee t$
+\item $\urcorner r \wedge \urcorner s \wedge \urcorner t$
+\item $\urcorner p \wedge \urcorner q \wedge \urcorner r \wedge \urcorner s \wedge \urcorner t$
+\end{enumerate}
+\item (KtiCa) Express the following function $f(p,q,r)=\left[ (p\vee q)\wedge r\right]\vee (p\wedge q \wedge r)$ in \textbf{Disjunctive Normal Form (DNF)}, 
+	that is, as a \textbf{disjunction} of terms, each of which consisting on a {\sl conjunction} of atomic literals or negation of atomic literals.
+\item (KtiCa) Simplify and determine whether each of the following sentences is (a) contingent, (b) contradictory or (c) tautological:
+	\begin{enumerate}
+		\item $(p\rightarrow q)\rightarrow \urcorner q$
+		\item $p\rightarrow \urcorner p$
+		\item $\left[\left(p\rightarrow r\right)\rightarrow (p\wedge q)\right]\wedge r\wedge \urcorner q$
+	\end{enumerate}
+\item (KTIca) Consider a gate consisting in two CNOT gates coupled in series, i.e., the output of the first is fed into the input of the second (see figure \ref{CNOTseries}).
+	\begin{figure}
+	\centering
+	\includegraphics[width=0.6\linewidth]{CNOT-series}
+	\caption{Two CNOT in series}
+	\label{CNOTseries}
+	\end{figure}
+	\begin{enumerate}
+	\item Write the algebraic expression of $Z$ in terms of the inputs $x$ and $y$
+	\item Determine an algebraic expressions for $x'$ and $y'$ in terms of $x$ and $y$
+	\item A CNOT gate is reversible. This means we can build a gate, called the \textit{inverse gate} of the CNOT, that \textit{undoes} what the CNOT does. What is that gate?
+	\end{enumerate}
+\item\label{qtof} (kTICa) Consider the CCNOT or Toffoli circuit of figure \ref{toffoli} and determine the expressions for $a,\,b,\,c$ in the following cases. What function do we obtain in each case?
+	\begin{enumerate}
+		\item $x=1$
+		\item $y=1$
+		\item $z=0$
+		\item $z=0$ and before $x,\,y$ enter the gate we pass each through a NOT gate. What's then $a,b,c$?
+	\end{enumerate}
+	\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=0.5\linewidth]{Toffoli}
+		\caption{Toffoli gate}
+		\label{toffoli}
+	\end{center}
+	\end{figure}
+\item (kTIca) From your answers to exercise \ref{qtof}, figure out how to write the OR gate using only NOT's and a CCNOT.
+\end{enumerate}
+
+\end{document}
