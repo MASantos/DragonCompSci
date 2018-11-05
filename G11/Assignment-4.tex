@@ -1,0 +1,95 @@
+\documentclass{article}
+\usepackage{amssymb}
+\usepackage[T1]{fontenc}
+\usepackage{sidecap} %for side captions
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{tasks}
+\usepackage[margin=2cm]{geometry}
+
+\title{
+Computer Science G11 at The Dragon Academy\\
+Assignment 4
+%\\ \bf{Due date: Tue Sep. 18 2018}
+}
+\author{}
+
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+\item \label{2dqubit}(KtiCa) A qubit is in the state given by $|s\rangle$ in figure \ref{qbit-1}.
+	\begin{enumerate}
+	\item Determine the expression of $|s\rangle$ in terms of the fundamental states $|0\rangle,\,|1\rangle$, that is, write $|s\rangle$ in the form 
+		$a|0\rangle\,+\,b|1\rangle$.
+	\item What is the probability to find the qubit in state $|0\rangle$?
+	\item What is the probability to find the qubit in state $|1\rangle$?
+	\end{enumerate}
+\item (KtiCa) Repeat exercise \ref{2dqubit} for figures \ref{qbit-2} and \ref{qbit-3}. %an $\alpha=30^{\circ},\,60^{\circ}$.
+\begin{figure}[h]
+\centering
+	\begin{subfigure}[h]{0.25\textwidth}
+	\includegraphics[width=\textwidth]{qbit-1}
+	\caption{}
+	\label{qbit-1}
+	\end{subfigure}
+	\begin{subfigure}[h]{0.25\textwidth}
+	\includegraphics[width=\textwidth]{qbit-2}
+	\caption{}
+	\label{qbit-2}
+	\end{subfigure}
+	\begin{subfigure}[h]{0.25\textwidth}
+	\includegraphics[width=\textwidth]{qbit-3}
+	\caption{}
+	\label{qbit-3}
+	\end{subfigure}
+	\begin{subfigure}[h]{0.25\textwidth}
+	\includegraphics[width=\textwidth]{qbit-0}
+	\caption{An arbitrary Qubit $|s\rangle$}
+	\label{qbit-0}
+	\end{subfigure}
+\end{figure}
+\item (kTICa) What is the expression of the qubit in figure \ref{qbit-0}?
+\item (kticA) If $\alpha=45^\circ$, what is the expression of the qubit in figure \ref{qbit-0}?
+\item (KtiCa) What is the \textit{action} of the gate $\mathbf{Z}$ on the states $|+\rangle\,\mbox{and}\,|-\rangle$?
+\item (KtiCa) Let's name by $|+\rangle$ the combination $(|0\rangle\,+\,|1\rangle)/\sqrt(2)$. What is the \textit{action} of the gate $\mathbf{X}$ on the state $|+\rangle$?
+\item (KtiCa) Let's name by $|-\rangle$ the combination $(|0\rangle\,-\,|1\rangle)/\sqrt(2)$. What is the \textit{action} of the gate $\mathbf{X}$ on the state $|-\rangle$?
+\item (kticA) \label{hadamard}Consider the Hadamard gate $\mathbf{H}$
+	\begin{enumerate}
+	\item Evaluate $\mathbf{H}\,|0\rangle$
+	\item Evaluate $\mathbf{H}\,|1\rangle$
+	\item Evaluate $\mathbf{H}\,|+\rangle$
+	\item Evaluate $\mathbf{H}\,|-\rangle$
+	\end{enumerate}
+\item (kTIca) From your answers to exercise \ref{hadamard}, what is the inverse of the gate $\mathbf{H}$? See figure \ref{Hinverse}.
+\item (KticA) Determine the output state $|s\rangle$ from the circuit of figure \ref{qCircuit-1}.
+\begin{figure}[h!]
+\centering
+	\begin{subfigure}[h]{0.7\textwidth}
+	\includegraphics[width=\textwidth]{Hinverse}
+	\caption{What's the gate that \textit{undoes} what $\mathbf{H}$ does so that the output is the same as the input $|w\rangle$?}
+	\label{Hinverse}
+	\end{subfigure}
+	\begin{subfigure}[h]{0.7\textwidth}
+	\includegraphics[width=\textwidth]{qCircuit-1}
+	\caption{What's the output $|s\rangle$? Write it in terms of the fundamental states $|o\rangle,\,|1\rangle$}
+	\label{qCircuit-1}
+	\end{subfigure}
+\end{figure}
+\item (KticA) Consider the quantum circuit of figure \ref{Entanglement-0} that operates on 2-qubits.
+	\begin{enumerate}
+	\item Determine the state $|w_0\rangle$ in terms of the fundamental states $|0\rangle\,\mbox\,|1\rangle$. 
+	\item Determine the state $|w_1\rangle$ in terms of the fundamental states $|0\rangle\,\mbox\,|1\rangle$. 
+	\item Determine the state $|w_2\rangle$ in terms of the fundamental states $|0\rangle\,\mbox\,|1\rangle$. 
+	\item Determine the state $|w_3\rangle$ in terms of the fundamental states $|0\rangle\,\mbox\,|1\rangle$. 
+	\end{enumerate}
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.6\linewidth]{Entanglement-0}
+\caption{2-qubits Quantum circuit}
+\label{Entanglement-0}
+\end{figure}
+\item (KTIca) At the end of the previous circuit (see Fig.\ref{Entanglement-0}), what is the probability of the system of 2-qubits to be in the states
+	\begin{tasks}(4) \task $|00\rangle$ \task $|01\rangle$ \task $|10\rangle$ \task $|11\rangle$  \end{tasks}
+\end{enumerate}
+\end{document}
