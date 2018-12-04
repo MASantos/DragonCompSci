@@ -1,0 +1,81 @@
+\documentclass{article}
+\usepackage{amssymb}
+\usepackage[T1]{fontenc}
+\usepackage{sidecap} %for side captions
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{tasks}
+\usepackage[margin=2cm]{geometry}
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+\title{
+Computer Science G11 at The Dragon Academy\\
+Assignment 7 \\
+\textbf{Due date: Thu Dec. 6 2018}
+}
+\author{}
+
+\begin{document}
+\maketitle
+
+Write all answers in a single C source, adding the pertinent comments to make your submission as easy to understand and follow as possible. Avoid making it tedious to read though!
+Name the source file Assignment7.c and send it by email. 
+
+\textbf{Make sure that your code compiles without errors nor warnings!}
+
+All questions have the same value.
+
+\begin{enumerate}
+	\item  \textbf{\href{https://stackoverflow.com/questions/1410563/what-is-the-difference-between-a-definition-and-a-declaration}{Declaration}, Definition, Variable, Pointer and Dereferencing.}	
+    \begin{enumerate}[label=\arabic*]
+        \item \textit{Declare} a variable \texttt{j} of type int. This means just \textit{telling} the compiler that there is a variable \texttt{j} which has a specific type of \texttt{int}.
+            Example: \texttt{char c;} We declare the label '\texttt{c}' to refer to a variable of type \texttt{char}.
+		\item \textit{Define} a variable \texttt{i} of type int. This means the same as declaring it, \textbf{plus} actually reserving the space in memory by assigning it a particular value. 
+					Also called \textit{instantiating} the variable \texttt{i}. 
+					Example: \texttt{char c = 'S';} We declare the label'c' to refer to a variable of type \texttt{char} \textbf{AND} assign it the value '\texttt{S}', 
+					thereby asking to actually reserve the necessary space in memory, have c referencing that space and storing there the bits representing the character '\texttt{S}'.
+		\item Declare a pointer, ptr, to an integer
+		\item Assign the address of \texttt{i} to the pointer ptr
+		\item Assign the value 1 to the variable \texttt{i}
+		\item Print out the value of the pointer ptr (Hint: use the format "\texttt{\%p}" and recast the pointer as void, i.e., \texttt{(void*)ptr}, when passing it to the printf function)
+		\item Print out the value of the variable \texttt{i}
+		\item Print out the value the pointer ptr is pointing to
+		\item Print out the content of the (memory address) \texttt{ptr}
+		\item We established that "\texttt{*ptr}" is the "content of (the memory address pointed to by) \texttt{ptr}". Store the value 2 into the memory location of \texttt{i}.
+		\item Print out the value of \texttt{i}
+		\item Following the previous question, assign the value 3 to i using \texttt{ptr}
+		\item Print out the value of \texttt{i}
+		\item Assign the value of 137 to \texttt{j} using a pointer to \texttt{j} and print out \texttt{j}
+	\end{enumerate}
+	\item \textbf{Correct type of a pointer}
+    \begin{enumerate}[label=\arabic*]
+		\item In one statement, \textit{define} a pointer \texttt{ptr\_s} to a \textit{short int} with the value of variable i
+		\item Print out the value pointed by \texttt{ptr\_s} and content of variable \texttt{ptr\_s}. 
+		\item Does the value of that short int coincide with i? In which memory address is that short int been stored?
+		\item Assign to j the value 65537, then assign its address to \texttt{ptr\_s}
+		\item Print out the value pointed by \texttt{ptr\_s} and content of variable \texttt{ptr\_s}. 
+		\item Does the value of that short int coincide with i? In which memory address is that short int been stored?
+	\end{enumerate}
+	\item \textbf{How does the computer lay out the bits of an integer in memory? \textit{Little Endian}, \textit{Big Endian} and \textit{basic pointer arithmetics}. }
+    \begin{enumerate}[label=\arabic*]
+			\item Define an integer variable \texttt{a} with the hex value value  \texttt{0x00010203} (Note: the first 2 characters, \texttt{0x}, just mean that
+					the rest is a number in hexadecimal notation. Assign it just as it is.)
+			\item Print out the value of \texttt{a} and its address
+			\item Define a pointer to a short int \texttt{ptr\_sa} and assign it the address of a
+			\item Print out the address contained in \texttt{ptr\_sa} and the value it's referencing.
+			\item Print out the content of the \textit{next memory address} following that pointed to by \texttt{ptr\_sa}. (Hint: The next memory address is given by \texttt{ptr\_sa}+1)
+			\item What is the difference between the memory addresses of this last one and that in \texttt{ptr\_sa}? Express it in bytes.
+			\item What did hapen? Explain the difference between these last three print statements?
+			\item Consider the last print statement and answer the following questions:
+                \begin{enumerate}[label=\arabic*]
+				\item What value of \texttt{a} was printed when dereferencing the address following that pointed to by \texttt{ptr\_sa}
+                \item Hence, when we "go up" in memory we retrieve the higher bits (more to the left) or the lower bits (more to the right) of a byte?
+                \item The hex number \texttt{0x010203} occupies 3 bytes. For arguments sake, let's say \textit{it is store in memory address} \texttt{0x7fff51b0f900}. 
+                    a) What number is stored in the first byte starting at that address, b) In which address is the \texttt{01} stored?
+			\end{enumerate}
+	\end{enumerate}
+\end{enumerate}
+
+
+\end{document}
