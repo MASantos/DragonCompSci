@@ -1,4 +1,4 @@
-# What is Concurrent Programming?
+# What is Concurrent Programming? <a name="top"></a>
 
 I'm trying to come up right now with an example of a common device that doesn't use modern multi-core processors...uhm, phones...no...tablets...no...Ipod touch...no, smartwatches...no -at least not the big-league ones; Fitbit ones do, so do as well any ipod nano...
 
@@ -20,27 +20,27 @@ It is this call, in either version, clone/clone3, in Linux that really blurs the
 making both just but two ends of a spectrum of possible concurrent programming models. All three calls are part of the same family of system calls. 
 This family includes as well [other calls](https://en.wikipedia.org/wiki/Clone_(Linux_system_call)#Variants).
 
-# Index:
+# Index: <a name="idx"></a>  
 
-    1. The Multi-Process, aka. (ehem) Parallel, aka. Concurrent "Hello World!"
-    2. What just happened?
-    3. Non-determinism
-    4. Multiple Children
-    5. Chaperoning your Children
-    6. What have you done my child?
-    7. Matrix Multiplication
-    8. When is a matrix big enough to justify the use of concurrent programming
-    9. 1T (trillion) operations
-    10. Linux Memory Types 
-    11. Simple Improvement 
-    12. COW in action
-    13. Conclusions
-    14. References 
+1. [The Multi-Process, aka. (ehem) Parallel, aka. Concurrent "Hello World!""](#helloworld)
+2. [What just happened?](#whathappened)
+3. [Non-determinism](#nondet)
+4. [Multiple Children](#mpch)
+5. [Chaperoning your Children](#chapch)
+6. [What have you done my child?](#whatdone)
+7. [Matrix Multiplication](#mtxmult)
+8. [When is a matrix big enough to justify the use of concurrent programming](#isbig)
+9. [1T (trillion) operations](#tril)
+10. [Linux Memory Types](#LMT) 
+11. [Simple Improvement](#improve) 
+12. [COW in action](#cow)
+13. [Conclusions](#conclusions)
+14. [References](#refs) 
 
-# The Multi-Process / Parallel / Concurrent "Hello World!"
+# The Multi-Process / Parallel / Concurrent "Hello World!" [$^$](#idx) <a name="helloworld"></a>
 
- Let's see an example in C:
-`
+ Let's see an example in C:  
+```
     //helloworld-mp.c 
 
     #include <stdio.h>      //printf
@@ -67,7 +67,7 @@ This family includes as well [other calls](https://en.wikipedia.org/wiki/Clone_(
 
         return 0;
     }
-`
+```
 Compile as `gcc helloworld-mp.c` and run as `./a.out` 
 
 The output should look like this
@@ -76,58 +76,66 @@ The output should look like this
 >    Hello World! I'm the child with process id pid=0... Uhm...odd, yeah...
 >    anyway, my parents know my pid for sure. Ask them!
 
-# What just happened?
+# What just happened? [$^$](#idx) <a name="whathappened"></a>
 
 The call to fork basically generates a copy of the whole program and its state up to that point -except for file descriptors, which are shared, and the value of the pid variable, which differs:
 
-    * During the program execution
-       * the child, any child, sees a value of pid == 0. 
-       * The parent process sees a pid value that varies from child to child. That pid value seen by the parent is the actual PID the kernel assigned to the child process.  
-    * The memory pages of our program are likely duplicated. I say likely because the method used is copy-on-write (COW). Basically this works as follows: 
-       * initially things aren't duplicated at all (except details like the pid variable, say). The child process has access to any variable as would do any normal code of ours. 
-       * However, if and when the child tries to modify a common variable, the kernel copies that variable to the child memory page.  
-    * The children are assigned a PGRP (group process id)  equal to the PID of the parent.
+* During the program execution
+   * the child, any child, sees a value of pid == 0. 
+   * The parent process sees a pid value that varies from child to child. That pid value seen by the parent is the actual PID the kernel assigned to the child process.  
+* The memory pages of our program are likely duplicated. I say likely because the method used is **copy-on-write (COW)**. Basically this works as follows: 
+   * initially things aren't duplicated at all (except details like the pid variable, say). The child process has access to any variable as would do any normal code of ours. 
+   * However, **if and when the child (or parent) tries to modify a common variable, the kernel copies that variable to the child (or parent) memory page**.  
+* The children are assigned a PGRP (group process id)  equal to the PID of the parent.
 
 As the virtual pages of different processes are independent, by default those modifications done by the child process cannot be seen by the parent; and vice-versa.
 
-You can find more details at this excellent stackoverflow thread, or this comment of Linus Torvald on the way Linux deals with processes and threads.
-Non-determinism
+You can find more details at this excellent [stackoverflow thread](https://stackoverflow.com/questions/807506/threads-vs-processes-in-linux?noredirect=1&lq=1), or this comment of Linus Torvald on [the way Linux deals with processes and threads](https://www.evanjones.ca/software/threading-linus-msg.html). 
+
+
+# Non-determinism [$^$](#idx) <a name="nondet"></a>
 
 In concurrent programing execution is in general non-deterministic. This means, we cannot anticipate the order in which the different child process will be processed and, hence, finish their tasks. Thus, you may have seen the above output with the child's greeting first. That's more likely so the more children your program spawns and the more busy your computer is running apps in the background -browsers with several tabs, mail program, itunes...
 
-This fact is the source of additional headaches when debugging a concurrent program.
-Multiple Children
+This fact is the source of additional headaches when debugging a concurrent program.  
 
-Just do that same fork as many times as you need. Here we will use a loop.
+# Multiple Children [$^$](#idx) <a name="mpch"></a>
 
-    #include <stdio.h>      //printf
-    #include <unistd.h>     //fork
-    #include <stdlib.h>     //exit
+Just do that same fork as many times as you need. Here we will use a loop.  
 
-    #define NUMBER_CHILDREN 8
 
-    int main(){
-        for ( int i= 0 ; i < NUMBER_CHILDREN ; i++){
-            pid_t pid = fork();
+```
+#include <stdio.h>      //printf
+#include <unistd.h>     //fork
+#include <stdlib.h>     //exit
 
-            switch( pid ) {
-                case -1:
-                    printf("ERROR: spawning of child process failed\n");
-                    return 1;
-                    break;
-                case 0:
-                    printf("Hello World! I'm the child number %d. Bye!\n",i+1);
-                    exit(0);
-                    break;
-                default:
-                    printf("Hi, I'm the parent of the process with pid=%d\n",pid);
-                    break;
-            }
+#define NUMBER_CHILDREN 8
+
+int main(){
+    for ( int i= 0 ; i < NUMBER_CHILDREN ; i++){
+        pid_t pid = fork();
+
+        switch( pid ) {
+            case -1:
+                printf("ERROR: spawning of child process failed\n");
+                return 1;
+                break;
+            case 0:
+                printf("Hello World! I'm the child number %d. Bye!\n",i+1);
+                exit(0);
+                break;
+            default:
+                printf("Hi, I'm the parent of the process with pid=%d\n",pid);
+                break;
         }
-        return 0;
     }
+    return 0;
+}
+```
+
 
 Compile and run. You should see an output similar to this:
+
 
     Hi, I'm the parent of the process with pid=11607
     Hi, I'm the parent of the process with pid=11608
@@ -146,8 +154,11 @@ Compile and run. You should see an output similar to this:
     Hi, I'm the parent of the process with pid=11614
     Hello World! I'm the child number 8. Bye!
 
-Run it several times. You'll see what I meant by non-determinism: The order in which those print statements are executed varies from run to run.
-Chaperoning your children
+
+Run it several times. You'll see what I meant by non-determinism: The order in which those print statements are executed varies from run to run.  
+
+
+# Chaperoning your children [$^$](#idx)<a name="chapch"></a>
 
 Any decent parents will want to look after their children. I know you do. The child's PID allows the parent some level of targeted interaction, like...well, killing it. 8-/
 
@@ -155,39 +166,41 @@ Another thing that parents often do, is wait for their children to come back aft
 
 We can do this the following way: 
 
-    #include <stdio.h>      //printf
-    #include <unistd.h>     //fork
-    #include <stdlib.h>     //exit
+```
+#include <stdio.h>      //printf
+#include <unistd.h>     //fork
+#include <stdlib.h>     //exit
 
-    #define NUMBER_CHILDREN 8
+#define NUMBER_CHILDREN 8
 
-    int main(){
-        pid_t pid;
-        for ( int i= 0 ; i < NUMBER_CHILDREN ; i++){
-            pid = fork();
+int main(){
+    pid_t pid;
+    for ( int i= 0 ; i < NUMBER_CHILDREN ; i++){
+        pid = fork();
 
-            switch( pid ) {
-                case -1:
-                    printf("ERROR: spawning of child process failed\n");
-                    return 1;
-                    break;
-                case 0:
-                    printf("Hello World! I'm the child number %d. Bye!\n",i+1);
-                    exit(0);
-                    break;
-                default:
-                    printf("Hi, I'm the parent of the process with pid=%d\n",pid);
-                    break;
-            }
+        switch( pid ) {
+            case -1:
+                printf("ERROR: spawning of child process failed\n");
+                return 1;
+                break;
+            case 0:
+                printf("Hello World! I'm the child number %d. Bye!\n",i+1);
+                exit(0);
+                break;
+            default:
+                printf("Hi, I'm the parent of the process with pid=%d\n",pid);
+                break;
         }
-        printf("I'm the parent waiting for all my %d offspring to come back and report\n",NUMBER_CHILDREN);
-        int status;
-        while( (pid=wait(&status)) > 0) {
-            printf("My child with pid=%d is back!\n",pid);
-        }
-        printf("All children returned\n");
-        return 0;
-    } 
+    }
+    printf("I'm the parent waiting for all my %d offspring to come back and report\n",NUMBER_CHILDREN);
+    int status;
+    while( (pid=wait(&status)) > 0) {
+        printf("My child with pid=%d is back!\n",pid);
+    }
+    printf("All children returned\n");
+    return 0;
+}
+``` 
 
 Compile as usual and run it. You should see something like this:
 
@@ -218,21 +231,23 @@ Compile as usual and run it. You should see something like this:
     My child with pid=11692 is back!
     All children returned
 
-The function wait(int*) here is a wrapper around wait4(pid_t,int*,int, struct rusage*), equivalent to wait4(-1,&status,0,NULL). See man 2 wait.
+The function `wait(int*)` here is a wrapper around `wait4(pid_t,int*,int, struct rusage*)`, equivalent to `wait4(-1,&status,0,NULL)`. See man 2 wait.
 
-wait(int*) basically waits -that is, blocks execution!- until any of the children terminates -or is killed- and then it returns the child PID if a child terminated or -1 if there is no more children.
+`wait(int*)` basically waits -that is, blocks execution!- until any of the children terminates -or is killed- and then it returns the child PID if a child terminated or -1 if there is no more children.
 
 Actually, it returns -1 as well if there was a problem. But you can catch an error value and double check what happened. I'm trying to keep things as simple as possible to get you started though.
 
 Therefore, by looping while wait returns a positive value effectively we are waiting till each and every child has ended its execution.
 
-The variable status contains information of how the child processes terminated its execution -did it really finished as expected? whas it terminated because it received a (e.g. kill) signal? etc.
-What have you done out there my child?
+The variable status contains information of how the child processes terminated its execution -did it really finished as expected? whas it terminated because it received a (e.g. kill) signal? etc.  
 
-The following code waitforallchild.c provides a more detailed example on what information can be gathered on the child's execution.
+# What have you done out there my child? [$^$](#idx)<a name="whatdone"></a>
+
+The following code `waitforallchild.c` provides a more detailed example on what information can be gathered on the child's execution.
 
 It has the child calculating a large Fibonacci number. The code for this is in the header fibo.h listed afterwards:
 
+```
 //waitforallchild.c
 
 #include <stdio.h>
@@ -351,46 +366,49 @@ int main(int argc, const char** argv){
 
     return 0;
 }
+```
   
 
 The fibo.h  header :
 
-    #include <stdio.h>
-    #include <string.h>
-    #include <stdlib.h>
 
-    #ifndef DEBUG
-    #define DEBUG 0
-    #endif
+```
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
-    typedef long long unsigned int fibo_t;
+#ifndef DEBUG
+#define DEBUG 0
+#endif
 
-    fibo_t  fib(fibo_t n){
-            fibo_t f, tmp1, tmp2;
-            switch(n){
-                    case 0:
-                            return 0;
-                            break;
-                    case 1:
-                    case 2:
-                            return 1;
-                            break;
-                    default:
-                            tmp2 = (fibo_t) 1;
-                            tmp1 = (fibo_t) 1;
-                            for(fibo_t i=2; i < n ; i++){
-                                    f = tmp1 + tmp2;
-                                    if(DEBUG)printf("#DEBUG: fib(%llu)=%llu+%llu=%llu\n",i+1,tmp1, tmp2, f);
-                                    tmp2 = tmp1 ;
-                                    tmp1 = f;
-                            }
-                            return f;
-            }
-            exit(-1);
-    }
-    f
+typedef long long unsigned int fibo_t;
 
-Compile as gcc -o waitforallchild waitforallchild.c -DFIBO  then run as ./waitforallchild 
+fibo_t  fib(fibo_t n){
+        fibo_t f, tmp1, tmp2;
+        switch(n){
+                case 0:
+                        return 0;
+                        break;
+                case 1:
+                case 2:
+                        return 1;
+                        break;
+                default:
+                        tmp2 = (fibo_t) 1;
+                        tmp1 = (fibo_t) 1;
+                        for(fibo_t i=2; i < n ; i++){
+                                f = tmp1 + tmp2;
+                                if(DEBUG)printf("#DEBUG: fib(%llu)=%llu+%llu=%llu\n",i+1,tmp1, tmp2, f);
+                                tmp2 = tmp1 ;
+                                tmp1 = f;
+                        }
+                        return f;
+        }
+        exit(-1);
+}
+```
+
+Compile as `gcc -o waitforallchild waitforallchild.c -DFIBO`  then run as `./waitforallchild` 
 
 You should see something like this:
 
@@ -418,7 +436,7 @@ You should see something like this:
     Child 11832 terminated with an exit call 0
     All 4 children finished.Elapsed time aprox. 20 sec.
 
-Now open a new terminal window. We will run it again but this time kill one of the children while still computing the fibonacci number. In this example I issued a kill -9 11837 and the output is:
+Now open a new terminal window. We will run it again but this time kill one of the children while still computing the fibonacci number. In this example I issued a `kill -9 11837` and the output is:
 
     Parent: saw child 1 (11836) parting
     Hi, I'm child 1. Going to sleep now
@@ -441,7 +459,7 @@ Now open a new terminal window. We will run it again but this time kill one of t
     Child 11836 terminated with an exit call 0
     All 4 children finished.Elapsed time aprox. 20 sec.
 
-Matrix Multiplication
+# Matrix Multiplication [$^$](#idx)<a name="mtxmult"></a>
 
 Multi-linear functions, aka. Matrices are a domain of Linear Algebra that can easily benefit from using multiple cores. 
 
@@ -459,216 +477,222 @@ That is, the determination of each element of C involves 2k-1 operations: k mult
 
 In particular, calculating the square of a matrix A(n,n) involves n*n*(2n-1) ~ 2n^3 operations.
 
-The following code example does this multi-threaded, or rather, multi-process matrix multiplication. It relies on the header mtxmult_mp.h shown afterwards.
+The following code example does this multi-threaded, or rather, multi-process matrix multiplication. It relies on the header `mtxmult_mp.h` shown afterwards.
 
-    //test_mtxmult_mp-big.c
+```
+//test_mtxmult_mp-big.c
 
-    #include "mtxmult_mp.h"
-    #include <math.h>
-    #include <string.h>
+#include "mtxmult_mp.h"
+#include <math.h>
+#include <string.h>
 
-    int main(int argc, char** argv){
-        size_t nbproc = NUM_PROCESS;
-        if( argc < 3){
-            printf("Usage: %s nrows ncols [ nbproc (%zu) ] [-ns]\n\n-ns\t\tno single-thread\n",\
-                argv[0],nbproc);
-            return -1;
-        }
-        size_t nrows = (size_t) atol(argv[1]);
-        size_t ncols = (size_t) atol(argv[2]);
-        if( argc > 3 ){
-            nbproc = (size_t) atol(argv[3]);
-        }
-        int skip_single_thread=0;
-        if ( argc > 4 && strcmp("-ns",argv[4])==0){
-            skip_single_thread=1;
-        }
-        printf("Max # threads: %zu\n",nbproc);
-        printf("Random array size %zux%zu\n",nrows,ncols);
-        //orig matrix in shared memory makes no difference due to COW and being
-        //used just for reading by children
-        //double* A = mmap(NULL,nrows*ncols*sizeof(double),PROT_READ | PROT_WRITE,
-        //                                        MAP_SHARED | MAP_ANONYMOUS, -1, 0);
-        double *A2, *A = (double*) calloc(nrows*ncols, sizeof(double));
-        srand(1234567);
-        for(size_t i = 0 ; i < nrows*ncols ; i++){
-             A[i] = floor((10.0*rand())/RAND_MAX) ;
-        }
-        const size_t asz[2]={nrows,ncols};
-        pmtx(A,nrows,ncols,"A");
-        time_t begin ;
-        if( !skip_single_thread ){
-            printf("Single thread\n");
-            begin = time(NULL);
-            //pmtx( mtxsq(A,asz),nrows,ncols,"A^2");
-            A2=mtxsq(A,asz);
-            printf("Time: %zu sec.\n",time(NULL)-begin);
-            pmtx(A2,nrows,ncols,"A^2");
-        }
+int main(int argc, char** argv){
+    size_t nbproc = NUM_PROCESS;
+    if( argc < 3){
+        printf("Usage: %s nrows ncols [ nbproc (%zu) ] [-ns]\n\n-ns\t\tno single-thread\n",\
+            argv[0],nbproc);
+        return -1;
+    }
+    size_t nrows = (size_t) atol(argv[1]);
+    size_t ncols = (size_t) atol(argv[2]);
+    if( argc > 3 ){
+        nbproc = (size_t) atol(argv[3]);
+    }
+    int skip_single_thread=0;
+    if ( argc > 4 && strcmp("-ns",argv[4])==0){
+        skip_single_thread=1;
+    }
+    printf("Max # threads: %zu\n",nbproc);
+    printf("Random array size %zux%zu\n",nrows,ncols);
+    //orig matrix in shared memory makes no difference due to COW and being
+    //used just for reading by children
+    //double* A = mmap(NULL,nrows*ncols*sizeof(double),PROT_READ | PROT_WRITE,
+    //                                        MAP_SHARED | MAP_ANONYMOUS, -1, 0);
+    double *A2, *A = (double*) calloc(nrows*ncols, sizeof(double));
+    srand(1234567);
+    for(size_t i = 0 ; i < nrows*ncols ; i++){
+         A[i] = floor((10.0*rand())/RAND_MAX) ;
+    }
+    const size_t asz[2]={nrows,ncols};
+    pmtx(A,nrows,ncols,"A");
+    time_t begin ;
+    if( !skip_single_thread ){
+        printf("Single thread\n");
         begin = time(NULL);
-        //pmtx( mtxsq_thr(A,asz,nbproc),nrows,ncols,"A^2");
-        A2=mtxsq_thr(A,asz,nbproc);
+        //pmtx( mtxsq(A,asz),nrows,ncols,"A^2");
+        A2=mtxsq(A,asz);
         printf("Time: %zu sec.\n",time(NULL)-begin);
         pmtx(A2,nrows,ncols,"A^2");
-        return 0;
+    }
+    begin = time(NULL);
+    //pmtx( mtxsq_thr(A,asz,nbproc),nrows,ncols,"A^2");
+    A2=mtxsq_thr(A,asz,nbproc);
+    printf("Time: %zu sec.\n",time(NULL)-begin);
+    pmtx(A2,nrows,ncols,"A^2");
+    return 0;
+}
+```
+
+The actual concurrent calculation of the matrix multiplication is done by the code in `mtxmult_mp.h` that follows. As this example intends to show the difference between concurrent and sequential calculation of the square of a matrix, this code in turn requires the (sequential) version found in the header `mtxmult.h` that is listed afterwards.
+
+```
+//mtxmult_mp.h
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
+#include <unistd.h>
+#include <time.h>
+#include <sys/mman.h>
+
+#include "mtxmult.h"
+
+#define NUM_CORES 4
+#define NUM_PROCESS (size_t)(NUM_CORES-1)
+#define DEBUG 0
+
+//
+//Threaded ( via fork() ) version of matrix multiplication
+
+double* mtxm_thr(double* a,const size_t asz[2],double* b,const size_t bsz[2], size_t nbproc){
+    printf("Threaded Matrix Multiplication start...%zu threads\n",nbproc);
+    if ( asz[1] != bsz[0] ){
+        printf("ERROR: can't multiply A*B: columns of A %zu != rows of b%zu\n",asz[1],bsz[0]);
+        exit(1);
+    }
+    //result matrix in shared memory
+    double* ab = mmap(NULL,asz[0]*asz[1]*sizeof(double),PROT_READ | PROT_WRITE,
+                                            MAP_SHARED | MAP_ANONYMOUS, -1, 0);
+    if( ab == MAP_FAILED){
+        printf("ERROR: Couldn't allocate shared memory for matrix multiplication");
+        exit(2);
     }
 
-The actual concurrent calculation of the matrix multiplication is done by the code in mtxmult_mp.h that follows. As this example intends to show the difference between concurrent and sequential calculation of the square of a matrix, this code in turn requires the (sequential) version found in the header mtxmult.h that is listed afterwards.
+    size_t i,j,k, mop, mopo, pid, children=0, fchildren=0;
+    size_t mpt = (asz[0]*bsz[1])/nbproc;
+    size_t rmm = (size_t) ((asz[0]*bsz[1])%nbproc);
+    if( mpt == 0){
+        nbproc=asz[0]*bsz[1];
+        mpt = 1;
+        rmm = 0;
+        printf("I: Too large number of processes. Reset to %zu\n",nbproc);
+    }
+    size_t* fchildren_ptr = &fchildren;
+    mopo=rmm;
+    int pd[2];
+    pipe(pd);
 
-    //mtxmult_mp.h
-
-    #include <stdio.h>
-    #include <stdlib.h>
-    #include <assert.h>
-    #include <unistd.h>
-    #include <time.h>
-    #include <sys/mman.h>
-
-    #include "mtxmult.h"
-
-    #define NUM_CORES 4
-    #define NUM_PROCESS (size_t)(NUM_CORES-1)
-    #define DEBUG 0
-
-    //
-    //Threaded ( via fork() ) version of matrix multiplication
-
-    double* mtxm_thr(double* a,const size_t asz[2],double* b,const size_t bsz[2], size_t nbproc){
-        printf("Threaded Matrix Multiplication start...%zu threads\n",nbproc);
-        if ( asz[1] != bsz[0] ){
-            printf("ERROR: can't multiply A*B: columns of A %zu != rows of b%zu\n",asz[1],bsz[0]);
-            exit(1);
-        }
-        //result matrix in shared memory
-        double* ab = mmap(NULL,asz[0]*asz[1]*sizeof(double),PROT_READ | PROT_WRITE,
-                                                MAP_SHARED | MAP_ANONYMOUS, -1, 0);
-        if( ab == MAP_FAILED){
-            printf("ERROR: Couldn't allocate shared memory for matrix multiplication");
-            exit(2);
-        }
-
-        size_t i,j,k, mop, mopo, pid, children=0, fchildren=0;
-        size_t mpt = (asz[0]*bsz[1])/nbproc;
-        size_t rmm = (size_t) ((asz[0]*bsz[1])%nbproc);
-        if( mpt == 0){
-            nbproc=asz[0]*bsz[1];
-            mpt = 1;
-            rmm = 0;
-            printf("I: Too large number of processes. Reset to %zu\n",nbproc);
-        }
-        size_t* fchildren_ptr = &fchildren;
-        mopo=rmm;
-        int pd[2];
-        pipe(pd);
-
-        while ( children < nbproc - 1 ) {
-            children++;
-            mopo += mpt;
-            pid = fork();
-            if ( !pid ){
-                for(mop= mopo ; mop < (mopo+mpt) ; mop++){//
-                    i = (size_t) (mop/bsz[1]);
-                    j = (mop%bsz[1]);
-                    for(k=0; k<asz[0] ; k++){
-                        ab[i*asz[1]+j] += a[i*asz[1]+k] * b[k*bsz[1]+j] ;
-                    }
-                    if( DEBUG ) printf("#DEBUG: child %zu : ab(%zu,%zu)=%.4f\n",children,i,j,ab[i*asz[1]+j]);
+    while ( children < nbproc - 1 ) {
+        children++;
+        mopo += mpt;
+        pid = fork();
+        if ( !pid ){
+            for(mop= mopo ; mop < (mopo+mpt) ; mop++){//
+                i = (size_t) (mop/bsz[1]);
+                j = (mop%bsz[1]);
+                for(k=0; k<asz[0] ; k++){
+                    ab[i*asz[1]+j] += a[i*asz[1]+k] * b[k*bsz[1]+j] ;
                 }
-                (*fchildren_ptr)++;
+                if( DEBUG ) printf("#DEBUG: child %zu : ab(%zu,%zu)=%.4f\n",children,i,j,ab[i*asz[1]+j]);
+            }
+            (*fchildren_ptr)++;
 
-                if( write(pd[1], fchildren_ptr, sizeof(size_t)) == -1 ){
-                    printf("ERROR: child %zu couldn't write to parent\n",children);
-                    exit(3);
-                }
-                //return 0;
-                exit(0);
+            if( write(pd[1], fchildren_ptr, sizeof(size_t)) == -1 ){
+                printf("ERROR: child %zu couldn't write to parent\n",children);
+                exit(3);
+            }
+            //return 0;
+            exit(0);
+        }
+    }
+    if( DEBUG ) printf("#DEBUG: Parent processing... mop[0, %zu)\n",rmm+mpt);
+    for(mop=0 ; mop < rmm+mpt ; mop++){
+        i = (size_t) (mop/bsz[1]);
+        j = (mop%bsz[1]);
+        for(k=0; k<asz[0] ; k++)
+            ab[i*asz[1]+j] += a[i*asz[1]+k] * b[k*bsz[1]+j] ;
+        if( DEBUG ) printf("#DEBUG: parent : ab(%zu,%zu)=%.4f\n",i,j,ab[i*asz[1]+j]);
+    }
+
+    struct timespec timeout;
+    timeout.tv_sec = 1;
+    timeout.tv_nsec = 10*1000;
+
+    while( fchildren< nbproc-1 ){
+        if( DEBUG ) printf("#DEBUG: checking... %zu(%zu) children finished\n",fchildren,nbproc-1);
+        nanosleep(&timeout,NULL);
+        if( read(pd[0],&children,sizeof(size_t)) == -1 ){
+            printf("ERROR: parent :  reading pipe \n");
+            exit(4);
+        }
+        fchildren += children;
+    }
+    if( DEBUG ) printf("#DEBUG: %zu(%zu) children finished\n",fchildren,nbproc-1);
+    return ab;
+}
+double* mtxsq_thr(double* m, const size_t msz[2], size_t nbproc){
+    return mtxm_thr(m,msz,m,msz,nbproc);
+}
+```
+
+And finally here the linear matrix multiplication code of `mtxmult.h`
+
+```
+//mtxmult.h
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <time.h>
+void pmtx(double* m, size_t rs, size_t cs,char* txt){
+    if( rs*cs <= 0 ) {
+        fprintf(stderr,"Warning: ill-defined matrix dimensions\n");
+        return;
+    }
+    if( txt ) printf("%s\n",txt);
+    size_t i,j ;
+    for(i=0 ; i<rs ; i++){
+        for(j=0 ; j<cs ; j++){
+            printf("%.4f\t",m[i*cs+j]);
+            if( j == 10) {
+                j = cs;
+                printf("...");
             }
         }
-        if( DEBUG ) printf("#DEBUG: Parent processing... mop[0, %zu)\n",rmm+mpt);
-        for(mop=0 ; mop < rmm+mpt ; mop++){
-            i = (size_t) (mop/bsz[1]);
-            j = (mop%bsz[1]);
+        printf("\n");
+        if( i == 10){
+            i = rs;
+            printf("...\n");
+        }
+    }
+}
+double* mtxm(double* a,const size_t asz[2],double* b,const size_t bsz[2]){
+    if ( asz[1] != bsz[0] ){
+        printf("ERROR: can't multiply A*B: columns of A %zu != rows of b%zu\n",asz[1],bsz[0]);
+        exit(1);
+    }
+    double* ab = calloc(asz[0]*bsz[1],sizeof(double));
+    if( !ab ){
+        printf("ERROR: Couldn't allocate memory for matrix multiplication");
+        exit(2);
+    }
+    size_t i,j,k;
+    for(i=0 ; i<asz[0] ; i++){
+        for(j=0 ; j<bsz[1] ; j++)
             for(k=0; k<asz[0] ; k++)
                 ab[i*asz[1]+j] += a[i*asz[1]+k] * b[k*bsz[1]+j] ;
-            if( DEBUG ) printf("#DEBUG: parent : ab(%zu,%zu)=%.4f\n",i,j,ab[i*asz[1]+j]);
-        }
-
-        struct timespec timeout;
-        timeout.tv_sec = 1;
-        timeout.tv_nsec = 10*1000;
-
-        while( fchildren< nbproc-1 ){
-            if( DEBUG ) printf("#DEBUG: checking... %zu(%zu) children finished\n",fchildren,nbproc-1);
-            nanosleep(&timeout,NULL);
-            if( read(pd[0],&children,sizeof(size_t)) == -1 ){
-                printf("ERROR: parent :  reading pipe \n");
-                exit(4);
-            }
-            fchildren += children;
-        }
-        if( DEBUG ) printf("#DEBUG: %zu(%zu) children finished\n",fchildren,nbproc-1);
-        return ab;
     }
-    double* mtxsq_thr(double* m, const size_t msz[2], size_t nbproc){
-        return mtxm_thr(m,msz,m,msz,nbproc);
-    }
+    return ab;
+}
+double* mtxsq(double* m, const size_t msz[2]){
+    return mtxm(m,msz,m,msz);
+}
+```
 
-And finally here the linear matrix multiplication code of mtxmult.h
+In a Mac, compile this simply as `gcc -o test_mtxmult_mp-big test_mtxmult_mp-big.c`.
 
-    //mtxmult.h
-    #include <stdio.h>
-    #include <stdlib.h>
-    #include <unistd.h>
-    #include <time.h>
-    void pmtx(double* m, size_t rs, size_t cs,char* txt){
-        if( rs*cs <= 0 ) {
-            fprintf(stderr,"Warning: ill-defined matrix dimensions\n");
-            return;
-        }
-        if( txt ) printf("%s\n",txt);
-        size_t i,j ;
-        for(i=0 ; i<rs ; i++){
-            for(j=0 ; j<cs ; j++){
-                printf("%.4f\t",m[i*cs+j]);
-                if( j == 10) {
-                    j = cs;
-                    printf("...");
-                }
-            }
-            printf("\n");
-            if( i == 10){
-                i = rs;
-                printf("...\n");
-            }
-        }
-    }
-    double* mtxm(double* a,const size_t asz[2],double* b,const size_t bsz[2]){
-        if ( asz[1] != bsz[0] ){
-            printf("ERROR: can't multiply A*B: columns of A %zu != rows of b%zu\n",asz[1],bsz[0]);
-            exit(1);
-        }
-        double* ab = calloc(asz[0]*bsz[1],sizeof(double));
-        if( !ab ){
-            printf("ERROR: Couldn't allocate memory for matrix multiplication");
-            exit(2);
-        }
-        size_t i,j,k;
-        for(i=0 ; i<asz[0] ; i++){
-            for(j=0 ; j<bsz[1] ; j++)
-                for(k=0; k<asz[0] ; k++)
-                    ab[i*asz[1]+j] += a[i*asz[1]+k] * b[k*bsz[1]+j] ;
-        }
-        return ab;
-    }
-    double* mtxsq(double* m, const size_t msz[2]){
-        return mtxm(m,msz,m,msz);
-    }
+In Linux you'll likely have to hint the linker to the right math library with -lm, thus compile it as `gcc -o test_mtxmult_mp-big test_mtxmult_mp-big.c -lm`.
 
-In a Mac, compile this simply as gcc -o test_mtxmult_mp-big test_mtxmult_mp-big.c.
-
-In Linux you'll likely have to hint the linker to the right math library with -lm, thus compile it as gcc -o test_mtxmult_mp-big test_mtxmult_mp-big.c -lm.
-
- Do a first test by running ./test_mtxmult_mp-big 3 3 You should get
+ Do a first test by running `./test_mtxmult_mp-big 3 3` You should get
 
     Max # threads: 3
     Random array size 3x3
@@ -693,36 +717,39 @@ You can see that both calculations of the square of matrix A coincide. That's wh
 
 But you may also notice that the multi-process calculation takes slightly more to complete! 
 
-There is an overhead the kernel incurs in setting up everything for us to use multiple processes. For small matrices that's actually a noticeable burden and a single process fares better.
-When is a matrix big enough to justify the use of concurrent programing?
+There is an overhead the kernel incurs in setting up everything for us to use multiple processes. For small matrices that's actually a noticeable burden and a single process fares better.  
 
-The above program test_mtxmult_mp-big creates a random square matrix of the size we specify in the command line and calculates its square both sequentiall and concurrently with as many child processes as specified. Notice that the parent also takes up its share of work. Thus using 7 children actually means splitting the work among 8 concurrent processes that do a calculation!
+# When is a matrix big enough to justify the use of concurrent programing? [$^$](#idx)<a name="isbig"></a>
+
+The above program `test_mtxmult_mp-big` creates a random square matrix of the size we specify in the command line and calculates its square both sequentiall and concurrently with as many child processes as specified. Notice that the parent also takes up its share of work. Thus using 7 children actually means splitting the work among 8 concurrent processes that do a calculation!
 
  Suprisingly, it takes quite a large matrix to start seeing a benefit. The actual size will depend on your machine's specs. 
 
 In this first result I'm using a MacbookPro with the following specs
 
-    $system_profiler SPHardwareDataType
+```
+$system_profiler SPHardwareDataType
 
-          Model Name: MacBook Pro
-          Model Identifier: MacBookPro9,1
-          Processor Name: Quad-Core Intel Core i7
-          Processor Speed: 2.3 GHz
-          Number of Processors: 1
-          Total Number of Cores: 4
-          L2 Cache (per Core): 256 KB
-          L3 Cache: 6 MB
-          Hyper-Threading Technology: Enabled
-          Memory: 16 GB
-          Boot ROM Version: 233.0.0.0.0
-          SMC Version (system): 2.1f173
-          Serial Number (system): CH348DJ39J4
-          Hardware UUID: 723078B1-962D-3749-8B77-1D1D857678B1
-          Sudden Motion Sensor:
-          State: Enabled
+      Model Name: MacBook Pro
+      Model Identifier: MacBookPro9,1
+      Processor Name: Quad-Core Intel Core i7
+      Processor Speed: 2.3 GHz
+      Number of Processors: 1
+      Total Number of Cores: 4
+      L2 Cache (per Core): 256 KB
+      L3 Cache: 6 MB
+      Hyper-Threading Technology: Enabled
+      Memory: 16 GB
+      Boot ROM Version: 233.0.0.0.0
+      SMC Version (system): 2.1f173
+      Serial Number (system): CH348DJ39J4
+      Hardware UUID: 723078B1-962D-3749-8B77-1D1D857678B1
+      Sudden Motion Sensor:
+      State: Enabled
 
-    $sysctl -n machdep.cpu.brand_string
-    Intel(R) Core(TM) i7-3615QM CPU @ 2.30GHz
+$sysctl -n machdep.cpu.brand_string
+Intel(R) Core(TM) i7-3615QM CPU @ 2.30GHz
+```
 
  
 This table summarizes the results
@@ -757,12 +784,12 @@ For a matrix of size 3000*3000 the difference is however clear: MP using 8 proce
 
  Notice what we mentioned above:
 
-    The parent process (highlighted in red) has a PID 12056 and a PPID of 490.
-    All children have a group process id PGRP (highlighted in green) equal to the PID of the parent, i.e., 1206.
+* The parent process (highlighted in red) has a PID 12056 and a PPID of 490.
+* All children have a group process id PGRP (highlighted in green) equal to the PID of the parent, i.e., 1206.
 
 We store the original matrix with 9*10^6 doubles (8 Bytes), that is, about 70MiB . Top reports 69MiB.
 
-1T (trillion) Operations
+# 1T (trillion) Operations[$^$](#idx)<a name="1tril"></a>
 
 In another box I have a Linux system with the following arch (issue lscpu)
 
@@ -883,20 +910,21 @@ Notice how the RES column shows now a huge value right from the start of this ne
 
 See a more detailed account of memory usage 
 
- 
+ ![](https://1.bp.blogspot.com/-KWf8AhQ5pe8/X5cfWQn-qiI/AAAAAAAAF24/G5lQsRkzKHgpO1uCu6cpkUoayvDyGXSEwCLcBGAsYHQ/s979/Screen%2BShot%2B2020-10-26%2Bat%2B3.05.32%2BPM.png)
 
 And a few minutes before finishing the calculation
  
+ ![](https://1.bp.blogspot.com/-7X32DXFxNp4/X5c1TDB3VXI/AAAAAAAAF3Q/Zm1N8iXWVTwNPcPaqqKAfCmRA84asbGfgCLcBGAsYHQ/s1012/Screen%2BShot%2B2020-10-26%2Bat%2B4.31.46%2BPM.png)
 
  Notice here the values of the RSsh column which end up on the scale of ~95MiB, 1/8 of the total size the matrix occupies. See below.
 
-Linux Memory Types
+# Linux Memory Types[$^$](#idx)<a name="LMT"></a>
 
 A comment on Linux Memory Types is in place in other to clarfy a bit what we are reading there.
 
 From the linux top man page:
 
-
+![Linux memory types](https://1.bp.blogspot.com/-NF0FzysWZLs/X5cqUq2hLfI/AAAAAAAAF3E/40XjW9lnsfsqA4XJZmuAr8aNM-St0HDawCLcBGAsYHQ/s548/Screen%2BShot%2B2020-10-26%2Bat%2B3.53.15%2BPM.png)
  
 
            The following may help in interpreting process level memory values displayed as scalable columns and discussed under topic `3a. DESCRIPTIONS of Fields'.
@@ -937,7 +965,7 @@ CODE = Chunk (KiB) of physical memory currently used by the executable code, aka
 DATA =  Data + Stack size (KiB). Memory reserved by the process, aka. Data Resident Set (DRS). It may not yet be mapped to physical (RES) memory. It's always included in VIRT though.
 
  
-Simple Improvement
+# Simple Improvement[$^$](#idx)<a name="improve"></a>
 
 Therefore, the way we wrote our program fork is efectively cloning the memory of the parent process. That's on us.
 
@@ -955,13 +983,14 @@ But even without going into that trouble, simply allocating the initial matrix i
 Both show the initial moments of a run with the 10,000*10,000 matrix and 8 threads, but skipping the single-thread calculation (option -ns ). 
 
 The first corresponds to allocating the initial matrix via the calloc() system call. It's size of ~760MiB is effectively cloned as anonymous resident memory space, RSan, to each of the threads
-
+![](https://1.bp.blogspot.com/-XIdFgSehwiM/X5c_3QT_YrI/AAAAAAAAF3c/rIFvjtAgXEcgLiGNrwcI1lSwQ4RFfWqlgCLcBGAsYHQ/s1018/Screen%2BShot%2B2020-10-26%2Bat%2B5.19.54%2BPM.png)
 
 However, when allocating the initial matrix as shared memory space via the mmap() system call, things look more promising: The whole initial matrix is now allocated as RSsh, while the private RSan chunk is minimal! 
+![](https://1.bp.blogspot.com/-PbyhMeKm9pY/X5dAj4maYUI/AAAAAAAAF3k/2XPMnifJPjkR4jQeq_yNYWLrTQQeEi-IACLcBGAsYHQ/w640-h162/Screen%2BShot%2B2020-10-26%2Bat%2B5.15.13%2BPM.png)
 
-COW in Action
+# COW in Action[$^$](#idx)<a name="cow"></a>
 
-Let's run this: ./test_mtxmult_mp-big 40000 40000 8 -ns. This is a square matrix of 40,000 rows and columns, hence 16 times larger than the previous example, thus roughly 11.9GiB. 
+Let's run this: `./test_mtxmult_mp-big 40000 40000 8 -ns`. This is a square matrix of 40,000 rows and columns, hence 16 times larger than the previous example, thus roughly 11.9GiB. 
 
 First will do it allocating the initial matrix with a calloc call. That will put it under RSan and Data. 
 
@@ -971,16 +1000,17 @@ However, when we run it things do work. Furthermore, the physical used memory as
 
 This means that fork didn't really copy and duplicated all that data! It's only being read, so COW should not need to really duplicate  -no write.
 
-
+![](https://1.bp.blogspot.com/-x-vI5THgsz4/X5dUn7DkqJI/AAAAAAAAF3w/yWoWRAiDVW8HhNq8by9QDKR6BjCV6NLigCLcBGAsYHQ/s1012/Screen%2BShot%2B2020-10-26%2Bat%2B6.46.02%2BPM.png)
 
 
 Incidentally, this shows that it's not meaningfull to add the RES value of different processes as that does not amount to the actual, physical combined memory used  by all of them.
 
 Let's repeat this case but allocating the initial matrix via mmap call.
+![](https://1.bp.blogspot.com/-zvlCyNsOnsY/X5dXPcPCp1I/AAAAAAAAF38/pVlAwouh7w8l24gfUENWZWFmmFxiDzjngCLcBGAsYHQ/s1017/Screen%2BShot%2B2020-10-26%2Bat%2B7.09.26%2BPM.png)
 
 Again we see the shift from almost all the memory being private (above) to almost all being shared.
 
-However, an analogous conclusion can be drawn: It's not meaningful to add the values of USED for different processes; neither is it to add the values of RSsh: They do not account for independent chunks of physical memory; we are overcounting!
+However, an analogous conclusion can be drawn: It's not meaningful to add the values of USED for different processes; neither is it to add the values of RSsh: **They do not account for independent chunks of physical memory; we are overcounting!**
 
 Additionally, notice that in this case the physical used memory reported by top is just a mere 1158MiB, a bit over 1.GiB, that's about 180MiB over the initial baseline which in this case was 974MiB. 
  
@@ -988,7 +1018,7 @@ Can we account for that? I don't know how.
 
 Finally, notice that the used buff/cache mem has increased in this case by roughly 12000MiB, again of the order of the size of the initial matrix.
 
-Conclusions
+# Conclusions[$^$](#idx)<a name="conclusions"></a>
 
 This post provides a first hands-on introduction to concurrent programming. You can use it for small projects on most OSs like OSX, Linux, FreeBSD -notably not Windows, which has no fork capabilties. 
  
@@ -998,7 +1028,7 @@ For instance, passing information between parent and children could be done thro
 
 A better alternative is to fine tune the creationg of the children through the clone family of systems calls. These allow for selectively sharing things like the heap or stack. 
 
-When sharing memory among the parent and children, with read and write privileges for all, an important complication arises: race condtions. This means, as a programmer, must make sure that no two processes attempt to modify the same memory location at the same time, or forget to unlock on time a descriptor thus blocking a second processes from using it, etc. Semaphores is a keyword for digging into this.
+When sharing memory among the parent and children, with read and write privileges for all, an important complication arises: race condtions. This means, as a programmer, must make sure that no two processes attempt to modify the same memory location at the same time, or forget to unlock on time a descriptor thus blocking a second processes from using it, etc. [Semaphores](https://en.wikipedia.org/wiki/Semaphore_(programming)) is a keyword for digging into this.
 
 This is their typical day-to-day life when people say they are using pthreads! ;-)
  
@@ -1008,7 +1038,7 @@ Coming back to our example, just with fork and memory sharing, we could have all
 
 Waiting for our child processes might eventually also be done using the system calls select (*NIXs) or epoll (Linux), like when using sockets in network programming. 
 
-Furthermore, the design of the webserver nginx provides a somewhat different alternative to spawning and controlling children through async events.
+Furthermore, the design of the webserver [nginx](https://en.wikipedia.org/wiki/Nginx) provides a somewhat different alternative to spawning and controlling children through async events.
 
 I may apend an addendum on some usage details of the memory sharing library another day. The example of matrix multiplication together with the man pages should help you get started.
 
@@ -1017,12 +1047,13 @@ Hope this helped you start writing some concurrent programs and put to work all 
 Besides books, man pages and wikipedia can be a useful resource. Don't waste it. ;-)
 
  
-References
+# References[$^$](#idx)<a name="refs"></a>  
+
 Here some additional, useful references.
 
-    https://techtalk.intersec.com/2013/07/memory-part-2-understanding-process-memory/
-    https://stackoverflow.com/questions/131303/how-can-i-measure-the-actual-memory-usage-of-an-application-or-process
-    https://stackoverflow.com/questions/118307/a-way-to-determine-a-processs-real-memory-usage-i-e-private-dirty-rss
-    https://stackoverflow.com/questions/64546808/hands-on-example-of-forks-copy-on-write-in-action?noredirect=1#comment114135505_64546808
+1. https://techtalk.intersec.com/2013/07/memory-part-2-understanding-process-memory/
+2. https://stackoverflow.com/questions/131303/how-can-i-measure-the-actual-memory-usage-of-an-application-or-process
+3. https://stackoverflow.com/questions/118307/a-way-to-determine-a-processs-real-memory-usage-i-e-private-dirty-rss
+4. https://stackoverflow.com/questions/64546808/hands-on-example-of-forks-copy-on-write-in-action?noredirect=1#comment114135505_64546808
 
 
