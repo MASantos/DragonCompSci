@@ -967,8 +967,6 @@ DATA =  Data + Stack size (KiB). Memory reserved by the process, aka. Data Resid
  
 # Simple Improvement[$^$](#idx)<a name="improve"></a>
 
-Therefore, the way we wrote our program fork is efectively cloning the memory of the parent process. That's on us.
-
 While at fork time 1.5GiB are cloned and allocated into res memory to each child (RSan) its value stays constant throughout the whole calculation. 
 
 However, the USED value increases by roughly 100MiB. This corresponds to the increase in RSsh the shared anonymous resident memory allocated to each child. This value corresponds indeed to the size of the corresponding chunk of the end result matrix each child must compute. 
