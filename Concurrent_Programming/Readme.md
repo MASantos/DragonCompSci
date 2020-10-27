@@ -20,6 +20,8 @@ It is this call, in either version, clone/clone3, in Linux that really blurs the
 making both just but two ends of a spectrum of possible concurrent programming models. All three calls are part of the same family of system calls. 
 This family includes as well [other calls](https://en.wikipedia.org/wiki/Clone_(Linux_system_call)#Variants).
 
+You can find all the source files of the code commented here at this [GitHub repository](https://github.com/MASantos/DragonCompSci/tree/master/Concurrent_Programming).
+
 # Index: <a name="idx"></a>  
 
 1. [The Multi-Process, aka. (ehem) Parallel, aka. Concurrent "Hello World!""](#helloworld)
@@ -72,9 +74,10 @@ Compile as `gcc helloworld-mp.c` and run as `./a.out`
 
 The output should look like this
 
-> Hi, I'm the parent of the process whose pid=11518. 
-> Hello World! I'm the child with process id pid=0... Uhm...odd, yeah...  
-> anyway, my parents know my pid for sure. Ask them!
+>    Hi, I'm the parent of the process whose pid=11518. 
+
+>    Hello World! I'm the child with process id pid=0... Uhm...odd, yeah...  
+>    anyway, my parents know my pid for sure. Ask them!
 
 # What just happened? [$^$](#idx) <a name="whathappened"></a>
 
@@ -755,6 +758,7 @@ Intel(R) Core(TM) i7-3615QM CPU @ 2.30GHz
 This table summarizes the results
  
 Size  |  Single thread | MP 8 threads
+:----:|:--------------:|:------------:
 1000 |       11 sec       |     10 sec
 3000 |     400 sec       |   107 sec 
 
@@ -789,7 +793,7 @@ For a matrix of size 3000*3000 the difference is however clear: MP using 8 proce
 
 We store the original matrix with 9*10^6 doubles (8 Bytes), that is, about 70MiB . Top reports 69MiB.
 
-# 1T (trillion) Operations[$^$](#idx)<a name="1tril"></a>
+# Trillion Operations[$^$](#idx)<a name="tril"></a>
 
 In another box I have a Linux system with the following arch (issue lscpu)
 
@@ -831,15 +835,16 @@ In another box I have a Linux system with the following arch (issue lscpu)
 
 Calculations will be faster here simply due to the 1.5 times faster CPU clock.
 
-    Size   |  Single thread | MP 8 threads
-    1000  |         10 sec     |         9 sec
-    3000  |       341 sec     |       84 sec 
-    10000|   15972 sec     |    7101 sec = 118min (w/o single-proc calc: 7040 sec = 117.3 min)
+|Size   |  Single thread | MP 8 threads|
+|:-----:|:--------------:|:-----------:|
+|1000  |         10 sec     |         9 sec|
+|3000  |       341 sec     |       84 sec| 
+|10000|   15972 sec     |    7101 sec = 118min (w/o single-proc calc: 7040 sec = 117.3 min)|
 
 
 15972 sec = 4.44hrs or 4h 25min ! More than double the time required by our multitasking version!
 
-I didn't want to leave my laptop running +4h. That's why I didn't provide the timing for the case of a 10,000*10,000 matrix. That's 100M elements requiring a total 1T (trillion or 1e9) operations! 
+I didn't want to leave my laptop running +4h. That's why I didn't provide the timing for the case of a 10,000*10,000 matrix. That's 100M elements requiring a total ~2T (trillion or 1e12) operations! 
  
 As the elements are stored as doubles, such a matrix requires of the order of 10^8*8Bytes = 800MB = 763MiB. From the previous results we'd expect the single process to use up to ~1.5GiB and take ~10,000sec ~ 2.8hrs, likely though +3hrs, to complete.
 
@@ -966,6 +971,8 @@ DATA =  Data + Stack size (KiB). Memory reserved by the process, aka. Data Resid
 
  
 # Simple Improvement[$^$](#idx)<a name="improve"></a>
+
+Therefore, the way we wrote our program fork is efectively cloning the memory of the parent process. That's on us.
 
 While at fork time 1.5GiB are cloned and allocated into res memory to each child (RSan) its value stays constant throughout the whole calculation. 
 
