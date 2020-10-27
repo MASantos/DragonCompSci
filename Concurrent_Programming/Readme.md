@@ -72,9 +72,9 @@ Compile as `gcc helloworld-mp.c` and run as `./a.out`
 
 The output should look like this
 
->    Hi, I'm the parent of the process whose pid=11518
->    Hello World! I'm the child with process id pid=0... Uhm...odd, yeah...
->    anyway, my parents know my pid for sure. Ask them!
+> Hi, I'm the parent of the process whose pid=11518. 
+> Hello World! I'm the child with process id pid=0... Uhm...odd, yeah...  
+> anyway, my parents know my pid for sure. Ask them!
 
 # What just happened? [$^$](#idx) <a name="whathappened"></a>
 
