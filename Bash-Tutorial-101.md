@@ -22,9 +22,11 @@ The first two are part of what's called I/O (input/output) procedures.
 
 ### 2. Variable assignment
 This is how we store things in memory
+```
 x=43
 yz="Hello World"
 b=true
+```
 
 #### Remark
 A statement like `x=43` means the following:
@@ -166,3 +168,66 @@ f(){
 # Now let's call function f with argument 3
 f 3 # This will print 6 on screen
 ```
+
+
+## Design Patterns we follow
+
+The first key idea to keep always in mind is **_modularity_**.
+
+We want our code to be split into different chunks. Each chunk should be as independent as possible from any other chunk.
+
+In Bash we have two ways to achieve this modularity:
+1. Split your code into functions all defined in a single file.
+2. Split your code into functions each defined in a separate file.
+
+In both cases there will be one of those functions that triggers the execution of all the others we may need to run.
+For such a reason we may call such function the "main" function.
+
+Oposite to such a modular design is that of a monolitic, sequential and imperative code as the one we started with at the
+beginning of our project. Such a code is always more complicated to mantain and will never scale well: The more features one
+add to it the more complex it becomes adding them. It leads systematically to a code that violates both the DRY and KISS rules.
+
+## Basic structure of our code
+
+All scripts should follow the following **MINIMAL** skeleton:
+```
+ 0: #!/bin/bash
+ 1: trap trapFailurerMsgLogFile ERR
+ 2: set -Eeuo pipefail
+ 3:
+ 4: usage(){
+ 5: }
+ 6:
+ 7: main(){
+ 8: }
+ 9:
+10: #### HELPER FUNCTIONS
+11: printInfo(){
+12: }
+13:
+14: trapFailurerMsgLogFile(){
+15: }
+16:
+17: errorExit(){
+18: }
+19:
+20: main $@
+21:
+```
+
+The order of those statements is an essential part of the design of our code. Below we will see why.
+
+### Explanation
+Line 0 is needed in order to be able to execute file from the command line by directly calling its name.
+
+Line by line:
+
+* 1) Defines a trapping mechanism for the signal ERR. This signal is trigger at runtime whenever a command returns a values greater than 0. This line then says that in such a case the function `trapFailurerMsgLogFile` should be called. Here is where you can make the script bail out in a nice and controlled way.
+* 2) Enables the raising errors even within pipes
+* 4-5) Defines the function `usage`. This function has only one job: to print out the instructions on how to use the present script.
+* 7-8) Defines the function `main` which will play the role of our main function, that is, the one that will trigger the execution of all the other functions.
+* 10) A comment line identifying that the rest of the script contains helper functions. These are functions that aren't key for the task at hand, but just come handy as the capture what are some recurrent design patterns.
+* 11-12) Defines a function whose only task will be to print out logging information in a well-defined format.
+* 14-15) Defines the function that the bash trapping mechanism will call whenever a command returns an error status value, that is, roughly, whenever a statment ends in an error.
+* 17-18) Defines the function that exits the script in a well-controlled way whenever there is an error. A call to this function may well be the last statement of function `trapFailurerMsgLogFile`
+* 20) This constitutes the **call** to function `main` which triggers the execution of the whole script. We are passing to this function the argument `$@`. Eventhough it looks like one single argument, the shell unfolds it into **_all arguments we passed to the script when we called it from the command line_**.
