@@ -1,7 +1,7 @@
 # Bash Tutorial
 This tutorial is intended as a crash course to help fixing the minimal set of  ideas to allow one
-modify the scripts built in house. In particular we will focus on understanding the `automate-upgrade.sh`
-Drivesync5 upgrade script.
+modify the scripts built in house. In particular we will focus on understanding the `automated-upgrade.sh`
+DS5 upgrade script.
 
 Generality or precision have consequently been sacrified in order to keep this tutorial concise and practical.
 
@@ -222,7 +222,7 @@ Line 0 is needed in order to be able to execute our file from the command line b
 
 Line by line:
 
-* 1 ) Defines a trapping mechanism for the signal ERR. This signal is trigger at runtime whenever a command returns a values greater than 0. This line then says that in such a case the function `trapFailurerMsgLogFile` should be called. Here is where you can make the script bail out in a nice and controlled way.
+* 1 ) Defines a trapping mechanism for the signal ERR. This signal is trigger at runtime whenever a command returns a values greater than 0. This line then says that in such a case the function `trapFailurerMsgLogFile` should be called. This is where you can make the script bail out in a nice and controlled way. See below.
 * 2 ) Enables the raising errors even within pipes
 * 4-5 ) Defines the function `usage`. This function has only one job: to print out the instructions on how to use the present script.
 * 7-8 ) Defines the function `main` which will play the role of our main function, that is, the one that will trigger the execution of all the other functions.
@@ -231,3 +231,25 @@ Line by line:
 * 14-15 ) Defines the function that the bash trapping mechanism will call whenever a command returns an error status value, that is, roughly, whenever a statment ends in an error.
 * 17-18 ) Defines the function that exits the script in a well-controlled way whenever there is an error. A call to this function may well be the last statement of function `trapFailurerMsgLogFile`
 * 20 ) This constitutes the **call** to function `main` which triggers the execution of the whole script. We are passing to this function the argument `$@`. Eventhough it looks like one single argument, the shell unfolds it into **_all arguments we passed to the script when we called it from the command line_**.
+
+
+
+#### Why such order
+Setting up the trapping mechanism must be done as soon as possible, lest we miss to react on some errors.
+
+The very first two functions shall be the `usage` and the main function. The reason is simple: we write code not for the computer, but for others to read it and understand as quickly and easily as possible what our code does.
+
+By writing the usage first, even other developers can quickly get an idea of how this program is expected to work. If they are experienced enough, it may even give them a hint on how it is designed and the underlying logic.
+
+By writing the `main` function next, we offer a chance to the interested reader to quickly get a grasp of the logic of the program.
+
+Furthermore, we will see that often we will have`main` handle the command line arguments. If so, we will deal with them almost at the very top of the function `main`'s body. Thus, by being the second function of the script, the interested developer will quickly and easily have access to the command line behavior of the script. This facilitates modifying such behavior; and, when doing so, modifying as well the usage help accordingly, as it right there above the arguments handling code.
+
+The only exception to `main` being the second function is if we define an extra function `getArguments` whose task would be precisely to deal with the command line arguments.
+
+In such a case, `getArguments` shall come as the second function of the script, immediately followed by `main`.
+
+To summarize our leading idea on the order of things: **First, instructions and goal of the script, then logic, and finally the details**.
+
+
+
