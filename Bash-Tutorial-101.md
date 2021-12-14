@@ -218,16 +218,16 @@ All scripts should follow the following **MINIMAL** skeleton:
 The order of those statements is an essential part of the design of our code. Below we will see why.
 
 ### Explanation
-Line 0 is needed in order to be able to execute file from the command line by directly calling its name.
+Line 0 is needed in order to be able to execute our file from the command line by directly calling its name.
 
 Line by line:
 
-* 1) Defines a trapping mechanism for the signal ERR. This signal is trigger at runtime whenever a command returns a values greater than 0. This line then says that in such a case the function `trapFailurerMsgLogFile` should be called. Here is where you can make the script bail out in a nice and controlled way.
-* 2) Enables the raising errors even within pipes
-* 4-5) Defines the function `usage`. This function has only one job: to print out the instructions on how to use the present script.
-* 7-8) Defines the function `main` which will play the role of our main function, that is, the one that will trigger the execution of all the other functions.
-* 10) A comment line identifying that the rest of the script contains helper functions. These are functions that aren't key for the task at hand, but just come handy as the capture what are some recurrent design patterns.
-* 11-12) Defines a function whose only task will be to print out logging information in a well-defined format.
-* 14-15) Defines the function that the bash trapping mechanism will call whenever a command returns an error status value, that is, roughly, whenever a statment ends in an error.
-* 17-18) Defines the function that exits the script in a well-controlled way whenever there is an error. A call to this function may well be the last statement of function `trapFailurerMsgLogFile`
-* 20) This constitutes the **call** to function `main` which triggers the execution of the whole script. We are passing to this function the argument `$@`. Eventhough it looks like one single argument, the shell unfolds it into **_all arguments we passed to the script when we called it from the command line_**.
+* 1 ) Defines a trapping mechanism for the signal ERR. This signal is trigger at runtime whenever a command returns a values greater than 0. This line then says that in such a case the function `trapFailurerMsgLogFile` should be called. Here is where you can make the script bail out in a nice and controlled way.
+* 2 ) Enables the raising errors even within pipes
+* 4-5 ) Defines the function `usage`. This function has only one job: to print out the instructions on how to use the present script.
+* 7-8 ) Defines the function `main` which will play the role of our main function, that is, the one that will trigger the execution of all the other functions.
+* 10 ) A comment line identifying that the rest of the script contains helper functions. These are functions that aren't key for the task at hand, but just come handy as the capture what are some recurrent design patterns.
+* 11-12 ) Defines a function whose only task will be to print out logging information in a well-defined format.
+* 14-15 ) Defines the function that the bash trapping mechanism will call whenever a command returns an error status value, that is, roughly, whenever a statment ends in an error.
+* 17-18 ) Defines the function that exits the script in a well-controlled way whenever there is an error. A call to this function may well be the last statement of function `trapFailurerMsgLogFile`
+* 20 ) This constitutes the **call** to function `main` which triggers the execution of the whole script. We are passing to this function the argument `$@`. Eventhough it looks like one single argument, the shell unfolds it into **_all arguments we passed to the script when we called it from the command line_**.
